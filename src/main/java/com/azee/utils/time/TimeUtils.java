@@ -1,4 +1,4 @@
-package com.azee.utils;
+package com.azee.utils.time;
 
 import org.springframework.stereotype.Service;
 

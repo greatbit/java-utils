@@ -1,5 +1,6 @@
-package com.azee.utils;
+package com.azee.utils.time;
 
+import com.azee.utils.time.TimeUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

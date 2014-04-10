@@ -1,4 +1,4 @@
-package com.azee.utils;
+package com.azee.utils.string;
 
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.stereotype.Service;
