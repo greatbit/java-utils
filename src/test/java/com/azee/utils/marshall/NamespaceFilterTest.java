@@ -1,7 +1,9 @@
 package com.azee.utils.marshall;
 
 import com.azee.utils.beans.NamespaceBeanExample;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
@@ -10,6 +12,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.sax.SAXSource;
 import java.io.*;
+import java.rmi.UnmarshalException;
 
 import static junit.framework.Assert.assertNotNull;
 
@@ -21,6 +24,9 @@ public class NamespaceFilterTest {
 
     private String marshalledBean = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
             "<namespaceBeanExample><value>1</value></namespaceBeanExample>";
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     @Test
     public void getExampleBeanTest() throws Exception {
@@ -51,5 +57,17 @@ public class NamespaceFilterTest {
 
         rd.close();
         assertNotNull(beanExample);
+    }
+
+    @Test
+    public void getExampleBeanTestNegative() throws Exception {
+        exception.expect(javax.xml.bind.UnmarshalException.class);
+
+        //Unmarshaller
+        JAXBContext contextObj = JAXBContext.newInstance(NamespaceBeanExample.class);
+        Unmarshaller unmarshallerObj = contextObj.createUnmarshaller();
+
+        //Do unmarshalling
+        NamespaceBeanExample beanExample = (NamespaceBeanExample)unmarshallerObj.unmarshal(new InputStreamReader(new ByteArrayInputStream(marshalledBean.getBytes("UTF-8"))));
     }
 }
