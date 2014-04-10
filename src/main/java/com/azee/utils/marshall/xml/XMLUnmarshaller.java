@@ -14,8 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.transform.sax.SAXSource;
 import java.io.*;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
-import java.rmi.UnmarshalException;
+import java.util.List;
 
 /**
  * Created by azee on 4/10/14.
@@ -88,6 +87,7 @@ public class XMLUnmarshaller {
 
         //Create the filter (to add namespace) and set the xmlReader as its parent.
         NamespaceFilter inFilter = new NamespaceFilter(getXMLRootNamespace(clazz), true);
+
         inFilter.setParent(reader);
 
         //Prepare the input
@@ -110,15 +110,25 @@ public class XMLUnmarshaller {
      * @return
      */
     public String getXMLRootNamespace(Class clazz) {
-        Annotation annotation = clazz.getAnnotation(XmlRootElement.class);
-        if (annotation == null){
-            return "";
+//        Annotation annotation = clazz.getAnnotation(XmlRootElement.class);
+//        if (annotation == null){
+//            return "";
+//        }
+//        try {
+//            return annotation.annotationType().getMethod("namespace").invoke(annotation).toString();
+//        } catch (Exception e) {
+//            return "";
+//        }
+
+
+        String result = "";
+        String[] packageNames = clazz.getPackage().getName().split("\\.");
+        for (int i = packageNames.length - 1; i >= 0; i--){
+            result = result + "." + packageNames[i];
         }
-        try {
-            return annotation.annotationType().getMethod("namespace").invoke(annotation).toString();
-        } catch (Exception e) {
-            return "";
-        }
+        result = result.substring(1);
+
+        return result;
     }
 
 }
