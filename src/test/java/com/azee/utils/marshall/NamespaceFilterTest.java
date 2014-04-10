@@ -1,6 +1,7 @@
 package com.azee.utils.marshall;
 
 import com.azee.utils.beans.NamespaceBeanExample;
+import com.azee.utils.marshall.utils.NamespaceFilter;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -12,7 +13,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.sax.SAXSource;
 import java.io.*;
-import java.rmi.UnmarshalException;
 
 import static junit.framework.Assert.assertNotNull;
 
