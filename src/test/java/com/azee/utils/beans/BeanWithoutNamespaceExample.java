@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 
-@XmlRootElement(name = "namespaceBeanExample")
-public class NamespaceBeanExample {
+@XmlRootElement(name = "beanExample")
+public class BeanWithoutNamespaceExample {
     @XmlElement(required = true)
     protected int value;
 

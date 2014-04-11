@@ -7,12 +7,12 @@ import javax.xml.bind.annotation.*;
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "NamespaceBeanExample", propOrder = {
+@XmlType(name = "BeanWithoutNamespaceExample", propOrder = {
         "value"
 })
-@XmlRootElement(name = "namespaceBeanExample", namespace = "beans.utils.azee.com")
-public class BeanExample {
-    @XmlElement(required = true)
+@XmlRootElement(name = "beanExample", namespace = "beans.utils.azee.com")
+public class BeanWithNamespaceExample {
+    @XmlElement(required = true,  namespace = "beans.utils.azee.com")
     protected int value;
 
     public int getValue() {

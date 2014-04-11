@@ -77,10 +77,9 @@ public class XMLUnmarshaller {
         //Unmarshaller
         JAXBContext contextObj = JAXBContext.newInstance(clazz);
         Unmarshaller unmarshallerObj = contextObj.createUnmarshaller();
-        InputStreamReader ir = new InputStreamReader(data);
 
         //Adding namespaces
-        BufferedReader rd = new BufferedReader(ir);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(data));
 
         //Create an XMLReader to use with our filter
         XMLReader reader = XMLReaderFactory.createXMLReader();

@@ -1,13 +1,15 @@
 package com.azee.utils.marshall.xml;
 
-import com.azee.utils.beans.BeanExample;
-import com.azee.utils.beans.NamespaceBeanExample;
+import com.azee.utils.beans.BeanWithNamespaceExample;
+import com.azee.utils.beans.BeanWithoutNamespaceExample;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.io.ByteArrayInputStream;
 
 import static junit.framework.Assert.assertNotNull;
 import static org.hamcrest.core.Is.is;
@@ -20,24 +22,33 @@ import static org.hamcrest.core.Is.is;
 public class XMLUnmarshallerTest {
     @Autowired
     XMLUnmarshaller xmlUnmarshaller;
+//
+//    private String marshalledBean = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+//            "<namespaceBeanExample><value>2</value></namespaceBeanExample>";
 
-    private String marshalledBean = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
-            "<namespaceBeanExample><value>2</value></namespaceBeanExample>";
+    private String marshalledBean = "<beanExample><value>2</value></beanExample>";
 
     private String marshalledBeanWithNs = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
-            "<ns2:namespaceBeanExample xmlns:ns2=\"beans.utils.azee.com\"><value>10</value></ns2:namespaceBeanExample>";
+            "<ns2:beanExample xmlns:ns2=\"beans.utils.azee.com\"><ns2:value>10</ns2:value></ns2:beanExample>";
 
 
     @Test
     public void testUnmarshall() throws Exception {
-        NamespaceBeanExample bean = xmlUnmarshaller.unmarshall(marshalledBean, NamespaceBeanExample.class);
+        BeanWithoutNamespaceExample bean = xmlUnmarshaller.unmarshall(marshalledBean, BeanWithoutNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(2));
     }
 
     @Test
     public void testUnmarshallWNamespace() throws Exception {
-        BeanExample bean = xmlUnmarshaller.unmarshall(marshalledBeanWithNs, BeanExample.class);
+        BeanWithNamespaceExample bean = xmlUnmarshaller.unmarshall(marshalledBeanWithNs, BeanWithNamespaceExample.class);
+        assertNotNull(bean);
+        Assert.assertThat("Wrong bean value", bean.getValue(), is(10));
+    }
+
+    @Test
+    public void testUnmarshallWithoutNamespace() throws Exception {
+        BeanWithNamespaceExample bean = xmlUnmarshaller.unmarshall(marshalledBean, BeanWithNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(10));
     }
@@ -45,13 +56,13 @@ public class XMLUnmarshallerTest {
     @Test
     public void testGetXMLRootNamespace() throws Exception {
         Assert.assertThat("Wrong namespace",
-                xmlUnmarshaller.getXMLRootNamespace(BeanExample.class),
+                xmlUnmarshaller.getXMLRootNamespace(BeanWithNamespaceExample.class),
                 is("beans.utils.azee.com"));
     }
     @Test
     public void testGetXMLRootNoNamespace() throws Exception {
         Assert.assertThat("Wrong namespace",
-                xmlUnmarshaller.getXMLRootNamespace(NamespaceBeanExample.class),
+                xmlUnmarshaller.getXMLRootNamespace(BeanWithoutNamespaceExample.class),
                 is("beans.utils.azee.com"));
     }
 
