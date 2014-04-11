@@ -14,7 +14,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.transform.sax.SAXSource;
 import java.io.*;
 import java.lang.annotation.Annotation;
-import java.util.List;
 
 /**
  * Created by azee on 4/10/14.
@@ -109,24 +108,30 @@ public class XMLUnmarshaller {
      * @return
      */
     public String getXMLRootNamespace(Class clazz) {
-//        Annotation annotation = clazz.getAnnotation(XmlRootElement.class);
-//        if (annotation == null){
-//            return "";
-//        }
-//        try {
-//            return annotation.annotationType().getMethod("namespace").invoke(annotation).toString();
-//        } catch (Exception e) {
-//            return "";
-//        }
-
-
         String result = "";
-        String[] packageNames = clazz.getPackage().getName().split("\\.");
-        for (int i = packageNames.length - 1; i >= 0; i--){
-            result = result + "." + packageNames[i];
+        Annotation annotation = clazz.getAnnotation(XmlRootElement.class);
+        //If XMLRoot annotation applied then use it's namespace
+        if (annotation != null){
+            try {
+                result = annotation.annotationType().getMethod("namespace").invoke(annotation).toString();
+            } catch (Exception e) {
+                result = "";
+            }
         }
-        result = result.substring(1);
 
+        //If found default namespace value fromn XMLRootElement namespace{
+        if ("##default".equals(result)){
+            result = "";
+        }
+
+        //If no XMLRoot annotation applied then use package name
+        if ("".equals(result) || "##default".equals(result)){
+            String[] packageNames = clazz.getPackage().getName().split("\\.");
+            for (int i = packageNames.length - 1; i >= 0; i--){
+                result = result + "." + packageNames[i];
+            }
+            result = result.substring(1);
+        }
         return result;
     }
 
