@@ -9,6 +9,23 @@
     <name>Java Utils</name>
     <packaging>jar</packaging>
 
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>owner</id>
+            <name>Aziz Namazov</name>
+            <email>azeedrums@gmail.com</email>
+            <timezone>UTC+4</timezone>
+        </developer>
+    </developers>
+
     <scm>
         <connection>scm:git:git@github.com:azee/java-utils</connection>
         <developerConnection>scm:git:git@github.com:azee/java-utils.git</developerConnection>
