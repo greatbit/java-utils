@@ -11,10 +11,27 @@ import org.springframework.stereotype.Service;
 @Service
 public class JsonUnmarshaller {
 
+    /**
+     * Unmarshall an object without root element
+     * @param data
+     * @param objectClass
+     * @param <T>
+     * @return
+     * @throws Exception
+     */
     public <T>T unmarshal(String data, Class<T> objectClass) throws Exception{
         return unmarshal(data, "", objectClass);
     }
 
+    /**
+     * Unmarshall object with root element
+     * @param data
+     * @param rootName
+     * @param objectClass
+     * @param <T>
+     * @return
+     * @throws Exception
+     */
     public <T>T unmarshal(String data, String rootName, Class<T> objectClass) throws Exception{
         if (rootName != null && !"".equals(rootName)){
             data = "{\"" + rootName + "\": " + data + "}";
