@@ -33,9 +33,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git@github.com:azee/java-utils</connection>
-        <developerConnection>scm:git:git@github.com:azee/java-utils.git</developerConnection>
-        <url>scm:git:git@github.com:azee/java-utils.git</url>
+        <connection>scm:git:git@github.com/azee/java-utils</connection>
+        <developerConnection>scm:git:git@github.com/azee/java-utils.git</developerConnection>
+        <url>scm:git:git@github.com/azee/java-utils.git</url>
     </scm>
 
     <properties>
