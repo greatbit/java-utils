@@ -18,8 +18,8 @@ public class StringUtils {
 
     /**
      * Returns an empty string if null - helps to avoid NPE
-     * @param input
-     * @return
+     * @param input - String to verify
+     * @return String
      */
     public String emptyIfNull(String input){
         if (input == null) {
@@ -30,8 +30,8 @@ public class StringUtils {
 
     /**
      * Provide a string with a comma separated
-     * @param stringList
-     * @return
+     * @param stringList - List of strings
+     * @return result String
      */
     public String listAsString(List<String> stringList){
         String result = "";
@@ -49,8 +49,8 @@ public class StringUtils {
 
     /**
      * Get an MD5 sequence from a string
-     * @param input
-     * @return
+     * @param input - String to encode
+     * @return - md5 String
      * @throws NoSuchAlgorithmException
      */
     public String getMd5String(String input) throws NoSuchAlgorithmException {
@@ -64,9 +64,9 @@ public class StringUtils {
 
     /**
      * Verifies if a list of strings contains a given one
-     * @param stringList
-     * @param toSearch
-     * @return
+     * @param stringList - List of strings
+     * @param toSearch - String to search
+     * @return - boolean - is string in list
      */
     public boolean isStringInList(List<String> stringList, String toSearch){
         if (toSearch == null) return false;

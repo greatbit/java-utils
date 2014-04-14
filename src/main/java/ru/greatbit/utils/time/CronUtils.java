@@ -16,8 +16,8 @@ public class CronUtils {
 
     /**
      * Converts a UNIX-style cron value into the Quartz
-     * @param input
-     * @return
+     * @param input - unix cron String expression
+     * @return String - quartz compatible expression
      */
     public String convertToQuartz(String input){
         String result = "";

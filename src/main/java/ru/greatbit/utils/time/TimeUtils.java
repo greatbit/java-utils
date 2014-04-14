@@ -17,7 +17,7 @@ public class TimeUtils {
 
     /**
      * Provides the time in milliseconds that corresponds the beginning of the provided day
-     * @param time
+     * @param time - ling time of the day
      * @return long time - the beginning of the provided day
      */
     public long getStartOfTheDay(long time){

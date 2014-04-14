@@ -14,9 +14,9 @@ public class JsonMarshaller {
 
     /**
      * Marshall an object without root
-     * @param object
-     * @param <T>
-     * @return
+     * @param object - an object to marshall
+     * @param <T> - object class
+     * @return String - marshalled object
      * @throws Exception
      */
     public <T> String marshal(T object) throws Exception{
@@ -27,10 +27,10 @@ public class JsonMarshaller {
     /**
      * Marshall an object
      * Object can be wrapped into root element if provided
-     * @param object
-     * @param rootName
-     * @param <T>
-     * @return
+     * @param object - an object to marshall
+     * @param rootName - String root name to wrap
+     * @param <T> - object class
+     * @return - String - marshalled object
      * @throws Exception
      */
     public <T> String marshal(T object, String rootName) throws Exception{

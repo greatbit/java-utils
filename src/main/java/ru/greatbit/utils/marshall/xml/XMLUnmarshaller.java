@@ -24,10 +24,10 @@ public class XMLUnmarshaller {
     /**
      * Unmarshall an object event if the string doesn't contain
      * namespaces on root element from String
-     * @param data
-     * @param clazz
-     * @param <T>
-     * @return
+     * @param data - String - marshalled object to unmarshal
+     * @param clazz - Class of the object
+     * @param <T> - Class of the object
+     * @return <T> - Unmarshalled object
      * @throws JAXBException
      * @throws IOException
      * @throws SAXException
@@ -44,10 +44,10 @@ public class XMLUnmarshaller {
     /**
      * Unmarshall an object event if the string doesn't contain
      * namespaces on root element from InputStream
-     * @param data
-     * @param clazz
-     * @param <T>
-     * @return
+     * @param data - String - marshalled object to unmarshal
+     * @param clazz - Class of the object
+     * @param <T> - Class of the object
+     * @return <T> - Unmarshalled object
      * @throws JAXBException
      * @throws IOException
      * @throws SAXException
@@ -62,10 +62,10 @@ public class XMLUnmarshaller {
     /**
      * Unmarshall an object event if the string doesn't contain
      * namespaces on root element from InputStream
-     * @param data
-     * @param clazz
-     * @param <T>
-     * @return
+     * @param data - String - marshalled object to unmarshal
+     * @param clazz - Class of the object
+     * @param <T> - Class of the object
+     * @return <T> - Unmarshalled object
      * @throws JAXBException
      * @throws IOException
      * @throws SAXException
@@ -104,8 +104,8 @@ public class XMLUnmarshaller {
 
     /**
      * Return the namespace value of @XmlRootElement
-     * @param clazz
-     * @return
+     * @param clazz - Class of the object
+     * @return String - namespace
      */
     public String getXMLRootNamespace(Class clazz) {
         String result = "";

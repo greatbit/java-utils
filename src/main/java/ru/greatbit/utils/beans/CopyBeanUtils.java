@@ -19,9 +19,9 @@ public class CopyBeanUtils {
 
     /**
      * Get a copy of an object
-     * @param source
-     * @param <T>
-     * @return
+     * @param source - a source object
+     * @param <T> - class of the object
+     * @return <T> - a copy of the object
      * @throws Exception
      */
     public <T>T getCopy(Object source) throws Exception {

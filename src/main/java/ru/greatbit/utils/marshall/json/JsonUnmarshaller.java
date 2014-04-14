@@ -13,10 +13,10 @@ public class JsonUnmarshaller {
 
     /**
      * Unmarshall an object without root element
-     * @param data
-     * @param objectClass
-     * @param <T>
-     * @return
+     * @param data - String - marshalled object to unmarshal
+     * @param objectClass - class of the object
+     * @param <T> - class of the object
+     * @return <T> - unmarshalled object
      * @throws Exception
      */
     public <T>T unmarshal(String data, Class<T> objectClass) throws Exception{
@@ -25,11 +25,11 @@ public class JsonUnmarshaller {
 
     /**
      * Unmarshall object with root element
-     * @param data
-     * @param rootName
-     * @param objectClass
-     * @param <T>
-     * @return
+     * @param data - String - marshalled object to unmarshal
+     * @param rootName - String - additional root name to add
+     * @param objectClass - class of the object
+     * @param <T> - class of the object
+     * @return <T> - unmarshalled object
      * @throws Exception
      */
     public <T>T unmarshal(String data, String rootName, Class<T> objectClass) throws Exception{
