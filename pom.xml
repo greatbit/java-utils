@@ -174,7 +174,6 @@
                         <version>1.5</version>
                         <configuration>
                             <passphrase>${gpg.passphrase}</passphrase>
-                            <keyname>${gpg.key.name}</keyname>
                         </configuration>
                         <executions>
                             <execution>
