@@ -144,3 +144,7 @@ CronUtils cronUtils;
 
 cronUtils.convertToQuartz("0 10 * * 1-4");
 ```
+
+Jenkins Build
+==========
+http://azee.people.yandex.net/job/java-utils/
