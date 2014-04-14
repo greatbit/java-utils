@@ -24,7 +24,7 @@ public class TimeUtilsTest {
     @Test
     public void getStartOfTheDayTest(){
         TimeZone tz = TimeZone.getDefault();
-        assertEquals(1389283200000L + tz.getRawOffset(), timeUtils.getStartOfTheDay(1389358493087L));
+        assertEquals(1389312000000L - tz.getRawOffset(), timeUtils.getStartOfTheDay(1389358493087L));
         assertEquals(10800000L, timeUtils.getStartOfTheDay(0));
         assertEquals(10800000L, timeUtils.getStartOfTheDay(10800000L));
     }
