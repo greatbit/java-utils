@@ -1,11 +1,12 @@
 package ru.greatbit.utils.time;
 
-import ru.greatbit.utils.time.TimeUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.TimeZone;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -22,7 +23,8 @@ public class TimeUtilsTest {
 
     @Test
     public void getStartOfTheDayTest(){
-        assertEquals(1389297600000L, timeUtils.getStartOfTheDay(1389358493087L));
+        TimeZone tz = TimeZone.getDefault();
+        assertEquals(1389283200000L + tz.getRawOffset(), timeUtils.getStartOfTheDay(1389358493087L));
         assertEquals(10800000L, timeUtils.getStartOfTheDay(0));
         assertEquals(10800000L, timeUtils.getStartOfTheDay(10800000L));
     }
