@@ -3,6 +3,8 @@ java-utils
 
 Useful utils lib for java
 
+Project just started. Everyone is welcome to contribute
+
 Maven
 ==========
 
