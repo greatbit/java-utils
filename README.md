@@ -130,7 +130,7 @@ TimeUtils timeUtils;
 timeUtils.getStartOfTheDay(new Date().getTime());
 ```
 
-Creon
+Cron
 ==========
 Convert Unix cron expression to Quartz
 
