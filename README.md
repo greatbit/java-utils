@@ -30,7 +30,7 @@ SomeBean targetBean = copyBeanUtils.getCopy(sourceBean);
 ```
 
 
-Marshall
+Serialize
 ==========
 Used to marshall and unmarshall objects annotated with JAXB annotations
 
@@ -58,7 +58,18 @@ SomeBean bean = jsonUnmarshaller.unmarshal(beanWithOutRoot, SomeBean.class);
 SomeBean bean2 = jsonUnmarshaller.unmarshal(beanWithRoot, "rootElement",  BeanWithoutNamespaceExample.class);
 ```
 
-Unmarshall XML (with or without namespaces):
+Marshal to XML (with or without namespaces):
+
+```
+@Autowired
+XMLMarshaller xmlMarshaller;
+
+...
+
+String xmlValue = xmlMarshaller.marshal(bean);
+```
+
+Unmarshal from XML (with or without namespaces):
 
 ```
 @Autowired
