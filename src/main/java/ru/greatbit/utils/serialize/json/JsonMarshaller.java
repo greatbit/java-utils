@@ -37,7 +37,7 @@ public class JsonMarshaller {
         String result;
         ObjectMapper mapper = new ObjectMapper();
         AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
-        mapper.getSerializationConfig().setAnnotationIntrospector(introspector);
+        mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
         result = mapper.writeValueAsString(object);
         if (rootName != null && !"".equals(rootName)){
             result = "{\"" + rootName + "\": " + result + "}";

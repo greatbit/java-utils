@@ -38,7 +38,7 @@ public class JsonUnmarshaller {
         }
         ObjectMapper mapper = new ObjectMapper();
         AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
-        mapper.getDeserializationConfig().setAnnotationIntrospector(introspector);
+        mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
         return (T)mapper.readValue(data, objectClass);
     }
 }
