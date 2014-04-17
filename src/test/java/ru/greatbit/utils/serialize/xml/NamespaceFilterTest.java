@@ -1,7 +1,7 @@
-package ru.greatbit.utils.marshall.xml;
+package ru.greatbit.utils.serialize.xml;
 
 import ru.greatbit.utils.beans.BeanWithNamespaceExample;
-import ru.greatbit.utils.marshall.utils.NamespaceFilter;
+import ru.greatbit.utils.serialize.utils.NamespaceFilter;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

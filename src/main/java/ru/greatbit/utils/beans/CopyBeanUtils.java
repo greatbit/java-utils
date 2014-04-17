@@ -1,7 +1,7 @@
 package ru.greatbit.utils.beans;
 
-import ru.greatbit.utils.marshall.json.JsonUnmarshaller;
-import ru.greatbit.utils.marshall.json.JsonMarshaller;
+import ru.greatbit.utils.serialize.json.JsonUnmarshaller;
+import ru.greatbit.utils.serialize.json.JsonMarshaller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

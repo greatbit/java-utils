@@ -1,6 +1,6 @@
-package ru.greatbit.utils.marshall.xml;
+package ru.greatbit.utils.serialize.xml;
 
-import ru.greatbit.utils.marshall.utils.NamespaceFilter;
+import ru.greatbit.utils.serialize.utils.NamespaceFilter;
 import org.springframework.stereotype.Service;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -32,12 +32,12 @@ public class XMLUnmarshaller {
      * @throws IOException
      * @throws SAXException
      */
-    public <T>T unmarshall(String data, Class<T> clazz) throws JAXBException, IOException, SAXException {
+    public <T>T unmarshal(String data, Class<T> clazz) throws JAXBException, IOException, SAXException {
         try {
-            return unmarshall(new ByteArrayInputStream(data.getBytes("UTF-8")), clazz);
+            return unmarshal(new ByteArrayInputStream(data.getBytes("UTF-8")), clazz);
         }
         catch (javax.xml.bind.UnmarshalException e){
-            return unmarshallNamespaceAware(new ByteArrayInputStream(data.getBytes("UTF-8")), clazz);
+            return unmarshalNamespaceAware(new ByteArrayInputStream(data.getBytes("UTF-8")), clazz);
         }
     }
 
@@ -52,7 +52,7 @@ public class XMLUnmarshaller {
      * @throws IOException
      * @throws SAXException
      */
-    public <T>T unmarshall(InputStream data, Class<T> clazz) throws JAXBException, IOException, SAXException {
+    public <T>T unmarshal(InputStream data, Class<T> clazz) throws JAXBException, IOException, SAXException {
         JAXBContext contextObj = JAXBContext.newInstance(clazz);
         Unmarshaller unmarshallerObj = contextObj.createUnmarshaller();
         InputStreamReader ir = new InputStreamReader(data);
@@ -70,7 +70,7 @@ public class XMLUnmarshaller {
      * @throws IOException
      * @throws SAXException
      */
-    public <T>T unmarshallNamespaceAware(InputStream data, Class<T> clazz) throws JAXBException, IOException, SAXException {
+    public <T>T unmarshalNamespaceAware(InputStream data, Class<T> clazz) throws JAXBException, IOException, SAXException {
         T result;
 
         //Unmarshaller

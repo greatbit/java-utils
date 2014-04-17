@@ -1,4 +1,4 @@
-package ru.greatbit.utils.marshall.xml;
+package ru.greatbit.utils.serialize.xml;
 
 import ru.greatbit.utils.beans.BeanWithNamespaceExample;
 import ru.greatbit.utils.beans.BeanWithoutNamespaceExample;
@@ -31,21 +31,21 @@ public class XMLUnmarshallerTest {
 
     @Test
     public void testUnmarshall() throws Exception {
-        BeanWithoutNamespaceExample bean = xmlUnmarshaller.unmarshall(marshalledBean, BeanWithoutNamespaceExample.class);
+        BeanWithoutNamespaceExample bean = xmlUnmarshaller.unmarshal(marshalledBean, BeanWithoutNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(2));
     }
 
     @Test
     public void testUnmarshallWNamespace() throws Exception {
-        BeanWithNamespaceExample bean = xmlUnmarshaller.unmarshall(marshalledBeanWithNs, BeanWithNamespaceExample.class);
+        BeanWithNamespaceExample bean = xmlUnmarshaller.unmarshal(marshalledBeanWithNs, BeanWithNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(10));
     }
 
     @Test
     public void testUnmarshallWithoutNamespace() throws Exception {
-        BeanWithNamespaceExample bean = xmlUnmarshaller.unmarshall(marshalledBean, BeanWithNamespaceExample.class);
+        BeanWithNamespaceExample bean = xmlUnmarshaller.unmarshal(marshalledBean, BeanWithNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(2));
     }

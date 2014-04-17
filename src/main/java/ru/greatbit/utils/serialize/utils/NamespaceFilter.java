@@ -1,4 +1,4 @@
-package ru.greatbit.utils.marshall.utils;
+package ru.greatbit.utils.serialize.utils;
 
 
 import org.xml.sax.Attributes;

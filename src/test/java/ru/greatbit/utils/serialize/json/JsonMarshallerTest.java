@@ -1,4 +1,4 @@
-package ru.greatbit.utils.marshall.json;
+package ru.greatbit.utils.serialize.json;
 
 import ru.greatbit.utils.beans.BeanWithoutNamespaceExample;
 import org.junit.Assert;

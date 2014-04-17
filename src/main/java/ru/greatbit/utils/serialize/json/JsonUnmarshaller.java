@@ -1,4 +1,4 @@
-package ru.greatbit.utils.marshall.json;
+package ru.greatbit.utils.serialize.json;
 
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.ObjectMapper;
