@@ -8,7 +8,7 @@
         <version>7</version>
     </parent>
 
-    <groupId>ru.greatbit.utils</groupId>
+    <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
     <version>1.4-SNAPSHOT</version>
 
