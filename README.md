@@ -12,7 +12,7 @@ Maven
 <dependency>
     <groupId>ru.greatbit.utils</groupId>
     <artifactId>java-utils</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
 </dependency>
 ```
 
