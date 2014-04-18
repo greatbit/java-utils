@@ -10,9 +10,9 @@ Maven
 
 ```
 <dependency>
-    <groupId>ru.greatbit.utils</groupId>
+    <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
-    <version>1.3</version>
+    <version>1.4</version>
 </dependency>
 ```
 
@@ -77,7 +77,7 @@ XMLUnmarshaller xmlUnmarshaller;
 
 ...
 
-SomeBean bean = xmlUnmarshaller.unmarshall(marshalledBeanString, SomeBean.class);
+SomeBean bean = xmlUnmarshaller.unmarshal(marshalledBeanString, SomeBean.class);
 ```
 
 String
