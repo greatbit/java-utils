@@ -16,6 +16,14 @@ Maven
 </dependency>
 ```
 
+Usage
+==========
+Include into your spring-context:
+
+```
+<context:component-scan base-package="ru.greatbit.utils"/>
+```
+
 Beans
 ==========
 Beans deep copy:
