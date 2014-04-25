@@ -7,7 +7,9 @@ import java.util.List;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created with IntelliJ IDEA.
@@ -53,6 +55,32 @@ public class StringUtilsTest {
 
         assertTrue(StringUtils.isStringInList(strings, "hide"));
         assertFalse(StringUtils.isStringInList(strings, "bride"));
+
+    }
+
+    @Test
+    public void addUniqueStringTest(){
+        List<String> strings = new LinkedList<String>();
+        strings.add("Str1");
+        strings.add("Str2");
+
+        strings = StringUtils.addUniqueString("Str1", strings);
+        assertThat("Not unique string was added", strings.size(), is(2));
+        assertThat("Wrong 1-st string", strings.get(0), is("Str1"));
+        assertThat("Wrong 1-st string", strings.get(1), is("Str2"));
+
+        strings = StringUtils.addUniqueString("Str3", strings);
+        assertThat("Not unique string was added", strings.size(), is(3));
+        assertThat("Wrong 1-st string", strings.get(0), is("Str1"));
+        assertThat("Wrong 1-st string", strings.get(1), is("Str2"));
+        assertThat("Wrong 1-st string", strings.get(2), is("Str3"));
+
+        strings = StringUtils.addUniqueString(null, strings);
+        assertThat("Not unique string was added", strings.size(), is(4));
+        assertThat("Wrong 1-st string", strings.get(0), is("Str1"));
+        assertThat("Wrong 1-st string", strings.get(1), is("Str2"));
+        assertThat("Wrong 1-st string", strings.get(2), is("Str3"));
+        assertThat("Wrong 1-st string", strings.get(3), is(""));
 
     }
 }

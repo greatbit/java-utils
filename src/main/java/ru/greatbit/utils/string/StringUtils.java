@@ -67,7 +67,7 @@ public class StringUtils {
      * @return - boolean - is string in list
      */
     public static boolean isStringInList(List<String> stringList, String toSearch){
-        if (toSearch == null) return false;
+        toSearch = emptyIfNull(toSearch);
 
         for (String entry : stringList){
             if (entry != null && toSearch.equals(entry))
@@ -84,6 +84,7 @@ public class StringUtils {
      * @return
      */
     public static List<String> addUniqueString(String toAdd, List<String> strings){
+        toAdd = emptyIfNull(toAdd);
         if (!isStringInList(strings, toAdd)){
             strings.add(toAdd);
         }
