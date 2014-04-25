@@ -12,16 +12,8 @@ Maven
 <dependency>
     <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
-    <version>1.4</version>
+    <version>1.5</version>
 </dependency>
-```
-
-Usage
-==========
-Include into your spring-context:
-
-```
-<context:component-scan base-package="ru.greatbit.utils"/>
 ```
 
 Beans
@@ -29,12 +21,7 @@ Beans
 Beans deep copy:
 
 ```
-@Autowired
-CopyBeanUtils copyBeanUtils;
-
-....
-
-SomeBean targetBean = copyBeanUtils.getCopy(sourceBean);
+SomeBean targetBean = CopyBeanUtils.getCopy(sourceBean);
 ```
 
 
@@ -45,47 +32,26 @@ Used to marshall and unmarshall objects annotated with JAXB annotations
 Marshall to JSON:
 
 ```
-@Autowired
-JsonMarshaller jsonMarshaller;
-
-...
-
-String marshalledBean = jsonMarshaller.marshal(bean);
-
+String marshalledBean = JsonMarshaller.marshal(bean);
 ```
 
 Marshall from JSON:
 
 ```
-@Autowired
-JsonUnmarshaller jsonUnmarshaller;
-
-...
-
-SomeBean bean = jsonUnmarshaller.unmarshal(beanWithOutRoot, SomeBean.class);
-SomeBean bean2 = jsonUnmarshaller.unmarshal(beanWithRoot, "rootElement",  BeanWithoutNamespaceExample.class);
+SomeBean bean = JsonUnmarshaller.unmarshal(beanWithOutRoot, SomeBean.class);
+SomeBean bean2 = JsonUnmarshaller.unmarshal(beanWithRoot, "rootElement",  BeanWithoutNamespaceExample.class);
 ```
 
 Marshal to XML (with or without namespaces):
 
 ```
-@Autowired
-XMLMarshaller xmlMarshaller;
-
-...
-
-String xmlValue = xmlMarshaller.marshal(bean);
+String xmlValue = XMLMarshaller.marshal(bean);
 ```
 
 Unmarshal from XML (with or without namespaces):
 
 ```
-@Autowired
-XMLUnmarshaller xmlUnmarshaller;
-
-...
-
-SomeBean bean = xmlUnmarshaller.unmarshal(marshalledBeanString, SomeBean.class);
+SomeBean bean = XMLUnmarshaller.unmarshal(marshalledBeanString, SomeBean.class);
 ```
 
 String
@@ -93,49 +59,35 @@ String
 Returns an empty string if null is passed:
 
 ```
-@Autowired
-StringUtils stringUtils;
-
-...
-
-stringUtils.emptyIfNull(someString)
+StringUtils.emptyIfNull(someString)
 ```
 
 
 Returns a comma separated string from the list:
 
 ```
-@Autowired
-StringUtils stringUtils;
-
-...
-
-stringUtils.listAsString(strings);
+StringUtils.listAsString(strings);
 ```
-
 
 
 Returns md5 hash from string:
 
 ```
-@Autowired
-StringUtils stringUtils;
-
-...
-
-stringUtils.getMd5String("Super secret string")
+StringUtils.getMd5String("Super secret string")
 ```
 
 
 Find out if a string is in string list:
 
 ```
-@Autowired
-StringUtils stringUtils;
+StringUtils.isStringInList(strings, "hide");
+```
 
-...
 
-stringUtils.isStringInList(strings, "hide");
+Add the string to string list only if it is unique
+
+```
+StringUtils.addUniqueString("I'm Unique", strings);
 ```
 
 Time
@@ -143,12 +95,7 @@ Time
 Get long - time of the beginning of the day of porvided time
 
 ```
-@Autowired
-TimeUtils timeUtils;
-
-...
-
-timeUtils.getStartOfTheDay(new Date().getTime());
+TimeUtils.getStartOfTheDay(new Date().getTime());
 ```
 
 Cron
@@ -156,12 +103,7 @@ Cron
 Convert Unix cron expression to Quartz
 
 ```
-@Autowired
-CronUtils cronUtils;
-
-...
-
-cronUtils.convertToQuartz("0 10 * * 1-4");
+CronUtils.convertToQuartz("0 10 * * 1-4");
 ```
 
 Jenkins Build
