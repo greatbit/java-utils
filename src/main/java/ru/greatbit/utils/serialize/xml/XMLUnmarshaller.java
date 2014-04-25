@@ -1,7 +1,6 @@
 package ru.greatbit.utils.serialize.xml;
 
 import ru.greatbit.utils.serialize.utils.NamespaceFilter;
-import org.springframework.stereotype.Service;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -18,7 +17,6 @@ import java.lang.annotation.Annotation;
 /**
  * Created by azee on 4/10/14.
  */
-@Service
 public class XMLUnmarshaller {
 
     /**
@@ -32,7 +30,7 @@ public class XMLUnmarshaller {
      * @throws IOException
      * @throws SAXException
      */
-    public <T>T unmarshal(String data, Class<T> clazz) throws JAXBException, IOException, SAXException {
+    public static <T>T unmarshal(String data, Class<T> clazz) throws JAXBException, IOException, SAXException {
         try {
             return unmarshal(new ByteArrayInputStream(data.getBytes("UTF-8")), clazz);
         }
@@ -52,7 +50,7 @@ public class XMLUnmarshaller {
      * @throws IOException
      * @throws SAXException
      */
-    public <T>T unmarshal(InputStream data, Class<T> clazz) throws JAXBException, IOException, SAXException {
+    public static <T>T unmarshal(InputStream data, Class<T> clazz) throws JAXBException, IOException, SAXException {
         JAXBContext contextObj = JAXBContext.newInstance(clazz);
         Unmarshaller unmarshallerObj = contextObj.createUnmarshaller();
         InputStreamReader ir = new InputStreamReader(data);
@@ -70,7 +68,7 @@ public class XMLUnmarshaller {
      * @throws IOException
      * @throws SAXException
      */
-    public <T>T unmarshalNamespaceAware(InputStream data, Class<T> clazz) throws JAXBException, IOException, SAXException {
+    public static <T>T unmarshalNamespaceAware(InputStream data, Class<T> clazz) throws JAXBException, IOException, SAXException {
         T result;
 
         //Unmarshaller
@@ -107,7 +105,7 @@ public class XMLUnmarshaller {
      * @param clazz - Class of the object
      * @return String - namespace
      */
-    public String getXMLRootNamespace(Class clazz) {
+    public static String getXMLRootNamespace(Class clazz) {
         String result = "";
         Annotation annotation = clazz.getAnnotation(XmlRootElement.class);
         //If XMLRoot annotation applied then use it's namespace

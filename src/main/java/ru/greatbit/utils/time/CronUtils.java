@@ -1,7 +1,5 @@
 package ru.greatbit.utils.time;
 
-import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 
 /**
@@ -9,17 +7,15 @@ import java.util.Arrays;
  * User: azee
  * Date: 1/10/14
  */
-@Service
 public class CronUtils {
-    private final String DEFAULT_CRON = "";
-    private final String DEFAULT_SIMPLE_CRON = "";
+    private static final String DEFAULT_CRON = "";
 
     /**
      * Converts a UNIX-style cron value into the Quartz
      * @param input - unix cron String expression
      * @return String - quartz compatible expression
      */
-    public String convertToQuartz(String input){
+    public static String convertToQuartz(String input){
         String result = "";
         String[] entries = input.split(" ");
 
@@ -62,7 +58,7 @@ public class CronUtils {
      * @return
      * @throws NumberFormatException
      */
-    private String adjustDayOfWeek(String entry) throws NumberFormatException{
+    private static String adjustDayOfWeek(String entry) throws NumberFormatException{
         String splitter = "";
         String result = "";
 
@@ -92,7 +88,7 @@ public class CronUtils {
      * @param entry
      * @return
      */
-    private String formCommaSeparatedEntry(String entry) throws NumberFormatException{
+    private static String formCommaSeparatedEntry(String entry) throws NumberFormatException{
         String result = "";
         String[] values = entry.split("-");
         if (values.length != 2){
@@ -117,7 +113,7 @@ public class CronUtils {
      * @param value
      * @return
      */
-    private int convertCronDayToQuartz(int value){
+    private static int convertCronDayToQuartz(int value){
         if (value == 7 || value == 0){
             return 1;
         } else {

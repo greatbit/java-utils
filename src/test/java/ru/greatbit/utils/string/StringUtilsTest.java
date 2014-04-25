@@ -1,35 +1,28 @@
 package ru.greatbit.utils.string;
 
-import ru.greatbit.utils.string.StringUtils;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created with IntelliJ IDEA.
  * User: azee
  * Date: 1/10/14
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath*:spring-test-context.xml")
+
 public class StringUtilsTest {
-    @Autowired
-    StringUtils stringUtils;
+
 
     @Test
     public void testEmptyIfNull() throws Exception {
-        assertEquals("", stringUtils.emptyIfNull(null));
-        assertEquals("", stringUtils.emptyIfNull(""));
-        assertEquals("abc", stringUtils.emptyIfNull("abc"));
+        assertEquals("", StringUtils.emptyIfNull(null));
+        assertEquals("", StringUtils.emptyIfNull(""));
+        assertEquals("abc", StringUtils.emptyIfNull("abc"));
     }
 
     @Test
@@ -42,12 +35,12 @@ public class StringUtilsTest {
         strings.add("two");
         strings.add("beers");
 
-        assertEquals("Two,beers,or,not,two,beers", stringUtils.listAsString(strings));
+        assertEquals("Two,beers,or,not,two,beers", StringUtils.listAsString(strings));
     }
 
     @Test
     public void testGetMd5String() throws Exception {
-        assertEquals("4896cb726e6127ac4e7bb382edae08ab", stringUtils.getMd5String("Super secret string"));
+        assertEquals("4896cb726e6127ac4e7bb382edae08ab", StringUtils.getMd5String("Super secret string"));
     }
 
     @Test
@@ -58,8 +51,8 @@ public class StringUtilsTest {
         strings.add("and");
         strings.add("seek");
 
-        assertTrue(stringUtils.isStringInList(strings, "hide"));
-        assertFalse(stringUtils.isStringInList(strings, "bride"));
+        assertTrue(StringUtils.isStringInList(strings, "hide"));
+        assertFalse(StringUtils.isStringInList(strings, "bride"));
 
     }
 }

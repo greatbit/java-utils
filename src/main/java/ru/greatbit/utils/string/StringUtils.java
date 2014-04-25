@@ -1,7 +1,6 @@
 package ru.greatbit.utils.string;
 
 import org.apache.commons.codec.binary.Hex;
-import org.springframework.stereotype.Service;
 
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -13,7 +12,6 @@ import java.util.List;
  * User: azee
  * Date: 1/10/14
  */
-@Service
 public class StringUtils {
 
     /**
@@ -21,7 +19,7 @@ public class StringUtils {
      * @param input - String to verify
      * @return String
      */
-    public String emptyIfNull(String input){
+    public static String emptyIfNull(String input){
         if (input == null) {
             return "";
         }
@@ -33,7 +31,7 @@ public class StringUtils {
      * @param stringList - List of strings
      * @return result String
      */
-    public String listAsString(List<String> stringList){
+    public static String listAsString(List<String> stringList){
         String result = "";
         for (String oneString : stringList){
             result = result + oneString + ",";
@@ -53,7 +51,7 @@ public class StringUtils {
      * @return - md5 String
      * @throws NoSuchAlgorithmException
      */
-    public String getMd5String(String input) throws NoSuchAlgorithmException {
+    public static String getMd5String(String input) throws NoSuchAlgorithmException {
         final MessageDigest messageDigest = MessageDigest.getInstance("MD5");
         messageDigest.reset();
         messageDigest.update(input.getBytes(Charset.forName("UTF8")));
@@ -68,14 +66,27 @@ public class StringUtils {
      * @param toSearch - String to search
      * @return - boolean - is string in list
      */
-    public boolean isStringInList(List<String> stringList, String toSearch){
+    public static boolean isStringInList(List<String> stringList, String toSearch){
         if (toSearch == null) return false;
 
         for (String entry : stringList){
-            if (toSearch.equals(entry))
+            if (entry != null && toSearch.equals(entry))
                 return true;
         }
 
         return false;
+    }
+
+    /**
+     * Add a string to list if it is not represented in list yet
+     * @param toAdd
+     * @param strings
+     * @return
+     */
+    public static List<String> addUniqueString(String toAdd, List<String> strings){
+        if (!isStringInList(strings, toAdd)){
+            strings.add(toAdd);
+        }
+        return strings;
     }
 }

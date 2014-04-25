@@ -3,12 +3,10 @@ package ru.greatbit.utils.serialize.json;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by azee on 4/11/14.
  */
-@Service
 public class JsonUnmarshaller {
 
     /**
@@ -19,7 +17,7 @@ public class JsonUnmarshaller {
      * @return <T> - unmarshalled object
      * @throws Exception
      */
-    public <T>T unmarshal(String data, Class<T> objectClass) throws Exception{
+    public static <T>T unmarshal(String data, Class<T> objectClass) throws Exception{
         return unmarshal(data, "", objectClass);
     }
 
@@ -32,7 +30,7 @@ public class JsonUnmarshaller {
      * @return <T> - unmarshalled object
      * @throws Exception
      */
-    public <T>T unmarshal(String data, String rootName, Class<T> objectClass) throws Exception{
+    public static <T>T unmarshal(String data, String rootName, Class<T> objectClass) throws Exception{
         if (rootName != null && !"".equals(rootName)){
             data = "{\"" + rootName + "\": " + data + "}";
         }

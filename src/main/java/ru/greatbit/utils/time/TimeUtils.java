@@ -1,7 +1,5 @@
 package ru.greatbit.utils.time;
 
-import org.springframework.stereotype.Service;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,17 +8,16 @@ import java.util.Date;
  * User: azee
  * Date: 1/10/14
  */
-@Service
 public class TimeUtils {
 
-    private final long BEGINNING_OF_TIMES = 10800000L;
+    private static final long BEGINNING_OF_TIMES = 10800000L;
 
     /**
      * Provides the time in milliseconds that corresponds the beginning of the provided day
      * @param time - ling time of the day
      * @return long time - the beginning of the provided day
      */
-    public long getStartOfTheDay(long time){
+    public static long getStartOfTheDay(long time){
         if (time <= BEGINNING_OF_TIMES){
             return BEGINNING_OF_TIMES;
         }

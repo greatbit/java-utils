@@ -4,11 +4,6 @@ import ru.greatbit.utils.beans.BeanWithNamespaceExample;
 import ru.greatbit.utils.beans.BeanWithoutNamespaceExample;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 
 import static junit.framework.Assert.assertNotNull;
 import static org.hamcrest.core.Is.is;
@@ -16,12 +11,8 @@ import static org.hamcrest.core.Is.is;
 /**
  * Created by azee on 4/10/14.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath*:spring-test-context.xml")
-public class XMLUnmarshallerTest {
 
-    @Autowired
-    XMLUnmarshaller xmlUnmarshaller;
+public class XMLUnmarshallerTest {
 
     private String marshalledBean = "<beanExample><value>2</value></beanExample>";
 
@@ -31,21 +22,21 @@ public class XMLUnmarshallerTest {
 
     @Test
     public void testUnmarshall() throws Exception {
-        BeanWithoutNamespaceExample bean = xmlUnmarshaller.unmarshal(marshalledBean, BeanWithoutNamespaceExample.class);
+        BeanWithoutNamespaceExample bean = XMLUnmarshaller.unmarshal(marshalledBean, BeanWithoutNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(2));
     }
 
     @Test
     public void testUnmarshallWNamespace() throws Exception {
-        BeanWithNamespaceExample bean = xmlUnmarshaller.unmarshal(marshalledBeanWithNs, BeanWithNamespaceExample.class);
+        BeanWithNamespaceExample bean = XMLUnmarshaller.unmarshal(marshalledBeanWithNs, BeanWithNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(10));
     }
 
     @Test
     public void testUnmarshallWithoutNamespace() throws Exception {
-        BeanWithNamespaceExample bean = xmlUnmarshaller.unmarshal(marshalledBean, BeanWithNamespaceExample.class);
+        BeanWithNamespaceExample bean = XMLUnmarshaller.unmarshal(marshalledBean, BeanWithNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(2));
     }
@@ -53,13 +44,13 @@ public class XMLUnmarshallerTest {
     @Test
     public void testGetXMLRootNamespace() throws Exception {
         Assert.assertThat("Wrong namespace",
-                xmlUnmarshaller.getXMLRootNamespace(BeanWithNamespaceExample.class),
+                XMLUnmarshaller.getXMLRootNamespace(BeanWithNamespaceExample.class),
                 is("beans.utils.greatbit.ru"));
     }
     @Test
     public void testGetXMLRootNoNamespace() throws Exception {
         Assert.assertThat("Wrong namespace",
-                xmlUnmarshaller.getXMLRootNamespace(BeanWithoutNamespaceExample.class),
+                XMLUnmarshaller.getXMLRootNamespace(BeanWithoutNamespaceExample.class),
                 is("beans.utils.greatbit.ru"));
     }
 
