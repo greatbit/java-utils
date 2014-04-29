@@ -106,10 +106,6 @@ Convert Unix cron expression to Quartz
 CronUtils.convertToQuartz("0 10 * * 1-4");
 ```
 
-Jenkins Build
-==========
-http://azee.people.yandex.net/job/java-utils/
-
 New in 1.5-SNAPSHOT
 ==========
 
@@ -132,3 +128,8 @@ difference.getAdded();
 difference.getRemoved();
 difference.getEqual();
 ```
+
+Jenkins Build
+==========
+http://azee.people.yandex.net/job/java-utils/
+
