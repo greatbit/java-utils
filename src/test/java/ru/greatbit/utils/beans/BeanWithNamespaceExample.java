@@ -15,6 +15,12 @@ public class BeanWithNamespaceExample {
     @XmlElement(required = true,  namespace = "beans.utils.greatbit.ru")
     protected int value;
 
+    public BeanWithNamespaceExample() {}
+
+    public BeanWithNamespaceExample(int value) {
+        this.value = value;
+    }
+
     public int getValue() {
         return value;
     }

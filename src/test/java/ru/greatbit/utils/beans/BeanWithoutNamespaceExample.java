@@ -13,6 +13,13 @@ public class BeanWithoutNamespaceExample {
     @XmlElement(required = true)
     protected int value;
 
+    public BeanWithoutNamespaceExample(int value) {
+        this.value = value;
+    }
+
+    public BeanWithoutNamespaceExample() {
+    }
+
     public int getValue() {
         return value;
     }
