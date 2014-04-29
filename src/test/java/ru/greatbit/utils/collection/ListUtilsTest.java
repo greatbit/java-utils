@@ -96,6 +96,12 @@ public class ListUtilsTest {
         assertThat(difference.getEqual().size(), is(2));
         assertTrue(StringUtils.isStringInList(difference.getEqual(), "1"));
         assertTrue(StringUtils.isStringInList(difference.getEqual(), "3"));
+
+        assertThat(difference.getMerged().size(), is(4));
+        assertTrue(StringUtils.isStringInList(difference.getMerged(), "1"));
+        assertTrue(StringUtils.isStringInList(difference.getMerged(), "2"));
+        assertTrue(StringUtils.isStringInList(difference.getMerged(), "3"));
+        assertTrue(StringUtils.isStringInList(difference.getMerged(), "4"));
     }
 
 
@@ -129,6 +135,8 @@ public class ListUtilsTest {
         assertThat(difference.getEqual().size(), is(1));
         assertNotNull(difference.getEqual().get(0));
         assertThat(difference.getEqual().get(0), is(commonBean));
+
+        assertThat(difference.getMerged().size(), is(5));
     }
 }
 

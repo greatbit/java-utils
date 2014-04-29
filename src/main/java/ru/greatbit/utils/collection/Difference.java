@@ -32,4 +32,12 @@ public class Difference<T> {
         }
         return equal;
     }
+
+    public List<T> getMerged(){
+        List<T> result = new LinkedList<T>();
+        result.addAll(equal);
+        result.addAll(removed);
+        result.addAll(added);
+        return result;
+    }
 }
