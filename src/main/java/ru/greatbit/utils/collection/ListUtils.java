@@ -60,6 +60,12 @@ public class ListUtils {
         return difference;
     }
 
+    /**
+     * Load a list to a map
+     * @param input - List<T>
+     * @param <T> - Class of objects
+     * @return - Map<T, T>
+     */
     private static <T>Map<T, T> listToMap(List<T> input){
         Map<T, T> dataMap = new HashMap<T, T>();
         for (T object : input){
