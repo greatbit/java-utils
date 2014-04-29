@@ -117,7 +117,7 @@ List<String> result = ListUtils.mergeLists(first, second);
 List<SomeObject> result2 = ListUtils.mergeLists(first, second);
 ```
 
-Fing differences in 2 lists:
+Find differences in 2 lists:
 ```
 Difference<String> difference = ListUtils.getDiff(first, second);
 Difference<BeanWithNamespaceExample> difference2 = ListUtils.getDiff(first, second);
