@@ -90,27 +90,8 @@ Add the string to string list only if it is unique
 StringUtils.addUniqueString("I'm Unique", strings);
 ```
 
-Time
+List
 ==========
-Get long - time of the beginning of the day of porvided time
-
-```
-TimeUtils.getStartOfTheDay(new Date().getTime());
-```
-
-Cron
-==========
-Convert Unix cron expression to Quartz
-
-```
-CronUtils.convertToQuartz("0 10 * * 1-4");
-```
-
-New in 1.5-SNAPSHOT
-==========
-
-List utils
-
 Merge 2 lists:
 ```
 List<String> result = ListUtils.mergeLists(first, second);
@@ -128,6 +109,32 @@ difference.getAdded();
 difference.getRemoved();
 difference.getEqual();
 ```
+
+Time
+==========
+Get long - time of the beginning of the day of porvided time
+
+```
+TimeUtils.getStartOfTheDay(new Date().getTime());
+```
+
+Cron
+==========
+Convert Unix cron expression to Quartz
+
+```
+CronUtils.convertToQuartz("0 10 * * 1-4");
+```
+
+New in 1.6-SNAPSHOT
+==========
+Bean Utils:
+
+Compare beans by value:
+```
+boolean areEqual = CompareBeanUtils.equalByVal(bean1, bean2)
+```
+
 
 Jenkins Build
 ==========
