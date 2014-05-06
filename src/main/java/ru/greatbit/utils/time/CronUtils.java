@@ -54,12 +54,12 @@ public class CronUtils {
 
     /**
      * Format a day-of-week item
-     * @param entry
+     * @param entry - String
      * @return
      * @throws NumberFormatException
      */
     private static String adjustDayOfWeek(String entry) throws NumberFormatException{
-        String splitter = "";
+        String splitter;
         String result = "";
 
         //Convert 1-5 to 1,2,3,4,5
@@ -85,8 +85,8 @@ public class CronUtils {
 
     /**
      * Convert 1-5 to 1,2,3,4,5
-     * @param entry
-     * @return
+     * @param entry - String
+     * @return - String entry
      */
     private static String formCommaSeparatedEntry(String entry) throws NumberFormatException{
         String result = "";
@@ -110,8 +110,8 @@ public class CronUtils {
 
     /**
      * Converts cron days to Quartz
-     * @param value
-     * @return
+     * @param value - int days
+     * @return - int days
      */
     private static int convertCronDayToQuartz(int value){
         if (value == 7 || value == 0){
