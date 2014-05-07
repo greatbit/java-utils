@@ -4,6 +4,7 @@ import ru.greatbit.utils.beans.BeanWithNamespaceExample;
 import ru.greatbit.utils.beans.BeanWithoutNamespaceExample;
 import org.junit.Assert;
 import org.junit.Test;
+import ru.greatbit.utils.serialize.XmlSerializer;
 
 import static junit.framework.Assert.assertNotNull;
 import static org.hamcrest.core.Is.is;
@@ -22,21 +23,21 @@ public class XMLUnmarshallerTest {
 
     @Test
     public void testUnmarshall() throws Exception {
-        BeanWithoutNamespaceExample bean = XMLUnmarshaller.unmarshal(marshalledBean, BeanWithoutNamespaceExample.class);
+        BeanWithoutNamespaceExample bean = XmlSerializer.unmarshal(marshalledBean, BeanWithoutNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(2));
     }
 
     @Test
     public void testUnmarshallWNamespace() throws Exception {
-        BeanWithNamespaceExample bean = XMLUnmarshaller.unmarshal(marshalledBeanWithNs, BeanWithNamespaceExample.class);
+        BeanWithNamespaceExample bean = XmlSerializer.unmarshal(marshalledBeanWithNs, BeanWithNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(10));
     }
 
     @Test
     public void testUnmarshallWithoutNamespace() throws Exception {
-        BeanWithNamespaceExample bean = XMLUnmarshaller.unmarshal(marshalledBean, BeanWithNamespaceExample.class);
+        BeanWithNamespaceExample bean = XmlSerializer.unmarshal(marshalledBean, BeanWithNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(2));
     }
@@ -44,13 +45,13 @@ public class XMLUnmarshallerTest {
     @Test
     public void testGetXMLRootNamespace() throws Exception {
         Assert.assertThat("Wrong namespace",
-                XMLUnmarshaller.getXMLRootNamespace(BeanWithNamespaceExample.class),
+                XmlSerializer.getXMLRootNamespace(BeanWithNamespaceExample.class),
                 is("beans.utils.greatbit.ru"));
     }
     @Test
     public void testGetXMLRootNoNamespace() throws Exception {
         Assert.assertThat("Wrong namespace",
-                XMLUnmarshaller.getXMLRootNamespace(BeanWithoutNamespaceExample.class),
+                XmlSerializer.getXMLRootNamespace(BeanWithoutNamespaceExample.class),
                 is("beans.utils.greatbit.ru"));
     }
 

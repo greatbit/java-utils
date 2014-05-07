@@ -1,4 +1,4 @@
-package ru.greatbit.utils.serialize.xml;
+package ru.greatbit.utils.serialize;
 
 import ru.greatbit.utils.serialize.utils.NamespaceFilter;
 import org.xml.sax.InputSource;
@@ -8,6 +8,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.transform.sax.SAXSource;
@@ -17,7 +18,22 @@ import java.lang.annotation.Annotation;
 /**
  * Created by azee on 4/10/14.
  */
-public class XMLUnmarshaller {
+public class XmlSerializer {
+
+    /**
+     * Marhsal an object to string
+     * @param instance
+     * @return
+     * @throws IOException
+     * @throws JAXBException
+     */
+    public static String marshal(Object instance) throws IOException, JAXBException {
+        JAXBContext contextA = JAXBContext.newInstance(instance.getClass());
+        Marshaller marshaller = contextA.createMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(instance, writer);
+        return writer.toString();
+    }
 
     /**
      * Unmarshall an object event if the string doesn't contain

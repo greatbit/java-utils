@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import ru.greatbit.utils.beans.BeanWithNamespaceExample;
 import ru.greatbit.utils.beans.BeanWithoutNamespaceExample;
+import ru.greatbit.utils.serialize.XmlSerializer;
 
 import static org.hamcrest.core.Is.is;
 
@@ -25,7 +26,7 @@ public class XMLMarshallerTest {
         BeanWithoutNamespaceExample bean = new BeanWithoutNamespaceExample();
         bean.setValue(3);
         Assert.assertThat("Bean was not marshalled correctly",
-                XMLMarshaller.marshal(bean),
+                XmlSerializer.marshal(bean),
                 is(marshalledBean));
     }
 
@@ -34,7 +35,7 @@ public class XMLMarshallerTest {
         BeanWithNamespaceExample bean = new BeanWithNamespaceExample();
         bean.setValue(4);
         Assert.assertThat("Bean was not marshalled correctly",
-                XMLMarshaller.marshal(bean),
+                XmlSerializer.marshal(bean),
                 is(marshalledBeanWithNs));
     }
 

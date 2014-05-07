@@ -1,7 +1,6 @@
 package ru.greatbit.utils.beans;
 
-import ru.greatbit.utils.serialize.json.JsonUnmarshaller;
-import ru.greatbit.utils.serialize.json.JsonMarshaller;
+import ru.greatbit.utils.serialize.JsonSerializer;
 
 /**
  * Created by azee on 4/11/14.
@@ -16,8 +15,8 @@ public class CopyBeanUtils {
      * @throws Exception
      */
     public static <T>T getCopy(Object source) throws Exception {
-        String sourceString = JsonMarshaller.marshal(source);
+        String sourceString = JsonSerializer.marshal(source);
         Class clazz = source.getClass();
-        return (T) JsonUnmarshaller.unmarshal(sourceString, clazz);
+        return (T) JsonSerializer.unmarshal(sourceString, clazz);
     }
 }

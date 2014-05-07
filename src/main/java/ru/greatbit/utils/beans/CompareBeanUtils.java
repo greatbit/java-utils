@@ -1,6 +1,6 @@
 package ru.greatbit.utils.beans;
 
-import ru.greatbit.utils.serialize.json.JsonMarshaller;
+import ru.greatbit.utils.serialize.JsonSerializer;
 
 /**
  * Created by azee on 5/5/14.
@@ -26,8 +26,8 @@ public class CompareBeanUtils {
         }
 
         //Serialize and compare
-        String bean1String = JsonMarshaller.marshal(bean1);
-        String bean2String = JsonMarshaller.marshal(bean2);
+        String bean1String = JsonSerializer.marshal(bean1);
+        String bean2String = JsonSerializer.marshal(bean2);
         return bean1String.equals(bean2String);
     }
 }

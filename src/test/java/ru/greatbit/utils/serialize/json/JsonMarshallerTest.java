@@ -3,6 +3,7 @@ package ru.greatbit.utils.serialize.json;
 import ru.greatbit.utils.beans.BeanWithoutNamespaceExample;
 import org.junit.Assert;
 import org.junit.Test;
+import ru.greatbit.utils.serialize.JsonSerializer;
 
 import static org.hamcrest.core.Is.is;
 
@@ -21,9 +22,9 @@ public class JsonMarshallerTest {
         bean.setValue(1);
 
         Assert.assertThat("Incorrect marshalling",
-                JsonMarshaller.marshal(bean), is(beanWithoutRoot));
+                JsonSerializer.marshal(bean), is(beanWithoutRoot));
 
         Assert.assertThat("Incorrect marshalling",
-                JsonMarshaller.marshal(bean, "beanExample"), is(beanWithRoot));
+                JsonSerializer.marshal(bean, "beanExample"), is(beanWithRoot));
     }
 }

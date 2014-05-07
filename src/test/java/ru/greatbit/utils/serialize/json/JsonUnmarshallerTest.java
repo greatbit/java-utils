@@ -3,6 +3,7 @@ package ru.greatbit.utils.serialize.json;
 import ru.greatbit.utils.beans.BeanWithoutNamespaceExample;
 import org.junit.Assert;
 import org.junit.Test;
+import ru.greatbit.utils.serialize.JsonSerializer;
 
 import static junit.framework.Assert.assertNotNull;
 import static org.hamcrest.core.Is.is;
@@ -16,11 +17,11 @@ public class JsonUnmarshallerTest {
 
     @Test
     public void testUnmarshal() throws Exception {
-        BeanWithoutNamespaceExample bean = JsonUnmarshaller.unmarshal(beanWithRoot, BeanWithoutNamespaceExample.class);
+        BeanWithoutNamespaceExample bean = JsonSerializer.unmarshal(beanWithRoot, BeanWithoutNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(1));
 
-        bean = JsonUnmarshaller.unmarshal(beanWithoutRoot, "value", BeanWithoutNamespaceExample.class);
+        bean = JsonSerializer.unmarshal(beanWithoutRoot, "value", BeanWithoutNamespaceExample.class);
         assertNotNull(bean);
         Assert.assertThat("Wrong bean value", bean.getValue(), is(2));
     }
