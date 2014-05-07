@@ -1,6 +1,7 @@
 package ru.greatbit.utils.serialize.json;
 
 import org.codehaus.jackson.map.AnnotationIntrospector;
+import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 
@@ -35,6 +36,7 @@ public class JsonUnmarshaller {
             data = "{\"" + rootName + "\": " + data + "}";
         }
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
         mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
         return (T)mapper.readValue(data, objectClass);

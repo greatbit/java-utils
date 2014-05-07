@@ -1,6 +1,7 @@
 package ru.greatbit.utils.serialize.json;
 
 import org.codehaus.jackson.map.AnnotationIntrospector;
+import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 
@@ -34,6 +35,7 @@ public class JsonMarshaller {
         ObjectMapper mapper = new ObjectMapper();
         AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
         mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
+        mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         result = mapper.writeValueAsString(object);
         if (rootName != null && !"".equals(rootName)){
             result = "{\"" + rootName + "\": " + result + "}";
