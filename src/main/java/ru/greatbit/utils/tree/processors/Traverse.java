@@ -16,8 +16,8 @@ public class Traverse {
      * @param head
      * @return
      */
-    public static <K, V>List<Node> bfsList(Node<K, V> head){
-        List<Node> result = new LinkedList<Node>();
+    public static <K, V>List<Node<K, V>> bfsList(Node<K, V> head){
+        List<Node<K, V>> result = new LinkedList<Node<K, V>>();
         if (head == null){
             return result;
         }
@@ -44,8 +44,8 @@ public class Traverse {
      * @param head
      * @return
      */
-    public static <K, V>List<Node> dfsList(Node<K, V> head){
-        List<Node> result = new LinkedList<Node>();
+    public static <K, V>List<Node<K, V>> dfsList(Node<K, V> head){
+        List<Node<K, V>> result = new LinkedList<Node<K, V>>();
         dfsList(head, result);
         return result;
     }
@@ -55,7 +55,7 @@ public class Traverse {
      * @param head
      * @param result
      */
-    private static <K, V> void dfsList(Node<K, V> head, List<Node> result){
+    private static <K, V> void dfsList(Node<K, V> head, List<Node<K, V>> result){
         if (head == null){
             return;
         }
@@ -72,8 +72,8 @@ public class Traverse {
      * @param <V>
      * @return
      */
-    public static <K, V> List<Node> getlLeafs(Node<K, V> head){
-        List<Node> result = new LinkedList<Node>();
+    public static <K, V> List<Node<K, V>> getlLeafs(Node<K, V> head){
+        List<Node<K, V>> result = new LinkedList<Node<K, V>>();
         getlLeafs(head, result);
         return result;
     }
@@ -86,7 +86,7 @@ public class Traverse {
      * @param <K>
      * @param <V>
      */
-    private static <K, V> void getlLeafs(Node<K, V> head, List<Node> result){
+    private static <K, V> void getlLeafs(Node<K, V> head, List<Node<K, V>> result){
         if (head == null){
             return;
         }
