@@ -168,6 +168,14 @@ Get all leafs:
 List<Node<String, String>> leafs = Traverse.getlLeafs((Node)head);
 ```
 
+Serialization:
+
+Unmarshal an oject if we don't now if it is a json or an xml:
+
+```
+SomeBean bean = Serializer.unmarshal(marshalledBeanString, SomeBean.class);
+```
+
 
 
 Jenkins Build
