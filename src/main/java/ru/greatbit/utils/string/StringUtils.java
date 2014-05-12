@@ -79,8 +79,8 @@ public class StringUtils {
 
     /**
      * Add a string to list if it is not represented in list yet
-     * @param toAdd
-     * @param strings
+     * @param toAdd - String - entry to add
+     * @param strings - List<String> - a list to update
      * @return
      */
     public static List<String> addUniqueString(String toAdd, List<String> strings){
@@ -89,5 +89,41 @@ public class StringUtils {
             strings.add(toAdd);
         }
         return strings;
+    }
+
+    /**
+     * Find out if all of provided string parts are present in the source string
+     * @param source - A String to search substrings in
+     * @param toSearch - an array of possible substrings
+     * @return
+     */
+    public static boolean containsAll(String source, String... toSearch){
+        if (source == null || toSearch == null || toSearch.length == 0){
+            return false;
+        }
+        for (String entry : toSearch){
+            if (!source.contains(entry)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Find out if provided souce string contains any of string parts from the list
+     * @param source - A String to search substrings in
+     * @param toSearch - an array of possible substrings
+     * @return
+     */
+    public static boolean containsAny(String source, String... toSearch){
+        if (source == null || toSearch == null || toSearch.length == 0){
+            return false;
+        }
+        for (String entry : toSearch){
+            if (source.contains(entry)){
+                return true;
+            }
+        }
+        return false;
     }
 }

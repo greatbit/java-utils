@@ -1,6 +1,8 @@
 package ru.greatbit.utils.string;
 
+import org.junit.Assert;
 import org.junit.Test;
+import ru.greatbit.utils.collection.ListUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -55,7 +57,6 @@ public class StringUtilsTest {
 
         assertTrue(StringUtils.isStringInList(strings, "hide"));
         assertFalse(StringUtils.isStringInList(strings, "bride"));
-
     }
 
     @Test
@@ -81,6 +82,20 @@ public class StringUtilsTest {
         assertThat("Wrong 1-st string", strings.get(1), is("Str2"));
         assertThat("Wrong 1-st string", strings.get(2), is("Str3"));
         assertThat("Wrong 1-st string", strings.get(3), is(""));
+    }
 
+    @Test
+    public void containsAllTest(){
+        String source = "How many javascript developers do we need to replace undefined? - NaN.";
+        Assert.assertTrue(StringUtils.containsAll(source, "javascript", "How", "need"));
+        Assert.assertFalse(StringUtils.containsAll(source, "javascript", "How", "need", "arrriva!"));
+    }
+
+    @Test
+    public void containsAnyTest(){
+        String source = "How many javascript developers do we need to replace undefined? - NaN.";
+        Assert.assertTrue(StringUtils.containsAny(source, "javascript", "How", "need"));
+        Assert.assertTrue(StringUtils.containsAny(source, "javascript", "How", "need", "arrriva!"));
+        Assert.assertFalse(StringUtils.containsAny(source, "cogito", "ergo", "sum"));
     }
 }
