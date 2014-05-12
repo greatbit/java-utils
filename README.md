@@ -136,6 +136,40 @@ boolean areEqual = CompareBeanUtils.equalByVal(bean1, bean2)
 ```
 
 
+
+String Utils:
+
+Find out if all of provided string parts are present in the source string:
+```
+boolean containsAll = StringUtils.containsAll(source, "javascript", "How", "need")
+```
+
+Find out if provided souce string contains any of string parts from the list:
+```
+boolean containsAny = StringUtils.containsAny(source, "javascript", "How", "need")
+```
+
+
+
+Tree Utils:
+
+Collect nodes in order using Breadth-first traversal:
+```
+List<Node<String, String>> bfsList = Traverse.bfsList((Node)head);
+```
+
+Collect nodes in order using Depth-first traversal:
+```
+List<Node<String, String>> dfsList = Traverse.dfsList((Node)head);
+```
+
+Get all leafs:
+```
+List<Node<String, String>> leafs = Traverse.getlLeafs((Node)head);
+```
+
+
+
 Jenkins Build
 ==========
 http://azee.people.yandex.net/job/java-utils/
