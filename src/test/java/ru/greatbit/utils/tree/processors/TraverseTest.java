@@ -33,4 +33,13 @@ public class TraverseTest {
         assertThat("Wrong sequence of nodes", ListTestUtils.getKeysList(dfsList).toString(),
                 is("[head, 1, 1_1, 1_1_1, 1_1_2, 1_2, 1_2_1, 2, 2_1, 3]"));
     }
+
+    @Test
+    public void leafsListTest(){
+        List<Node<String, String>> leafs = Traverse.getlLeafs(TreeGenerator.createNaryTree());
+        assertNotNull(leafs);
+        assertThat("Wrong number of nodes in the tree", leafs.size(), is(5));
+        assertThat("Wrong sequence of nodes", ListTestUtils.getKeysList(leafs).toString(),
+                is("[1_1_1, 1_1_2, 1_2_1, 2_1, 3]"));
+    }
 }
