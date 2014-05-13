@@ -12,7 +12,7 @@ Maven
 <dependency>
     <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
-    <version>1.5</version>
+    <version>1.6</version>
 </dependency>
 ```
 
@@ -22,6 +22,12 @@ Beans deep copy:
 
 ```
 SomeBean targetBean = CopyBeanUtils.getCopy(sourceBean);
+```
+
+
+Compare beans by value:
+```
+boolean areEqual = CompareBeanUtils.equalByVal(bean1, bean2)
 ```
 
 
@@ -52,6 +58,13 @@ Unmarshal from XML (with or without namespaces):
 
 ```
 SomeBean bean = XMLUnmarshaller.unmarshal(marshalledBeanString, SomeBean.class);
+```
+
+
+Unmarshal an oject if we don't now if it is a json or an xml:
+
+```
+SomeBean bean = Serializer.unmarshal(marshalledBeanString, SomeBean.class);
 ```
 
 String
@@ -90,6 +103,20 @@ Add the string to string list only if it is unique
 StringUtils.addUniqueString("I'm Unique", strings);
 ```
 
+
+Find out if all of provided string parts are present in the source string:
+
+```
+boolean containsAll = StringUtils.containsAll(source, "javascript", "How", "need")
+```
+
+
+Find out if provided souce string contains any of string parts from the list:
+
+```
+boolean containsAny = StringUtils.containsAny(source, "javascript", "How", "need")
+```
+
 List
 ==========
 Merge 2 lists:
@@ -126,55 +153,33 @@ Convert Unix cron expression to Quartz
 CronUtils.convertToQuartz("0 10 * * 1-4");
 ```
 
-New in 1.6-SNAPSHOT
+Trees
 ==========
-Bean Utils:
-
-Compare beans by value:
-```
-boolean areEqual = CompareBeanUtils.equalByVal(bean1, bean2)
-```
-
-
-
-String Utils:
-
-Find out if all of provided string parts are present in the source string:
-```
-boolean containsAll = StringUtils.containsAll(source, "javascript", "How", "need")
-```
-
-Find out if provided souce string contains any of string parts from the list:
-```
-boolean containsAny = StringUtils.containsAny(source, "javascript", "How", "need")
-```
-
-
-
-Tree Utils:
-
 Collect nodes in order using Breadth-first traversal:
+
 ```
 List<Node<String, String>> bfsList = Traverse.bfsList((Node)head);
 ```
 
+
 Collect nodes in order using Depth-first traversal:
+
 ```
 List<Node<String, String>> dfsList = Traverse.dfsList((Node)head);
 ```
 
+
 Get all leafs:
+
 ```
 List<Node<String, String>> leafs = Traverse.getlLeafs((Node)head);
 ```
 
-Serialization:
 
-Unmarshal an oject if we don't now if it is a json or an xml:
+New in 1.7-SNAPSHOT
+==========
 
-```
-SomeBean bean = Serializer.unmarshal(marshalledBeanString, SomeBean.class);
-```
+
 
 
 
