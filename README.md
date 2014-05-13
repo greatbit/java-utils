@@ -44,20 +44,20 @@ String marshalledBean = JsonMarshaller.marshal(bean);
 Marshall from JSON:
 
 ```
-SomeBean bean = JsonUnmarshaller.unmarshal(beanWithOutRoot, SomeBean.class);
-SomeBean bean2 = JsonUnmarshaller.unmarshal(beanWithRoot, "rootElement",  BeanWithoutNamespaceExample.class);
+SomeBean bean = JsonSerializer.unmarshal(beanWithOutRoot, SomeBean.class);
+SomeBean bean2 = JsonSerializer.unmarshal(beanWithRoot, "rootElement",  BeanWithoutNamespaceExample.class);
 ```
 
 Marshal to XML (with or without namespaces):
 
 ```
-String xmlValue = XMLMarshaller.marshal(bean);
+String xmlValue = XmlSerializer.marshal(bean);
 ```
 
 Unmarshal from XML (with or without namespaces):
 
 ```
-SomeBean bean = XMLUnmarshaller.unmarshal(marshalledBeanString, SomeBean.class);
+SomeBean bean = XmlSerializer.unmarshal(marshalledBeanString, SomeBean.class);
 ```
 
 
