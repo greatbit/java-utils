@@ -143,4 +143,21 @@ public class StringUtils {
         }
         return source;
     }
+
+    /**
+     * Remove heading string (e.g. comma or slash)
+     * @param source
+     * @param toRemove
+     * @return
+     */
+    public static String removeHeading(String source, String toRemove){
+        if (toRemove == null){
+            return source;
+        }
+        int toRemoveLength = toRemove.length();
+        if (toRemove.equals(source.substring(0, toRemoveLength))) {
+            source = source.substring(toRemoveLength, source.length());
+        }
+        return source;
+    }
 }
