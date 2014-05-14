@@ -187,6 +187,11 @@ Remove tailing symbols:
 StringUtils.removeTailing("Some, tailing, comma,", ",")
 ```
 
+Remove heading symbols:
+
+```
+StringUtils.removeHeading(",Some, tailing, comma", ",")
+```
 
 
 
