@@ -179,6 +179,13 @@ List<Node<String, String>> leafs = Traverse.getlLeafs((Node)head);
 New in 1.7-SNAPSHOT
 ==========
 
+String
+==========
+Remove tailing symbols:
+
+```
+StringUtils.removeTailing("Some, tailing, comma,", ",")
+```
 
 
 

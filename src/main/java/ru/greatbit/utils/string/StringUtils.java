@@ -126,4 +126,21 @@ public class StringUtils {
         }
         return false;
     }
+
+    /**
+     * Remove tailing string (e.g. comma or slash)
+     * @param source
+     * @param toRemove
+     * @return
+     */
+    public static String removeTailing(String source, String toRemove){
+        if (toRemove == null){
+            return source;
+        }
+        int toRemoveLength = toRemove.length();
+        if (toRemove.equals(source.substring(source.length() - toRemoveLength))) {
+            source = source.substring(0, source.length() - toRemoveLength);
+        }
+        return source;
+    }
 }

@@ -98,4 +98,12 @@ public class StringUtilsTest {
         Assert.assertTrue(StringUtils.containsAny(source, "javascript", "How", "need", "arrriva!"));
         Assert.assertFalse(StringUtils.containsAny(source, "cogito", "ergo", "sum"));
     }
+
+    @Test
+    public void removeTailingTest(){
+        assertThat("Tailing comma was not removed", StringUtils.removeTailing("Some, tailing, comma,", ","), is("Some, tailing, comma"));
+        assertThat("Tailing slash was not removed", StringUtils.removeTailing("Some, tailing/ slash//", "/"), is("Some, tailing/ slash/"));
+        assertThat("Three tailing commas were not removed", StringUtils.removeTailing("Some, tailing,, comma,,,", ",,,"), is("Some, tailing,, comma"));
+        assertThat("Tailing slash was not removed", StringUtils.removeTailing("Some, tailing/ slash//", ","), is("Some, tailing/ slash//"));
+    }
 }
