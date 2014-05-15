@@ -215,7 +215,11 @@ Get fibonacchi number of defined depth:
 Sequence.fibonacci(10)
 ```
 
+Get a sequence of fibonacci numbers of defined depth:
 
+```
+Sequence.fibonacciSequence(5)
+```
 
 
 Jenkins Build
