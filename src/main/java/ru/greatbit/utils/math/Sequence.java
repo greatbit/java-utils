@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by azee on 5/15/14.
  */
-public class Sequences {
+public class Sequence {
 
     /**
      * Get factorial of defined depth

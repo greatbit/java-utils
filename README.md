@@ -193,6 +193,29 @@ Remove heading symbols:
 StringUtils.removeHeading(",Some, tailing, comma", ",")
 ```
 
+Math
+==========
+Get factorial of defined depth:
+
+```
+Sequence.factorial(5)
+```
+
+
+Get a sequence of factorial numbers of defined depth:
+
+```
+Sequence.factorialSequence(5)
+```
+
+
+Get fibonacchi number of defined depth:
+
+```
+Sequence.fibonacci(10)
+```
+
+
 
 
 Jenkins Build
