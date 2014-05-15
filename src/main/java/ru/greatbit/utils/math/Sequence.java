@@ -69,4 +69,39 @@ public class Sequence {
             return fibonacci(depth - 1) + fibonacci(depth - 2);
         }
     }
+
+
+    /**
+     * Get a sequence of fibonacci numbers of defined depth
+     * @param depth
+     * @return
+     * @throws MathException
+     */
+    public static List<Long> fibonacciSequence(int depth) throws MathException {
+        List<Long> result = new LinkedList<Long>();
+        if (depth <= 0){
+            throw new MathException("Factorial is not supported for values less or equal to 0");
+        }
+        fibonacciSequence(depth, result);
+        return result;
+    }
+
+    /**
+     * Fill fibonacci sequence recursively
+     * @param depth
+     * @param result
+     */
+    private static void fibonacciSequence(int depth, List<Long> result) {
+        if (depth == 1) {
+            result.add(1L);
+            return;
+        }
+        if (depth == 2) {
+            result.add(1L);
+            result.add(1L);
+            return;
+        }
+        fibonacciSequence(depth - 1, result);
+        result.add(result.get(result.size() - 1) + result.get(result.size() - 2));
+    }
 }

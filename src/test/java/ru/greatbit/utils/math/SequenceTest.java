@@ -43,6 +43,15 @@ public class SequenceTest {
         assertThat(Sequence.fibonacci(15), is(610L));
     }
 
+    @Test
+    public void fibonacciSequenceTest() throws MathException {
+        assertThat(Sequence.fibonacciSequence(1).toString(), is("[1]"));
+        assertThat(Sequence.fibonacciSequence(2).toString(), is("[1, 1]"));
+        assertThat(Sequence.fibonacciSequence(5).toString(), is("[1, 1, 2, 3, 5]"));
+        assertThat(Sequence.fibonacciSequence(7).toString(), is("[1, 1, 2, 3, 5, 8, 13]"));
+        assertThat(Sequence.fibonacciSequence(10).toString(), is("[1, 1, 2, 3, 5, 8, 13, 21, 34, 55]"));
+    }
+
     @Test(expected = MathException.class)
     public void fibonacciNegativeTest() throws MathException {
         Sequence.fibonacci(0);
