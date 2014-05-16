@@ -82,6 +82,12 @@ Returns a comma separated string from the list:
 StringUtils.listAsString(strings);
 ```
 
+Returns a comma separated string from the list without spaces:
+
+```
+StringUtils.listAsStringNoSpaces(objects);
+```
+
 
 Returns md5 hash from string:
 
@@ -127,12 +133,6 @@ Remove heading symbols:
 
 ```
 StringUtils.removeHeading(",Some, tailing, comma", ",")
-```
-
-Returns a comma separated string from the list without spaces:
-
-```
-StringUtils.listAsStringNoSpaces(objects);
 ```
 
 Determine the longest common subsequence between the two strings:
