@@ -12,7 +12,7 @@ Maven
 <dependency>
     <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
-    <version>1.6</version>
+    <version>1.7</version>
 </dependency>
 ```
 
@@ -117,6 +117,29 @@ Find out if provided souce string contains any of string parts from the list:
 boolean containsAny = StringUtils.containsAny(source, "javascript", "How", "need")
 ```
 
+Remove tailing symbols:
+
+```
+StringUtils.removeTailing("Some, tailing, comma,", ",")
+```
+
+Remove heading symbols:
+
+```
+StringUtils.removeHeading(",Some, tailing, comma", ",")
+```
+
+Returns a comma separated string from the list without spaces:
+
+```
+StringUtils.listAsStringNoSpaces(objects);
+```
+
+Determine the longest common subsequence between the two strings:
+```
+StringUtils.lcs("Two beer or not two beer", "To bee or not to bee")
+```
+
 List
 ==========
 Merge 2 lists:
@@ -175,34 +198,6 @@ Get all leafs:
 List<Node<String, String>> leafs = Traverse.getlLeafs((Node)head);
 ```
 
-
-New in 1.7-SNAPSHOT
-==========
-
-String
-==========
-Remove tailing symbols:
-
-```
-StringUtils.removeTailing("Some, tailing, comma,", ",")
-```
-
-Remove heading symbols:
-
-```
-StringUtils.removeHeading(",Some, tailing, comma", ",")
-```
-
-Returns a comma separated string from the list without spaces:
-
-```
-StringUtils.listAsStringNoSpaces(objects);
-```
-
-Determine the longest common subsequence between the two strings:
-```
-StringUtils.lcs("Two beer or not two beer", "To bee or not to bee")
-```
 Math
 ==========
 Get factorial of defined depth:
@@ -251,6 +246,10 @@ Get list of simple primes in a range:
 ```
 Prime.getPrimes(5, 20)
 ```
+
+New in 1.8-SNAPSHOT
+==========
+
 
 
 Jenkins Build
