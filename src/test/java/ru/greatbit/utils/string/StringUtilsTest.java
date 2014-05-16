@@ -2,6 +2,7 @@ package ru.greatbit.utils.string;
 
 import org.junit.Assert;
 import org.junit.Test;
+import ru.greatbit.utils.beans.SimpleBeanExample;
 import ru.greatbit.utils.collection.ListUtils;
 
 import java.util.LinkedList;
@@ -38,8 +39,14 @@ public class StringUtilsTest {
         strings.add("not");
         strings.add("two");
         strings.add("beers");
-
         assertEquals("Two, beers, or, not, two, beers", StringUtils.listAsString(strings));
+
+        List<SimpleBeanExample> beans = new LinkedList<SimpleBeanExample>();
+        beans.add(new SimpleBeanExample(1));
+        beans.add(new SimpleBeanExample(2));
+        beans.add(null);
+        beans.add(new SimpleBeanExample(3));
+        assertEquals("1, 2, null, 3", StringUtils.listAsString(beans));
     }
 
     @Test
@@ -53,6 +60,13 @@ public class StringUtilsTest {
         strings.add("beers");
 
         assertEquals("Two,beers,or,not,two,beers", StringUtils.listAsStringNoSpaces(strings));
+
+        List<SimpleBeanExample> beans = new LinkedList<SimpleBeanExample>();
+        beans.add(new SimpleBeanExample(1));
+        beans.add(new SimpleBeanExample(2));
+        beans.add(null);
+        beans.add(new SimpleBeanExample(3));
+        assertEquals("1,2,null,3", StringUtils.listAsStringNoSpaces(beans));
     }
 
     @Test
