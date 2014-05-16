@@ -169,4 +169,38 @@ public class StringUtils {
         }
         return source;
     }
+
+    /**
+     * Determine the longest common subsequence between the two strings
+     * @param firstString
+     * @param secondString
+     * @return
+     */
+    public static String lcs(String firstString, String secondString) {
+        int[][] lengths = new int[firstString.length() + 1][secondString.length() + 1];
+
+        for (int i = 0; i < firstString.length(); i++)
+            for (int j = 0; j < secondString.length(); j++)
+                if (firstString.charAt(i) == secondString.charAt(j))
+                    lengths[i+1][j+1] = lengths[i][j] + 1;
+                else
+                    lengths[i+1][j+1] =
+                            Math.max(lengths[i+1][j], lengths[i][j+1]);
+
+        StringBuffer sb = new StringBuffer();
+        for (int x = firstString.length(), y = secondString.length(); x != 0 && y != 0; ) {
+            if (lengths[x][y] == lengths[x-1][y])
+                x--;
+            else if (lengths[x][y] == lengths[x][y-1])
+                y--;
+            else {
+                assert firstString.charAt(x-1) == secondString.charAt(y-1);
+                sb.append(firstString.charAt(x-1));
+                x--;
+                y--;
+            }
+        }
+
+        return sb.reverse().toString();
+    }
 }

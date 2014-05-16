@@ -199,6 +199,10 @@ Returns a comma separated string from the list without spaces:
 StringUtils.listAsStringNoSpaces(objects);
 ```
 
+Determine the longest common subsequence between the two strings:
+```
+StringUtils.lcs("Two beer or not two beer", "To bee or not to bee")
+```
 Math
 ==========
 Get factorial of defined depth:

@@ -143,4 +143,15 @@ public class StringUtilsTest {
         assertThat("Three Heading commas were not removed", StringUtils.removeHeading(",,,Some, tailing,, comma", ",,,"), is("Some, tailing,, comma"));
         assertThat("Heading slash was unexpectedly removed", StringUtils.removeHeading("/Some, tailing/ slash//", ","), is("/Some, tailing/ slash//"));
     }
+
+    @Test
+    public void lcsTest(){
+        assertThat(StringUtils.lcs("My name is Aziz", "name name is Az"), is(" name is Az"));
+        assertThat(StringUtils.lcs("My name is Aziz", "My surname is banana"), is("My name is "));
+        assertThat(StringUtils.lcs("My name is Aziz", "My surname is banana Aziz"), is("My name is Aziz"));
+        assertThat(StringUtils.lcs("Two beer or not two beer", "To bee or not to bee"), is("To bee or not to bee"));
+        assertThat(StringUtils.lcs("My name is Aziz", "If you want to call My nananamename do it loud: call Aziz Namazov"),
+                is("My name i Aziz"));
+        assertThat(StringUtils.lcs("My name is Aziz", "RockNRoll"), is(""));
+    }
 }
