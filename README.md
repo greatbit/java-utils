@@ -193,6 +193,12 @@ Remove heading symbols:
 StringUtils.removeHeading(",Some, tailing, comma", ",")
 ```
 
+Returns a comma separated string from the list without spaces:
+
+```
+StringUtils.listAsStringNoSpaces(objects);
+```
+
 Math
 ==========
 Get factorial of defined depth:
@@ -219,6 +225,27 @@ Get a sequence of fibonacci numbers of defined depth:
 
 ```
 Sequence.fibonacciSequence(5)
+```
+
+
+Find out if the number is prime:
+
+```
+Prime.isPrime(157)
+```
+
+
+Get list of simple primes:
+
+```
+Prime.getPrimes(20)
+```
+
+
+Get list of simple primes in a range:
+
+```
+Prime.getPrimes(5, 20)
 ```
 
 

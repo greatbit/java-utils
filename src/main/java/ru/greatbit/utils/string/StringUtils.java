@@ -31,18 +31,25 @@ public class StringUtils {
      * @param stringList - List of strings
      * @return result String
      */
-    public static String listAsString(List<String> stringList){
-        String result = "";
-        for (String oneString : stringList){
-            result = result + oneString + ",";
-        }
-
-        //Removing last ','
-        if (result.endsWith(","))
-        {
-            result = result.substring(0, result.length() - 1);
-        }
+    public static <T>String listAsString(List<T> stringList){
+        String result = stringList.toString();
+        result = removeHeading(result, "[");
+        result = removeTailing(result, "]");
+        result.trim();
         return result;
+    }
+
+    /**
+     * Provide a string with a comma separated
+     * @param stringList - List of strings
+     * @return result String
+     */
+    public static <T>String listAsStringNoSpaces(List<T> stringList){
+        String result = "";
+        for (T obj : stringList){
+            result = result + obj + ",";
+        }
+        return removeTailing(result, ",").trim();
     }
 
     /**
@@ -137,6 +144,7 @@ public class StringUtils {
         if (toRemove == null){
             return source;
         }
+        source = source.trim();
         int toRemoveLength = toRemove.length();
         if (toRemove.equals(source.substring(source.length() - toRemoveLength))) {
             source = source.substring(0, source.length() - toRemoveLength);
@@ -154,6 +162,7 @@ public class StringUtils {
         if (toRemove == null){
             return source;
         }
+        source = source.trim();
         int toRemoveLength = toRemove.length();
         if (toRemove.equals(source.substring(0, toRemoveLength))) {
             source = source.substring(toRemoveLength, source.length());

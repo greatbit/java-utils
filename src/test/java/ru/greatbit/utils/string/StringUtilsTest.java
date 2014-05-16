@@ -39,7 +39,20 @@ public class StringUtilsTest {
         strings.add("two");
         strings.add("beers");
 
-        assertEquals("Two,beers,or,not,two,beers", StringUtils.listAsString(strings));
+        assertEquals("Two, beers, or, not, two, beers", StringUtils.listAsString(strings));
+    }
+
+    @Test
+    public void testListAsStringNoSpaces() throws Exception {
+        List<String> strings = new LinkedList<String>();
+        strings.add("Two");
+        strings.add("beers");
+        strings.add("or");
+        strings.add("not");
+        strings.add("two");
+        strings.add("beers");
+
+        assertEquals("Two,beers,or,not,two,beers", StringUtils.listAsStringNoSpaces(strings));
     }
 
     @Test
@@ -102,6 +115,7 @@ public class StringUtilsTest {
     @Test
     public void removeTailingTest(){
         assertThat("Tailing comma was not removed", StringUtils.removeTailing("Some, tailing, comma,", ","), is("Some, tailing, comma"));
+        assertThat("Tailing comma was not removed", StringUtils.removeTailing("Some, tailing, comma, ", ","), is("Some, tailing, comma"));
         assertThat("Tailing slash was not removed", StringUtils.removeTailing("Some, tailing/ slash//", "/"), is("Some, tailing/ slash/"));
         assertThat("Three tailing commas were not removed", StringUtils.removeTailing("Some, tailing,, comma,,,", ",,,"), is("Some, tailing,, comma"));
         assertThat("Tailing slash was unexpectedly removed", StringUtils.removeTailing("Some, tailing/ slash//", ","), is("Some, tailing/ slash//"));
@@ -110,6 +124,7 @@ public class StringUtilsTest {
     @Test
     public void removeHeadingTest(){
         assertThat("Heading comma was not removed", StringUtils.removeHeading(",Some, tailing, comma", ","), is("Some, tailing, comma"));
+        assertThat("Heading comma was not removed", StringUtils.removeHeading(" ,Some, tailing, comma", ","), is("Some, tailing, comma"));
         assertThat("Heading slash was not removed", StringUtils.removeHeading("/Some, tailing/ slash/", "/"), is("Some, tailing/ slash/"));
         assertThat("Three Heading commas were not removed", StringUtils.removeHeading(",,,Some, tailing,, comma", ",,,"), is("Some, tailing,, comma"));
         assertThat("Heading slash was unexpectedly removed", StringUtils.removeHeading("/Some, tailing/ slash//", ","), is("/Some, tailing/ slash//"));
