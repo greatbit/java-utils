@@ -250,6 +250,40 @@ Prime.getPrimes(5, 20)
 New in 1.8-SNAPSHOT
 ==========
 
+ListUtils:
+
+Find differences in 2 lists of objects in which we can't override hashCode() and equals():
+```
+Difference<BeanWithNamespaceExample> difference = ListUtils.getDiffAnyObject(first, second);
+
+...
+
+difference.getAdded();
+difference.getRemoved();
+difference.getEqual();
+```
+
+Create maps of objects from the list where the key is the same object
+If not primitive or String - hashCode() and equals() should be overridden in object class
+```
+List<BeanWithNamespaceExample> beansList = new LinkedList();
+
+...
+
+Map<BeanWithNamespaceExample, BeanWithNamespaceExample> newMap = ListUtils.listToMap(beansList);
+```
+
+Create maps of objects from the list where the key is the MD5 string of serialized object
+Use if hashCode() and equals() couldn't be overridden in object class
+```
+List<BeanWithNamespaceExample> beansList = new LinkedList();
+
+...
+
+Map<String, BeanWithNamespaceExample> newMap = ListUtils.listToMD5Map(beansList);
+```
+
+
 
 
 Jenkins Build
