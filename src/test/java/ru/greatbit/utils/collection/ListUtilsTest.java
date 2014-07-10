@@ -138,5 +138,37 @@ public class ListUtilsTest {
 
         assertThat(difference.getMerged().size(), is(5));
     }
+
+    @Test
+    public void listDifferenceAnyObjectTest() throws Exception {
+        List<BeanWithNamespaceExample> first = new LinkedList<BeanWithNamespaceExample>();
+        List<BeanWithNamespaceExample> second = new LinkedList<BeanWithNamespaceExample>();
+
+        first.add(new BeanWithNamespaceExample(1));
+        first.add(new BeanWithNamespaceExample(2));
+        first.add(new BeanWithNamespaceExample(3));
+
+        second.add(new BeanWithNamespaceExample(4));
+        second.add(new BeanWithNamespaceExample(5));
+        second.add(new BeanWithNamespaceExample(3));
+
+
+        Difference<BeanWithNamespaceExample> difference = ListUtils.getDiffAnyObject(first, second);
+        assertNotNull(difference);
+
+        assertThat(difference.getAdded().size(), is(2));
+        assertNotNull(difference.getAdded().get(0));
+        assertNotNull(difference.getAdded().get(1));
+
+        assertThat(difference.getRemoved().size(), is(2));
+        assertNotNull(difference.getRemoved().get(0));
+        assertNotNull(difference.getRemoved().get(1));
+
+        assertThat(difference.getEqual().size(), is(1));
+        assertNotNull(difference.getEqual().get(0));
+        assertThat(difference.getEqual().get(0).getValue(), is(3));
+
+        assertThat(difference.getMerged().size(), is(5));
+    }
 }
 
