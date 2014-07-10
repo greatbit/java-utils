@@ -34,6 +34,31 @@ public class ListUtils {
     }
 
     /**
+     * Merge lists of object
+     * Objects are compared by serialisation value
+     * @param first
+     * @param second
+     * @param <T>
+     * @return
+     * @throws Exception
+     */
+    public static <T> List<T> mergeListsByValue(List<T> first, List<T> second) throws Exception {
+        Map<String, T> dataMap = listToMD5Map(first);
+
+        for (T object : second){
+            dataMap.put(StringUtils.getMd5String(JsonSerializer.marshal(object)), object);
+        }
+
+        List<T> resultObject = new LinkedList<T>();
+        for (String key : dataMap.keySet()){
+            resultObject.add(dataMap.get(key));
+        }
+        return resultObject;
+    }
+
+
+
+    /**
      * Get differences of lists
      * Objects should override hashCode and equals so they could be
      * compared in HashMap to find differences

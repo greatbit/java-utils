@@ -70,6 +70,36 @@ public class ListUtilsTest {
     }
 
     @Test
+    public void mergeObjectListsByValueTest() throws Exception {
+        List<BeanWithNamespaceExample> first = new LinkedList<BeanWithNamespaceExample>();
+        List<BeanWithNamespaceExample> second = new LinkedList<BeanWithNamespaceExample>();
+
+        first.add(new BeanWithNamespaceExample(1));
+        first.add(new BeanWithNamespaceExample(2));
+        first.add(new BeanWithNamespaceExample(3));
+
+        second.add(new BeanWithNamespaceExample(3));
+        second.add(new BeanWithNamespaceExample(4));
+        second.add(new BeanWithNamespaceExample(5));
+
+
+        List<BeanWithNamespaceExample> result = ListUtils.mergeListsByValue(first, second);
+        assertNotNull(result);
+        assertThat("Wrong number of items in result list", result.size(), is(5));
+
+        List<String> values = new LinkedList<String>();
+        for (BeanWithNamespaceExample bean : result){
+            values.add(Integer.toString(bean.getValue()));
+        }
+
+        assertTrue(StringUtils.isStringInList(values, "1"));
+        assertTrue(StringUtils.isStringInList(values, "2"));
+        assertTrue(StringUtils.isStringInList(values, "3"));
+        assertTrue(StringUtils.isStringInList(values, "4"));
+        assertTrue(StringUtils.isStringInList(values, "5"));
+    }
+
+    @Test
     public void listDifferenceStringTest(){
         List<String> first = new LinkedList<String>();
         List<String> second = new LinkedList<String>();

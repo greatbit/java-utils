@@ -250,7 +250,7 @@ Prime.getPrimes(5, 20)
 New in 1.8-SNAPSHOT
 ==========
 
-ListUtils:
+Collection:
 
 Find differences in 2 lists of objects in which we can't override hashCode() and equals():
 ```
@@ -283,6 +283,12 @@ List<BeanWithNamespaceExample> beansList = new LinkedList();
 Map<String, BeanWithNamespaceExample> newMap = ListUtils.listToMD5Map(beansList);
 ```
 
+ListUtils:
+
+Merge 2 lists of objects. Objects are compared by serialisation value:
+```
+List<SomeObject> result = ListUtils.mergeListsByValue(first, second);
+```
 
 
 
