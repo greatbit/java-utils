@@ -290,7 +290,25 @@ Merge 2 lists of objects. Objects are compared by serialisation value:
 List<SomeObject> result = ListUtils.mergeListsByValue(first, second);
 ```
 
-Reflection Utils
+Remove values from lists that don't support remove method
+```
+ListUtils.removeByIndex(Arrays.asList("A", "B", "C"), 2);
+```
+
+Reflection Utils:
+
+Get value of the field by name
+```
+(String) FieldsFetcher.getObjectFromField(parent, parent.getClass(), "str");
+(Integer) FieldsFetcher.getObjectFromField(parent, parent.getClass(), "count");
+```
+
+Find value of the field by point delimited path
+```
+(String) FieldsFetcher.findValue(parent, Arrays.asList("childPublic.childPrivate.str".split("\\.")))
+```
+
+
 
 Jenkins Build
 ==========
