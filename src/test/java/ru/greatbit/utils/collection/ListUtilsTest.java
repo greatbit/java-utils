@@ -4,6 +4,8 @@ import org.junit.Test;
 import ru.greatbit.utils.beans.BeanWithNamespaceExample;
 import ru.greatbit.utils.string.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -200,5 +202,43 @@ public class ListUtilsTest {
 
         assertThat(difference.getMerged().size(), is(5));
     }
+
+    @Test
+    public void removeByIndexTest() {
+        //LinkedList
+        List<String> input = new LinkedList<String>();
+        input.add("0");
+        input.add("1");
+        input.add("2");
+        ListUtils.removeByIndex(input, 1);
+        assertNotNull(input);
+        assertThat(input.size(), is(2));
+        assertThat(input.get(0), is("0"));
+        assertThat(input.get(1), is("2"));
+        assertTrue(input instanceof LinkedList);
+
+        //Arrays.ArrayList
+        input = Arrays.asList("0", "1", "2");
+        input = ListUtils.removeByIndex(input, 2);
+        assertNotNull(input);
+        assertThat(input.size(), is(2));
+        assertThat(input.get(0), is("0"));
+        assertThat(input.get(1), is("1"));
+        assertTrue(input.getClass().getName().equals("java.util.Arrays$ArrayList"));
+
+        //ArrayList
+        input = new ArrayList<String>();
+        input.add("0");
+        input.add("1");
+        input.add("2");
+        ListUtils.removeByIndex(input, 1);
+        assertNotNull(input);
+        assertThat(input.size(), is(2));
+        assertThat(input.get(0), is("0"));
+        assertThat(input.get(1), is("2"));
+        assertTrue(input instanceof ArrayList);
+    }
+
+
 }
 

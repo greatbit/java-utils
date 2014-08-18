@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by azee on 17.08.14.
  */
-public class Fields {
+public class FieldsFetcher {
 
     /**
      * Returns a value fetched from the provided object by point delimited path
