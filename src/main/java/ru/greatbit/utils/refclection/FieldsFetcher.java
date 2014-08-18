@@ -125,4 +125,36 @@ public class FieldsFetcher {
         }
         return result;
     }
+
+    /**
+     * Collect all fields of a certain interface into one list
+     * Useful if fields are generated from xsd
+     * @param obj
+     * @param commonInterface
+     * @param <T>
+     * @return
+     * @throws IllegalAccessException
+     */
+    public static <T>List<T> getValuesByInterface(Object obj, Class<T> commonInterface) throws IllegalAccessException {
+
+        List<T> result = new LinkedList<T>();
+
+        Field[] fields = obj.getClass().getDeclaredFields();
+
+        boolean access;
+
+        //Iterate through fields and grab all not empty collections: List<? extends commonInterface>
+        for (Field field: fields) {
+            if (commonInterface.isAssignableFrom(field.getType())){
+                //Make private fields visible to retrieve values
+                access = field.isAccessible();
+                field.setAccessible(true);
+                result.add((T) field.get(obj));
+                field.setAccessible(access);
+            }
+        }
+        return result;
+    }
+
+
 }

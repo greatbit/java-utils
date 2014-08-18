@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -99,6 +100,63 @@ public class FieldsFetcherTest {
         assertNotNull(result.get(1));
         assertNotNull(result.get(2));
         assertNotNull(result.get(3));
+
+        assertThat(result.get(0).value, is("super"));
+        assertThat(result.get(1).value, is("childOne"));
+        assertThat(result.get(2).value, is("childTwo"));
+        assertThat(result.get(3).value, is("childPrivate"));
+    }
+
+    @Test
+    public void getValuesByInterfaceTest() throws IllegalAccessException {
+        class SuperClass{
+            public String value;
+        }
+        class ChildOne extends SuperClass{}
+        class ChildTwo extends SuperClass{}
+        class Container{
+            public SuperClass superClass;
+            public SuperClass publicChildOne;
+            public SuperClass publicChildTwo;
+            private SuperClass privateChild;
+            public SuperClass nullChild;
+
+            public SuperClass getPrivateChild() {
+                return privateChild;
+            }
+
+            public void setPrivateChild(SuperClass privateChild) {
+                this.privateChild = privateChild;
+            }
+        }
+
+        SuperClass superClass = new SuperClass();
+        superClass.value = "super";
+
+        ChildOne childOne = new ChildOne();
+        childOne.value = "childOne";
+
+        ChildTwo childTwo = new ChildTwo();
+        childTwo.value = "childTwo";
+
+        ChildOne childPrivate = new ChildOne();
+        childPrivate.value = "childPrivate";
+
+        Container container = new Container();
+        container.superClass = superClass;
+        container.publicChildOne = childOne;
+        container.publicChildTwo = childTwo;
+        container.setPrivateChild(childPrivate);
+
+        List<SuperClass> result = FieldsFetcher.getValuesByInterface(container, SuperClass.class);
+        assertNotNull(result);
+        assertThat(result.size(), is(5));
+
+        assertNotNull(result.get(0));
+        assertNotNull(result.get(1));
+        assertNotNull(result.get(2));
+        assertNotNull(result.get(3));
+        assertNull(result.get(4));
 
         assertThat(result.get(0).value, is("super"));
         assertThat(result.get(1).value, is("childOne"));
