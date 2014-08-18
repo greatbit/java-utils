@@ -308,7 +308,15 @@ Find value of the field by point delimited path
 (String) FieldsFetcher.findValue(parent, Arrays.asList("childPublic.childPrivate.str".split("\\.")))
 ```
 
+Get values from object fields by super class and put them into single list
+```
+List<SuperClass> result = FieldsFetcher.getValuesByInterface(container, SuperClass.class);
+```
 
+Get values from object generic fields represented as list by super class and put them into single list
+```
+List<SuperClass> result = FieldsFetcher.mergeListsByInterface(container, SuperClass.class);
+```
 
 Jenkins Build
 ==========
