@@ -4,6 +4,9 @@ import ru.greatbit.utils.collection.ListUtils;
 import ru.greatbit.utils.exceptions.NullObjectException;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -78,5 +81,48 @@ public class FieldsFetcher {
         } catch (IllegalAccessException e) {
             return null;
         }
+    }
+
+    /**
+     * Combine lists with common interface into one
+     * Useful if lists are generated from xsd
+     * @param obj
+     * @param commonInterface
+     * @param <T>
+     * @return
+     * @throws IllegalAccessException
+     */
+    public static <T>List<T> mergeListsByInterface(Object obj, Class<T> commonInterface) throws IllegalAccessException {
+
+        List<T> result = new LinkedList<T>();
+
+        Field[] fields = obj.getClass().getDeclaredFields();
+
+        boolean access;
+
+        //Iterate through fields and grab all not empty collections: List<? extends commonInterface>
+        for (Field field: fields) {
+            Type type = field.getGenericType();
+            if (type instanceof ParameterizedType &&
+                    ((ParameterizedType) type).getActualTypeArguments().length > 0 &&
+                    commonInterface.isAssignableFrom((Class<?>) ((ParameterizedType) type).getActualTypeArguments()[0])) {
+
+                //Make private fields visible to retrieve values
+                access = field.isAccessible();
+                field.setAccessible(true);
+
+                //Get actual values from fields
+                List<T> values = (List<T>)field.get(obj);
+
+                //Avoid NPE in iterator
+                if (values == null) {
+                    values = new LinkedList();
+                }
+                result.addAll(values);
+
+                field.setAccessible(access);
+            }
+        }
+        return result;
     }
 }

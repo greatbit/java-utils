@@ -4,10 +4,14 @@ import org.junit.Test;
 import ru.greatbit.utils.beans.RecursiveBeanExample;
 import ru.greatbit.utils.exceptions.NullObjectException;
 import ru.greatbit.utils.refclection.FieldsFetcher;
+import sun.swing.BakedArrayList;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -15,7 +19,7 @@ import static org.junit.Assert.assertThat;
  */
 public class FieldsFetcherTest {
     @Test
-    public void ValueFetcherTest() throws NullObjectException, InstantiationException, IllegalAccessException {
+    public void valueFetcherTest() throws NullObjectException, InstantiationException, IllegalAccessException {
         RecursiveBeanExample parent = new RecursiveBeanExample();
         RecursiveBeanExample privateChild = new RecursiveBeanExample();
         RecursiveBeanExample publicChild = new RecursiveBeanExample();
@@ -49,4 +53,57 @@ public class FieldsFetcherTest {
         assertThat((String) FieldsFetcher.findValue(parent, Arrays.asList("childPublic.childPrivate.str".split("\\."))), is("grand"));
         assertThat((Integer) FieldsFetcher.findValue(parent, Arrays.asList("childPublic.childPrivate.count".split("\\."))), is(4));
     }
+
+    @Test
+    public void mergeListsByInterfaceTest() throws IllegalAccessException {
+        class SuperClass{
+            public String value;
+        }
+        class ChildOne extends SuperClass{}
+        class ChildTwo extends SuperClass{}
+        class Container{
+            public List<SuperClass> publicList = new ArrayList<SuperClass>();
+            private List<SuperClass> privateList = new ArrayList<SuperClass>();
+            private List<SuperClass> emptyList = new ArrayList<SuperClass>();
+            private List<SuperClass> nullList = null;
+
+            public List<SuperClass> getPrivateList() {
+                return privateList;
+            }
+        }
+
+        SuperClass superClass = new SuperClass();
+        superClass.value = "super";
+
+        ChildOne childOne = new ChildOne();
+        childOne.value = "childOne";
+
+        ChildTwo childTwo = new ChildTwo();
+        childTwo.value = "childTwo";
+
+        ChildOne childPrivate = new ChildOne();
+        childPrivate.value = "childPrivate";
+
+        Container container = new Container();
+        container.publicList.add(superClass);
+        container.publicList.add(childOne);
+        container.publicList.add(childTwo);
+
+        container.getPrivateList().add(childPrivate);
+
+        List<SuperClass> result = FieldsFetcher.mergeListsByInterface(container, SuperClass.class);
+        assertNotNull(result);
+        assertThat(result.size(), is(4));
+
+        assertNotNull(result.get(0));
+        assertNotNull(result.get(1));
+        assertNotNull(result.get(2));
+        assertNotNull(result.get(3));
+
+        assertThat(result.get(0).value, is("super"));
+        assertThat(result.get(1).value, is("childOne"));
+        assertThat(result.get(2).value, is("childTwo"));
+        assertThat(result.get(3).value, is("childPrivate"));
+    }
 }
+
