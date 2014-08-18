@@ -12,7 +12,7 @@ Maven
 <dependency>
     <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
-    <version>1.7</version>
+    <version>1.8</version>
 </dependency>
 ```
 
@@ -140,7 +140,7 @@ Determine the longest common subsequence between the two strings:
 StringUtils.lcs("Two beer or not two beer", "To bee or not to bee")
 ```
 
-List
+Collections
 ==========
 Merge 2 lists:
 ```
@@ -158,6 +158,47 @@ Difference<BeanWithNamespaceExample> difference2 = ListUtils.getDiff(first, seco
 difference.getAdded();
 difference.getRemoved();
 difference.getEqual();
+```
+
+Merge 2 lists of objects. Objects are compared by serialisation value:
+```
+List<SomeObject> result = ListUtils.mergeListsByValue(first, second);
+```
+
+Remove values from lists that don't support remove method
+```
+ListUtils.removeByIndex(Arrays.asList("A", "B", "C"), 2);
+```
+
+Find differences in 2 lists of objects in which we can't override hashCode() and equals():
+```
+Difference<BeanWithNamespaceExample> difference = ListUtils.getDiffAnyObject(first, second);
+
+...
+
+difference.getAdded();
+difference.getRemoved();
+difference.getEqual();
+```
+
+Create maps of objects from the list where the key is the same object
+If not primitive or String - hashCode() and equals() should be overridden in object class
+```
+List<BeanWithNamespaceExample> beansList = new LinkedList();
+
+...
+
+Map<BeanWithNamespaceExample, BeanWithNamespaceExample> newMap = ListUtils.listToMap(beansList);
+```
+
+Create maps of objects from the list where the key is the MD5 string of serialized object
+Use if hashCode() and equals() couldn't be overridden in object class
+```
+List<BeanWithNamespaceExample> beansList = new LinkedList();
+
+...
+
+Map<String, BeanWithNamespaceExample> newMap = ListUtils.listToMD5Map(beansList);
 ```
 
 Time
@@ -247,56 +288,9 @@ Get list of simple primes in a range:
 Prime.getPrimes(5, 20)
 ```
 
-New in 1.8-SNAPSHOT
+
+Reflection
 ==========
-
-Collection:
-
-Find differences in 2 lists of objects in which we can't override hashCode() and equals():
-```
-Difference<BeanWithNamespaceExample> difference = ListUtils.getDiffAnyObject(first, second);
-
-...
-
-difference.getAdded();
-difference.getRemoved();
-difference.getEqual();
-```
-
-Create maps of objects from the list where the key is the same object
-If not primitive or String - hashCode() and equals() should be overridden in object class
-```
-List<BeanWithNamespaceExample> beansList = new LinkedList();
-
-...
-
-Map<BeanWithNamespaceExample, BeanWithNamespaceExample> newMap = ListUtils.listToMap(beansList);
-```
-
-Create maps of objects from the list where the key is the MD5 string of serialized object
-Use if hashCode() and equals() couldn't be overridden in object class
-```
-List<BeanWithNamespaceExample> beansList = new LinkedList();
-
-...
-
-Map<String, BeanWithNamespaceExample> newMap = ListUtils.listToMD5Map(beansList);
-```
-
-ListUtils:
-
-Merge 2 lists of objects. Objects are compared by serialisation value:
-```
-List<SomeObject> result = ListUtils.mergeListsByValue(first, second);
-```
-
-Remove values from lists that don't support remove method
-```
-ListUtils.removeByIndex(Arrays.asList("A", "B", "C"), 2);
-```
-
-Reflection Utils:
-
 Get value of the field by name
 ```
 (String) FieldsFetcher.getObjectFromField(parent, parent.getClass(), "str");
@@ -317,6 +311,10 @@ Get values from object generic fields represented as list by super class and put
 ```
 List<SuperClass> result = FieldsFetcher.mergeListsByInterface(container, SuperClass.class);
 ```
+
+
+New in 1.9-SNAPSHOT
+==========
 
 Jenkins Build
 ==========
