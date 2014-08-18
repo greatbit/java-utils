@@ -3,10 +3,8 @@ package ru.greatbit.utils.collection;
 import ru.greatbit.utils.serialize.JsonSerializer;
 import ru.greatbit.utils.string.StringUtils;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * Created by azee on 4/29/14.
@@ -143,4 +141,24 @@ public class ListUtils {
         return dataMap;
     }
 
+    /**
+     * Used to remove values from lists that don't support remove method
+     * @param input
+     * @param index
+     * @param <T>
+     * @return
+     */
+    public static <T>List<T> removeByIndex(List<T> input, int index) {
+        List<T> result = new LinkedList<T>(input);
+        result.remove(index);
+
+        //Doing that to keep original input class
+        if (input.getClass().getName().equals("java.util.Arrays$ArrayList")){
+            input = (List<T>) Arrays.asList(result.toArray());
+        } else {
+            input.clear();
+            input.addAll(result);
+        }
+        return input;
+    }
 }
