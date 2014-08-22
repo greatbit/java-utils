@@ -48,11 +48,20 @@ public class FieldsFetcherTest {
         assertThat((String) FieldsFetcher.findValue(parent, Arrays.asList("childPrivate.str".split("\\."))), is("private"));
         assertThat((Integer) FieldsFetcher.findValue(parent, Arrays.asList("childPrivate.count".split("\\."))), is(2));
 
+        assertThat((String) FieldsFetcher.findValue(parent, "childPrivate.str"), is("private"));
+        assertThat((Integer) FieldsFetcher.findValue(parent, "childPrivate.count"), is(2));
+
         assertThat((String) FieldsFetcher.findValue(parent, Arrays.asList("childPublic.str".split("\\."))), is("public"));
         assertThat((Integer) FieldsFetcher.findValue(parent, Arrays.asList("childPublic.count".split("\\."))), is(3));
 
+        assertThat((String) FieldsFetcher.findValue(parent, "childPublic.str"), is("public"));
+        assertThat((Integer) FieldsFetcher.findValue(parent, "childPublic.count"), is(3));
+
         assertThat((String) FieldsFetcher.findValue(parent, Arrays.asList("childPublic.childPrivate.str".split("\\."))), is("grand"));
         assertThat((Integer) FieldsFetcher.findValue(parent, Arrays.asList("childPublic.childPrivate.count".split("\\."))), is(4));
+
+        assertThat((String) FieldsFetcher.findValue(parent, "childPublic.childPrivate.str"), is("grand"));
+        assertThat((Integer) FieldsFetcher.findValue(parent, "childPublic.childPrivate.count"), is(4));
     }
 
     @Test

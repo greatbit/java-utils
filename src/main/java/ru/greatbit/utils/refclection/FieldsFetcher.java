@@ -2,10 +2,12 @@ package ru.greatbit.utils.refclection;
 
 import ru.greatbit.utils.collection.ListUtils;
 import ru.greatbit.utils.exceptions.NullObjectException;
+import ru.greatbit.utils.string.StringUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,6 +18,20 @@ public class FieldsFetcher {
 
     /**
      * Returns a value fetched from the provided object by point delimited path
+     * @param object
+     * @param path
+     * @return
+     * @throws NullObjectException
+     */
+    public static Object findValue(Object object, String path) throws NullObjectException, IllegalAccessException, InstantiationException {
+        if (object == null){
+            throw new NullObjectException();
+        }
+        return findValue(object, object.getClass(), Arrays.asList(StringUtils.emptyIfNull(path).split("\\.")));
+    }
+
+    /**
+     * Returns a value fetched from the provided object by path in a list
      * @param object
      * @param path
      * @return

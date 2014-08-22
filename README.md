@@ -142,10 +142,15 @@ StringUtils.lcs("Two beer or not two beer", "To bee or not to bee")
 
 Collections
 ==========
-Merge 2 lists:
+Merge 2 lists, objects are compared by hashCode and equals:
 ```
 List<String> result = ListUtils.mergeLists(first, second);
 List<SomeObject> result2 = ListUtils.mergeLists(first, second);
+```
+
+Merge 2 lists of objects. Objects are compared by serialized into JSON value:
+```
+List<SomeObject> result = ListUtils.mergeListsByValue(first, second);
 ```
 
 Find differences in 2 lists:
@@ -158,11 +163,6 @@ Difference<BeanWithNamespaceExample> difference2 = ListUtils.getDiff(first, seco
 difference.getAdded();
 difference.getRemoved();
 difference.getEqual();
-```
-
-Merge 2 lists of objects. Objects are compared by serialisation value:
-```
-List<SomeObject> result = ListUtils.mergeListsByValue(first, second);
 ```
 
 Remove values from lists that don't support remove method
@@ -181,7 +181,7 @@ difference.getRemoved();
 difference.getEqual();
 ```
 
-Create maps of objects from the list where the key is the same object
+Create a map of objects from the list where the key is the same object.
 If not primitive or String - hashCode() and equals() should be overridden in object class
 ```
 List<BeanWithNamespaceExample> beansList = new LinkedList();
@@ -191,7 +191,7 @@ List<BeanWithNamespaceExample> beansList = new LinkedList();
 Map<BeanWithNamespaceExample, BeanWithNamespaceExample> newMap = ListUtils.listToMap(beansList);
 ```
 
-Create maps of objects from the list where the key is the MD5 string of serialized object
+Create a map of objects from the list where the key is the MD5 string of serialized object.
 Use if hashCode() and equals() couldn't be overridden in object class
 ```
 List<BeanWithNamespaceExample> beansList = new LinkedList();
@@ -203,7 +203,7 @@ Map<String, BeanWithNamespaceExample> newMap = ListUtils.listToMD5Map(beansList)
 
 Time
 ==========
-Get long - time of the beginning of the day of porvided time
+Get long - time of the beginning of the day for provided time
 
 ```
 TimeUtils.getStartOfTheDay(new Date().getTime());
@@ -297,17 +297,19 @@ Get value of the field by name
 (Integer) FieldsFetcher.getObjectFromField(parent, parent.getClass(), "count");
 ```
 
-Find value of the field by point delimited path
+Find value of the field by path provided as list of strings
 ```
 (String) FieldsFetcher.findValue(parent, Arrays.asList("childPublic.childPrivate.str".split("\\.")))
 ```
 
-Get values from object fields by super class and put them into single list
+Get values from object fields by super class and put them into single list.
+Used if we need to collect all objects of the same interface into a single list.
 ```
 List<SuperClass> result = FieldsFetcher.getValuesByInterface(container, SuperClass.class);
 ```
 
 Get values from object generic fields represented as list by super class and put them into single list
+Used if we need to collect all objects of the same interface into a single list.
 ```
 List<SuperClass> result = FieldsFetcher.mergeListsByInterface(container, SuperClass.class);
 ```
@@ -315,6 +317,12 @@ List<SuperClass> result = FieldsFetcher.mergeListsByInterface(container, SuperCl
 
 New in 1.9-SNAPSHOT
 ==========
+Reflection
+==========
+Find value of the field by point delimited path
+```
+(String) FieldsFetcher.findValue(parent, "childPublic.childPrivate.str")
+```
 
 Jenkins Build
 ==========
