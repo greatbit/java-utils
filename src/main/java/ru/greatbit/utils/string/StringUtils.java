@@ -45,11 +45,11 @@ public class StringUtils {
      * @return result String
      */
     public static <T>String listAsStringNoSpaces(List<T> stringList){
-        String result = "";
+        StringBuffer sb = new StringBuffer();
         for (T obj : stringList){
-            result = result + obj + ",";
+            sb.append(obj).append(",");
         }
-        return removeTailing(result, ",").trim();
+        return removeTailing(sb.toString(), ",").trim();
     }
 
     /**
