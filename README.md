@@ -38,7 +38,7 @@ Used to marshall and unmarshall objects annotated with JAXB annotations
 Marshall to JSON:
 
 ```
-String marshalledBean = JsonMarshaller.marshal(bean);
+String marshalledBean = JsonSerializer.marshal(bean);
 ```
 
 Marshall from JSON:
