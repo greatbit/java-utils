@@ -82,8 +82,8 @@ public class StringUtilsTest {
         strings.add("and");
         strings.add("seek");
 
-        assertTrue(StringUtils.isStringInList(strings, "hide"));
-        assertFalse(StringUtils.isStringInList(strings, "bride"));
+        assertTrue(strings.contains("hide"));
+        assertFalse(strings.contains("bride"));
     }
 
     @Test

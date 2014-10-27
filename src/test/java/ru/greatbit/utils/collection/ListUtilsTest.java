@@ -33,10 +33,10 @@ public class ListUtilsTest {
         List<String> result = ListUtils.mergeLists(first, second);
         assertNotNull(result);
         assertThat("Wrong number of items in result list", result.size(), is(4));
-        assertTrue(StringUtils.isStringInList(result, "1"));
-        assertTrue(StringUtils.isStringInList(result, "2"));
-        assertTrue(StringUtils.isStringInList(result, "3"));
-        assertTrue(StringUtils.isStringInList(result, "4"));
+        assertTrue(result.contains("1"));
+        assertTrue(result.contains("2"));
+        assertTrue(result.contains("3"));
+        assertTrue(result.contains("4"));
     }
 
     @Test
@@ -64,11 +64,11 @@ public class ListUtilsTest {
             values.add(Integer.toString(bean.getValue()));
         }
 
-        assertTrue(StringUtils.isStringInList(values, "1"));
-        assertTrue(StringUtils.isStringInList(values, "2"));
-        assertTrue(StringUtils.isStringInList(values, "3"));
-        assertTrue(StringUtils.isStringInList(values, "4"));
-        assertTrue(StringUtils.isStringInList(values, "5"));
+        assertTrue(values.contains("1"));
+        assertTrue(values.contains("2"));
+        assertTrue(values.contains("3"));
+        assertTrue(values.contains("4"));
+        assertTrue(values.contains("5"));
     }
 
     @Test
@@ -94,11 +94,11 @@ public class ListUtilsTest {
             values.add(Integer.toString(bean.getValue()));
         }
 
-        assertTrue(StringUtils.isStringInList(values, "1"));
-        assertTrue(StringUtils.isStringInList(values, "2"));
-        assertTrue(StringUtils.isStringInList(values, "3"));
-        assertTrue(StringUtils.isStringInList(values, "4"));
-        assertTrue(StringUtils.isStringInList(values, "5"));
+        assertTrue(values.contains("1"));
+        assertTrue(values.contains("2"));
+        assertTrue(values.contains("3"));
+        assertTrue(values.contains("4"));
+        assertTrue(values.contains("5"));
     }
 
     @Test
@@ -126,14 +126,15 @@ public class ListUtilsTest {
         assertThat(difference.getRemoved().get(0), is("2"));
 
         assertThat(difference.getEqual().size(), is(2));
-        assertTrue(StringUtils.isStringInList(difference.getEqual(), "1"));
-        assertTrue(StringUtils.isStringInList(difference.getEqual(), "3"));
+
+        difference.getEqual().contains("1");
+        difference.getEqual().contains("3");
 
         assertThat(difference.getMerged().size(), is(4));
-        assertTrue(StringUtils.isStringInList(difference.getMerged(), "1"));
-        assertTrue(StringUtils.isStringInList(difference.getMerged(), "2"));
-        assertTrue(StringUtils.isStringInList(difference.getMerged(), "3"));
-        assertTrue(StringUtils.isStringInList(difference.getMerged(), "4"));
+        difference.getMerged().contains("1");
+        difference.getMerged().contains("2");
+        difference.getMerged().contains("3");
+        difference.getMerged().contains("4");
     }
 
 

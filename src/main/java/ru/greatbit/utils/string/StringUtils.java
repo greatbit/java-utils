@@ -68,23 +68,6 @@ public class StringUtils {
     }
 
     /**
-     * Verifies if a list of strings contains a given one
-     * @param stringList - List of strings
-     * @param toSearch - String to search
-     * @return - boolean - is string in list
-     */
-    public static boolean isStringInList(List<String> stringList, String toSearch){
-        toSearch = emptyIfNull(toSearch);
-
-        for (String entry : stringList){
-            if (entry != null && toSearch.equals(entry))
-                return true;
-        }
-
-        return false;
-    }
-
-    /**
      * Add a string to list if it is not represented in list yet
      * @param toAdd - String - entry to add
      * @param strings - List<String> - a list to update
@@ -92,7 +75,7 @@ public class StringUtils {
      */
     public static List<String> addUniqueString(String toAdd, List<String> strings){
         toAdd = emptyIfNull(toAdd);
-        if (!isStringInList(strings, toAdd)){
+        if (!strings.contains(toAdd)){
             strings.add(toAdd);
         }
         return strings;

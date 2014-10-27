@@ -96,13 +96,6 @@ StringUtils.getMd5String("Super secret string")
 ```
 
 
-Find out if a string is in string list:
-
-```
-StringUtils.isStringInList(strings, "hide");
-```
-
-
 Add the string to string list only if it is unique
 
 ```
