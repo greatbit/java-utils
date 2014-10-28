@@ -3,7 +3,6 @@ package ru.greatbit.utils.string;
 import org.junit.Assert;
 import org.junit.Test;
 import ru.greatbit.utils.beans.SimpleBeanExample;
-import ru.greatbit.utils.collection.ListUtils;
 
 import java.util.LinkedList;
 import java.util.List;

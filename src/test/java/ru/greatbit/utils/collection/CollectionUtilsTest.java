@@ -2,12 +2,8 @@ package ru.greatbit.utils.collection;
 
 import org.junit.Test;
 import ru.greatbit.utils.beans.BeanWithNamespaceExample;
-import ru.greatbit.utils.string.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -15,7 +11,7 @@ import static org.junit.Assert.*;
 /**
  * Created by azee on 4/29/14.
  */
-public class ListUtilsTest {
+public class CollectionUtilsTest {
 
     @Test
     public void mergeStringListsTest(){
@@ -30,7 +26,7 @@ public class ListUtilsTest {
         second.add("3");
         second.add("4");
 
-        List<String> result = ListUtils.mergeLists(first, second);
+        List<String> result = CollectionUtils.mergeLists(first, second);
         assertNotNull(result);
         assertThat("Wrong number of items in result list", result.size(), is(4));
         assertTrue(result.contains("1"));
@@ -55,7 +51,7 @@ public class ListUtilsTest {
         second.add(new BeanWithNamespaceExample(5));
 
 
-        List<BeanWithNamespaceExample> result = ListUtils.mergeLists(first, second);
+        List<BeanWithNamespaceExample> result = CollectionUtils.mergeLists(first, second);
         assertNotNull(result);
         assertThat("Wrong number of items in result list", result.size(), is(5));
 
@@ -85,7 +81,7 @@ public class ListUtilsTest {
         second.add(new BeanWithNamespaceExample(5));
 
 
-        List<BeanWithNamespaceExample> result = ListUtils.mergeListsByValue(first, second);
+        List<BeanWithNamespaceExample> result = CollectionUtils.mergeListsByValue(first, second);
         assertNotNull(result);
         assertThat("Wrong number of items in result list", result.size(), is(5));
 
@@ -114,7 +110,7 @@ public class ListUtilsTest {
         second.add("3");
         second.add("4");
 
-        Difference<String> difference = ListUtils.getDiff(first, second);
+        Difference<String> difference = CollectionUtils.getDiff(first, second);
         assertNotNull(difference);
 
         assertThat(difference.getAdded().size(), is(1));
@@ -154,7 +150,7 @@ public class ListUtilsTest {
         second.add(new BeanWithNamespaceExample(5));
 
 
-        Difference<BeanWithNamespaceExample> difference = ListUtils.getDiff(first, second);
+        Difference<BeanWithNamespaceExample> difference = CollectionUtils.getDiff(first, second);
         assertNotNull(difference);
 
         assertThat(difference.getAdded().size(), is(2));
@@ -186,7 +182,7 @@ public class ListUtilsTest {
         second.add(new BeanWithNamespaceExample(3));
 
 
-        Difference<BeanWithNamespaceExample> difference = ListUtils.getDiffAnyObject(first, second);
+        Difference<BeanWithNamespaceExample> difference = CollectionUtils.getDiffAnyObject(first, second);
         assertNotNull(difference);
 
         assertThat(difference.getAdded().size(), is(2));
@@ -211,7 +207,7 @@ public class ListUtilsTest {
         input.add("0");
         input.add("1");
         input.add("2");
-        ListUtils.removeByIndex(input, 1);
+        CollectionUtils.removeByIndex(input, 1);
         assertNotNull(input);
         assertThat(input.size(), is(2));
         assertThat(input.get(0), is("0"));
@@ -220,7 +216,7 @@ public class ListUtilsTest {
 
         //Arrays.ArrayList
         input = Arrays.asList("0", "1", "2");
-        input = ListUtils.removeByIndex(input, 2);
+        input = CollectionUtils.removeByIndex(input, 2);
         assertNotNull(input);
         assertThat(input.size(), is(2));
         assertThat(input.get(0), is("0"));
@@ -232,7 +228,7 @@ public class ListUtilsTest {
         input.add("0");
         input.add("1");
         input.add("2");
-        ListUtils.removeByIndex(input, 1);
+        CollectionUtils.removeByIndex(input, 1);
         assertNotNull(input);
         assertThat(input.size(), is(2));
         assertThat(input.get(0), is("0"));
@@ -240,6 +236,42 @@ public class ListUtilsTest {
         assertTrue(input instanceof ArrayList);
     }
 
+    @Test
+    public void removeDuplicatesFromList() {
+        List<String> values = Arrays.asList("0", "1", "2", "0", "3", "1");
+        values = CollectionUtils.removeDuplicateValues(values);
+        assertNotNull(values);
+        assertThat(values.size(), is(4));
+        assertTrue(values.contains("0"));
+        assertTrue(values.contains("1"));
+        assertTrue(values.contains("2"));
+        assertTrue(values.contains("3"));
+    }
 
+    @Test
+    public void removeDuplicatesFromMap() {
+        Map<String, List<String>> values = new HashMap<String, List<String>>();
+        values.put("one", Arrays.asList("0", "1", "2", "0", "3", "1"));
+        values.put("two", Arrays.asList("0", "1", "2", "1", "2", "0"));
+
+        values = CollectionUtils.removeDuplicateValues(values);
+        assertNotNull(values);
+        assertThat(values.size(), is(2));
+
+        List<String> entry = values.get("one");
+        assertNotNull(entry);
+        assertThat(entry.size(), is(4));
+        assertTrue(entry.contains("0"));
+        assertTrue(entry.contains("1"));
+        assertTrue(entry.contains("2"));
+        assertTrue(entry.contains("3"));
+
+        entry = values.get("two");
+        assertNotNull(entry);
+        assertThat(entry.size(), is(3));
+        assertTrue(entry.contains("0"));
+        assertTrue(entry.contains("1"));
+        assertTrue(entry.contains("2"));
+    }
 }
 

@@ -3,13 +3,12 @@ package ru.greatbit.utils.collection;
 import ru.greatbit.utils.serialize.JsonSerializer;
 import ru.greatbit.utils.string.StringUtils;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
  * Created by azee on 4/29/14.
  */
-public class ListUtils {
+public class CollectionUtils {
 
     /**
      * Merge lists
@@ -117,7 +116,7 @@ public class ListUtils {
      * @param <V> - Class of objects
      * @return - Map<V, V>
      */
-    public static <V>Map<V, V> listToMap(List<V> input){
+    public static <V> Map<V, V> listToMap(List<V> input){
         Map<V, V> dataMap = new HashMap<V, V>();
         for (V object : input){
             dataMap.put(object, object);
@@ -133,7 +132,7 @@ public class ListUtils {
      * @return
      * @throws Exception
      */
-    public static <T>Map<String, T> listToMD5Map(List<T> input) throws Exception {
+    public static <T> Map<String, T> listToMD5Map(List<T> input) throws Exception {
         Map<String, T> dataMap = new HashMap<String, T>();
         for (T object : input){
             dataMap.put(StringUtils.getMd5String(JsonSerializer.marshal(object)), object);
@@ -148,7 +147,7 @@ public class ListUtils {
      * @param <T>
      * @return
      */
-    public static <T>List<T> removeByIndex(List<T> input, int index) {
+    public static <T> List<T> removeByIndex(List<T> input, int index) {
         List<T> result = new LinkedList<T>(input);
         result.remove(index);
 
@@ -160,5 +159,30 @@ public class ListUtils {
             input.addAll(result);
         }
         return input;
+    }
+
+    /**
+     * Remove duplicate values of list from map
+     * @param values
+     * @param <T>
+     * @param <K>
+     * @return
+     */
+    public static <T, K> Map<K, List<T>> removeDuplicateValues(Map<K, List<T>> values) {
+        Map<K, List<T>> newValues = new LinkedHashMap<K, List<T>>();
+        for (K key : values.keySet()) {
+            newValues.put(key, removeDuplicateValues(values.get(key)));
+        }
+        return newValues;
+    }
+
+    /**
+     * Remove duplicate values of list from list
+     * @param values
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> removeDuplicateValues(List<T> values) {
+        return new ArrayList(new HashSet<T>(values));
     }
 }

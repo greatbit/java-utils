@@ -137,19 +137,19 @@ Collections
 ==========
 Merge 2 lists, objects are compared by hashCode and equals:
 ```
-List<String> result = ListUtils.mergeLists(first, second);
-List<SomeObject> result2 = ListUtils.mergeLists(first, second);
+List<String> result = CollectionUtils.mergeLists(first, second);
+List<SomeObject> result2 = CollectionUtils.mergeLists(first, second);
 ```
 
 Merge 2 lists of objects. Objects are compared by serialized into JSON value:
 ```
-List<SomeObject> result = ListUtils.mergeListsByValue(first, second);
+List<SomeObject> result = CollectionUtils.mergeListsByValue(first, second);
 ```
 
 Find differences in 2 lists:
 ```
-Difference<String> difference = ListUtils.getDiff(first, second);
-Difference<BeanWithNamespaceExample> difference2 = ListUtils.getDiff(first, second);
+Difference<String> difference = CollectionUtils.getDiff(first, second);
+Difference<BeanWithNamespaceExample> difference2 = CollectionUtils.getDiff(first, second);
 
 ...
 
@@ -160,12 +160,12 @@ difference.getEqual();
 
 Remove values from lists that don't support remove method
 ```
-ListUtils.removeByIndex(Arrays.asList("A", "B", "C"), 2);
+CollectionUtils.removeByIndex(Arrays.asList("A", "B", "C"), 2);
 ```
 
 Find differences in 2 lists of objects in which we can't override hashCode() and equals():
 ```
-Difference<BeanWithNamespaceExample> difference = ListUtils.getDiffAnyObject(first, second);
+Difference<BeanWithNamespaceExample> difference = CollectionUtils.getDiffAnyObject(first, second);
 
 ...
 
@@ -181,7 +181,7 @@ List<BeanWithNamespaceExample> beansList = new LinkedList();
 
 ...
 
-Map<BeanWithNamespaceExample, BeanWithNamespaceExample> newMap = ListUtils.listToMap(beansList);
+Map<BeanWithNamespaceExample, BeanWithNamespaceExample> newMap = CollectionUtils.listToMap(beansList);
 ```
 
 Create a map of objects from the list where the key is the MD5 string of serialized object.
@@ -191,7 +191,21 @@ List<BeanWithNamespaceExample> beansList = new LinkedList();
 
 ...
 
-Map<String, BeanWithNamespaceExample> newMap = ListUtils.listToMD5Map(beansList);
+Map<String, BeanWithNamespaceExample> newMap = CollectionUtils.listToMD5Map(beansList);
+```
+
+Remove duplicate objects from List
+```
+List<String> values = Arrays.asList("0", "1", "2", "0", "3", "1");
+values = CollectionUtils.removeDuplicateValues(values);
+```
+
+Remove duplicate objects from Map
+```
+Map<String, List<String>> values = new HashMap<String, List<String>>();
+values.put("one", Arrays.asList("0", "1", "2", "0", "3", "1"));
+values.put("two", Arrays.asList("0", "1", "2", "1", "2", "0"));
+values = CollectionUtils.removeDuplicateValues(values);
 ```
 
 Time

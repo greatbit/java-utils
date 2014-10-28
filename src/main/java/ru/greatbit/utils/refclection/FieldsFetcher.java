@@ -1,6 +1,6 @@
 package ru.greatbit.utils.refclection;
 
-import ru.greatbit.utils.collection.ListUtils;
+import ru.greatbit.utils.collection.CollectionUtils;
 import ru.greatbit.utils.exceptions.NullObjectException;
 import ru.greatbit.utils.string.StringUtils;
 
@@ -61,7 +61,7 @@ public class FieldsFetcher {
             try {
                 path.remove(0);
             } catch (UnsupportedOperationException e){
-                path = ListUtils.removeByIndex(path, 0);
+                path = CollectionUtils.removeByIndex(path, 0);
             }
 
             if (nextObject != null){
