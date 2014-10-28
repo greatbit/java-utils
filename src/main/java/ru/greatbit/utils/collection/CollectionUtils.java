@@ -169,6 +169,9 @@ public class CollectionUtils {
      * @return
      */
     public static <T, K> Map<K, List<T>> removeDuplicateValues(Map<K, List<T>> values) {
+        if (values == null){
+            return values;
+        }
         Map<K, List<T>> newValues = new LinkedHashMap<K, List<T>>();
         for (K key : values.keySet()) {
             newValues.put(key, removeDuplicateValues(values.get(key)));
@@ -183,6 +186,9 @@ public class CollectionUtils {
      * @return
      */
     public static <T> List<T> removeDuplicateValues(List<T> values) {
+        if (values == null){
+            return values;
+        }
         return new ArrayList(new HashSet<T>(values));
     }
 }

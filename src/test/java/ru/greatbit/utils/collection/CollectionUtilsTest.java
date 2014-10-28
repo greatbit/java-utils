@@ -249,6 +249,26 @@ public class CollectionUtilsTest {
     }
 
     @Test
+    public void removeDuplicatesFromNullList() {
+        List list = null;
+        assertNull(CollectionUtils.removeDuplicateValues(list));
+
+        List emptyList = CollectionUtils.removeDuplicateValues(new ArrayList());
+        assertNotNull(emptyList);
+        assertThat(emptyList.size(), is(0));
+    }
+
+    @Test
+    public void removeDuplicatesFromNullMap() {
+        Map map = null;
+        assertNull(CollectionUtils.removeDuplicateValues(map));
+
+        Map emptyMap = CollectionUtils.removeDuplicateValues(new HashMap<String, List<String>>());
+        assertNotNull(emptyMap);
+        assertThat(emptyMap.size(), is(0));
+    }
+
+    @Test
     public void removeDuplicatesFromMap() {
         Map<String, List<String>> values = new HashMap<String, List<String>>();
         values.put("one", Arrays.asList("0", "1", "2", "0", "3", "1"));
