@@ -194,20 +194,6 @@ List<BeanWithNamespaceExample> beansList = new LinkedList();
 Map<String, BeanWithNamespaceExample> newMap = CollectionUtils.listToMD5Map(beansList);
 ```
 
-Remove duplicate objects from List
-```
-List<String> values = Arrays.asList("0", "1", "2", "0", "3", "1");
-values = CollectionUtils.removeDuplicateValues(values);
-```
-
-Remove duplicate objects from Map
-```
-Map<String, List<String>> values = new HashMap<String, List<String>>();
-values.put("one", Arrays.asList("0", "1", "2", "0", "3", "1"));
-values.put("two", Arrays.asList("0", "1", "2", "1", "2", "0"));
-values = CollectionUtils.removeDuplicateValues(values);
-```
-
 Time
 ==========
 Get long - time of the beginning of the day for provided time
@@ -324,11 +310,28 @@ List<SuperClass> result = FieldsFetcher.mergeListsByInterface(container, SuperCl
 
 New in 1.9-SNAPSHOT
 ==========
+
 Reflection
 ==========
 Find value of the field by point delimited path
 ```
 (String) FieldsFetcher.findValue(parent, "childPublic.childPrivate.str")
+```
+
+Collections
+==========
+Remove duplicate objects from List
+```
+List<String> values = Arrays.asList("0", "1", "2", "0", "3", "1");
+values = CollectionUtils.removeDuplicateValues(values);
+```
+
+Remove duplicate objects from Map
+```
+Map<String, List<String>> values = new HashMap<String, List<String>>();
+values.put("one", Arrays.asList("0", "1", "2", "0", "3", "1"));
+values.put("two", Arrays.asList("0", "1", "2", "1", "2", "0"));
+values = CollectionUtils.removeDuplicateValues(values);
 ```
 
 Jenkins Build
