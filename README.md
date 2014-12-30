@@ -336,5 +336,5 @@ values = CollectionUtils.removeDuplicateValues(values);
 
 Jenkins Build
 ==========
-http://azee.people.yandex.net/job/java-utils/
+http://azee.people.yandex.net/jenkins/job/java-utils/
 
