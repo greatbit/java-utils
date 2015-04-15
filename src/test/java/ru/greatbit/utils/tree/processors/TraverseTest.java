@@ -36,7 +36,7 @@ public class TraverseTest {
 
     @Test
     public void leafsListTest(){
-        List<Node<String, String>> leafs = Traverse.getlLeafs(TreeGenerator.createNaryTree());
+        List<Node<String, String>> leafs = Traverse.getLeafs(TreeGenerator.createNaryTree());
         assertNotNull(leafs);
         assertThat("Wrong number of nodes in the tree", leafs.size(), is(5));
         assertThat("Wrong sequence of nodes", ListTestUtils.getKeysList(leafs).toString(),

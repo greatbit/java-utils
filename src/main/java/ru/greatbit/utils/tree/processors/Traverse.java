@@ -99,9 +99,9 @@ public class Traverse {
      * @param <V>
      * @return
      */
-    public static <K, V> List<Node<K, V>> getlLeafs(Node<K, V> head){
+    public static <K, V> List<Node<K, V>> getLeafs(Node<K, V> head){
         List<Node<K, V>> result = new LinkedList<Node<K, V>>();
-        getlLeafs(head, result);
+        getLeafs(head, result);
         return result;
     }
 
@@ -113,7 +113,7 @@ public class Traverse {
      * @param <K>
      * @param <V>
      */
-    private static <K, V> void getlLeafs(Node<K, V> head, List<Node<K, V>> result){
+    private static <K, V> void getLeafs(Node<K, V> head, List<Node<K, V>> result){
         if (head == null){
             return;
         }
@@ -121,7 +121,7 @@ public class Traverse {
             result.add(head);
         } else {
             for (Node node : head.getChildren()){
-                getlLeafs(node, result);
+                getLeafs(node, result);
             }
         }
     }
