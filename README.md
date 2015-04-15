@@ -334,6 +334,16 @@ values.put("two", Arrays.asList("0", "1", "2", "1", "2", "0"));
 values = CollectionUtils.removeDuplicateValues(values);
 ```
 
+Trees
+==========
+BFS and DFS traversal processing using visitor pattern:
+Visitor visitor - is a visitor interface needed to be implemented
+
+```
+Traverse.bfs((Node)head, visitor);
+Traverse.dfs((Node)head, visitor);
+```
+
 Jenkins Build
 ==========
 http://azee.people.yandex.net/jenkins/job/java-utils/

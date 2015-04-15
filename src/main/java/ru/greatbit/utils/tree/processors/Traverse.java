@@ -1,6 +1,7 @@
 package ru.greatbit.utils.tree.processors;
 
 import ru.greatbit.utils.tree.nodes.Node;
+import ru.greatbit.utils.tree.processors.api.Visitor;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,9 +18,24 @@ public class Traverse {
      * @return
      */
     public static <K, V>List<Node<K, V>> bfsList(Node<K, V> head){
-        List<Node<K, V>> result = new LinkedList<Node<K, V>>();
+        final List<Node<K, V>> result = new LinkedList<Node<K, V>>();
+        bfsVisit(head, new Visitor() {
+            @Override
+            public void visit(Node node) {
+                result.add(node);
+            }
+        });
+        return result;
+    }
+
+    /**
+     * Process node using visitors pattern
+     * @param head
+     * @return
+     */
+    public static <K, V> void bfsVisit(Node<K, V> head, Visitor visitor){
         if (head == null){
-            return result;
+            return;
         }
 
         Queue<Node> queue = new LinkedList<Node>();
@@ -28,15 +44,13 @@ public class Traverse {
         while (!queue.isEmpty()){
             if (!queue.isEmpty()) {
                 head = queue.poll();
-                result.add(head);
+                visitor.visit(head);
             }
 
             for (Node child : head.getChildren()){
                 queue.add(child);
             }
         }
-
-        return result;
     }
 
     /**
@@ -55,13 +69,26 @@ public class Traverse {
      * @param head
      * @param result
      */
-    private static <K, V> void dfsList(Node<K, V> head, List<Node<K, V>> result){
+    private static <K, V> void dfsList(Node<K, V> head, final List<Node<K, V>> result){
+        dfs(head, new Visitor() {
+            @Override
+            public void visit(Node node) {
+                result.add(node);
+            }
+        });
+    }
+
+    /**
+     * Recursive method to process objects in DFS traversal using visitors pattern
+     * @param head
+     */
+    private static <K, V> void dfs(Node<K, V> head, Visitor visitor){
         if (head == null){
             return;
         }
-        result.add(head);
+        visitor.visit(head);
         for (Node children : head.getChildren()){
-            dfsList(children, result);
+            dfs(children, visitor);
         }
     }
 
