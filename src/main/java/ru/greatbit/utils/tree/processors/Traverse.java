@@ -70,7 +70,7 @@ public class Traverse {
      * @param result
      */
     private static <K, V> void dfsList(Node<K, V> head, final List<Node<K, V>> result){
-        dfs(head, new Visitor() {
+        dfsVisit(head, new Visitor() {
             @Override
             public void visit(Node node) {
                 result.add(node);
@@ -82,13 +82,13 @@ public class Traverse {
      * Recursive method to process objects in DFS traversal using visitors pattern
      * @param head
      */
-    private static <K, V> void dfs(Node<K, V> head, Visitor visitor){
+    public static <K, V> void dfsVisit(Node<K, V> head, Visitor visitor){
         if (head == null){
             return;
         }
         visitor.visit(head);
         for (Node children : head.getChildren()){
-            dfs(children, visitor);
+            dfsVisit(children, visitor);
         }
     }
 
