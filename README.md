@@ -12,7 +12,7 @@ Maven
 <dependency>
     <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
-    <version>1.8</version>
+    <version>1.12</version>
 </dependency>
 ```
 
@@ -194,6 +194,20 @@ List<BeanWithNamespaceExample> beansList = new LinkedList();
 Map<String, BeanWithNamespaceExample> newMap = CollectionUtils.listToMD5Map(beansList);
 ```
 
+Remove duplicate objects from List
+```
+List<String> values = Arrays.asList("0", "1", "2", "0", "3", "1");
+values = CollectionUtils.removeDuplicateValues(values);
+```
+
+Remove duplicate objects from Map
+```
+Map<String, List<String>> values = new HashMap<String, List<String>>();
+values.put("one", Arrays.asList("0", "1", "2", "0", "3", "1"));
+values.put("two", Arrays.asList("0", "1", "2", "1", "2", "0"));
+values = CollectionUtils.removeDuplicateValues(values);
+```
+
 Time
 ==========
 Get long - time of the beginning of the day for provided time
@@ -231,6 +245,27 @@ Get all leafs:
 ```
 List<Node<String, String>> leafs = Traverse.getlLeafs((Node)head);
 ```
+
+BFS and DFS traversal processing using visitor pattern:
+Visitor visitor - is a visitor interface needed to be implemented
+
+```
+Traverse.bfs((Node)head, visitor);
+Traverse.dfs((Node)head, visitor);
+```
+
+Count number of leafs
+
+```
+long leafsCount = countLeafs((Node)head)
+```
+
+Count maximum height
+
+```
+int height = countMaxHeight((Node)head)
+```
+
 
 Math
 ==========
@@ -307,42 +342,15 @@ Used if we need to collect all objects of the same interface into a single list.
 List<SuperClass> result = FieldsFetcher.mergeListsByInterface(container, SuperClass.class);
 ```
 
-
-New in 1.9-SNAPSHOT
-==========
-
-Reflection
-==========
 Find value of the field by point delimited path
 ```
 (String) FieldsFetcher.findValue(parent, "childPublic.childPrivate.str")
 ```
 
-Collections
+
+New in 1.13-SNAPSHOT
 ==========
-Remove duplicate objects from List
-```
-List<String> values = Arrays.asList("0", "1", "2", "0", "3", "1");
-values = CollectionUtils.removeDuplicateValues(values);
-```
 
-Remove duplicate objects from Map
-```
-Map<String, List<String>> values = new HashMap<String, List<String>>();
-values.put("one", Arrays.asList("0", "1", "2", "0", "3", "1"));
-values.put("two", Arrays.asList("0", "1", "2", "1", "2", "0"));
-values = CollectionUtils.removeDuplicateValues(values);
-```
-
-Trees
-==========
-BFS and DFS traversal processing using visitor pattern:
-Visitor visitor - is a visitor interface needed to be implemented
-
-```
-Traverse.bfs((Node)head, visitor);
-Traverse.dfs((Node)head, visitor);
-```
 
 Jenkins Build
 ==========
