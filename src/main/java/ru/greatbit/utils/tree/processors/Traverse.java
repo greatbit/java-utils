@@ -113,7 +113,7 @@ public class Traverse {
      * @param <K>
      * @param <V>
      */
-    private static <K, V> void getLeafs(Node<K, V> head, List<Node<K, V>> result){
+    public static <K, V> void getLeafs(Node<K, V> head, List<Node<K, V>> result){
         if (head == null){
             return;
         }
@@ -124,5 +124,49 @@ public class Traverse {
                 getLeafs(node, result);
             }
         }
+    }
+
+    /**
+     * Recursive method to count all leafs in DFS traversal
+     * @param head
+     * @param <K>
+     * @param <V>
+     */
+    public static <K, V> long countLeafs(Node<K, V> head){
+        long count = 0;
+        if (head == null){
+            return count;
+        }
+        if (head.getChildren().size() == 0){
+            return 1;
+        } else {
+            for (Node node : head.getChildren()){
+                count += countLeafs(node);
+            }
+            return count;
+        }
+    }
+
+    /**
+     * Recursive method to verify max height of the tree
+     * @param head
+     * @param <K>
+     * @param <V>
+     */
+    public static <K, V> int countMaxHeight(Node<K, V> head){
+        if (head == null){
+            return 0;
+        }
+
+        List<Integer> heights = new LinkedList<Integer>();
+        for (Node node : head.getChildren()){
+            heights.add(countMaxHeight(node));
+        }
+
+        int max = 0;
+        for (Integer childHeight : heights){
+            max = Math.max(max, childHeight);
+        }
+        return 1 + max;
     }
 }
