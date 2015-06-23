@@ -351,6 +351,13 @@ Find value of the field by point delimited path
 New in 1.13-SNAPSHOT
 ==========
 
+Random
+==========
+
+Returns random within a range (inclusive)
+```
+int rand = Random.next(1, 10);
+```
 
 Jenkins Build
 ==========
