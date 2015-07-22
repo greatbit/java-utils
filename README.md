@@ -359,6 +359,20 @@ Returns random within a range (inclusive)
 int rand = Random.next(1, 10);
 ```
 
+Network
+==========
+
+Returns InetAddress most suitable for current sever
+```
+InetAddress address = InetAddress getLocalHostLANAddress()
+```
+
+
+Returns localhost InetAddres
+```
+InetAddress address = InetAddress getLocalHost()
+```
+
 Jenkins Build
 ==========
 http://azee.people.yandex.net/jenkins/job/java-utils/
