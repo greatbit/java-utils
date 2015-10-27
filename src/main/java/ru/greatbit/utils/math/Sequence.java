@@ -13,7 +13,8 @@ public class Sequence {
     /**
      * Get factorial of defined depth
      * @param depth - Depth for a factorial
-     * @return
+     * @return - A factorial value of provided depth
+     * @throws MathException - Math Operations Exceptions
      */
     public static long factorial(int depth) throws MathException {
         if (depth <= 0){
@@ -28,7 +29,8 @@ public class Sequence {
     /**
      * Get a sequence of factorial numbers of defined depth
      * @param depth - Depth for a factorial
-     * @return
+     * @return - A sequence of factorial values of provided depth
+     * @throws MathException - Math Operations Exceptions
      */
     public static List<Long> factorialSequence(int depth) throws MathException {
         List<Long> result = new LinkedList<Long>();
@@ -59,6 +61,7 @@ public class Sequence {
      * Get fibonacchi number of defined depth
      * @param depth  - Depth for a fibonacci
      * @return - Long result
+     * @throws MathException - Math Operations Exceptions
      */
     public static long fibonacci(int depth) throws MathException {
         if (depth <= 0) {
@@ -75,7 +78,7 @@ public class Sequence {
      * Get a sequence of fibonacci numbers of defined depth
      * @param depth  - Depth for a fibonacci sequence
      * @return - List of fibonacci values
-     * @throws MathException
+     * @throws MathException - Math Operations Exceptions
      */
     public static List<Long> fibonacciSequence(int depth) throws MathException {
         List<Long> result = new LinkedList<Long>();

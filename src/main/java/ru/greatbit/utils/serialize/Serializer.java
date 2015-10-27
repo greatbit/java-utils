@@ -7,11 +7,11 @@ public class Serializer {
 
     /**
      * Unmarshal an oject if we don't now if it is a json or an xml
-     * @param data
-     * @param clazz
-     * @param <T>
-     * @return
-     * @throws Exception
+     * @param data - String with serialised object
+     * @param clazz - A class of object to be deserialised
+     * @param <T> - Class of object
+     * @return - Unmarshaled object
+     * @throws Exception - Serialisation exceptions
      */
     public static <T>T unmarshal(String data, Class<T> clazz) throws Exception {
         try {

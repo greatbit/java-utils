@@ -16,8 +16,8 @@ public class JsonSerializer {
      * Marshall an object without root
      * @param object - an object to marshall
      * @param <T> - object class
-     * @return String - marshalled object
-     * @throws Exception
+     * @return String - marshaled object
+     * @throws Exception - Serialisation exceptions
      */
     public static <T> String marshal(T object) throws Exception{
         return marshal(object, "");
@@ -30,8 +30,8 @@ public class JsonSerializer {
      * @param object - an object to marshall
      * @param rootName - String root name to wrap
      * @param <T> - object class
-     * @return - String - marshalled object
-     * @throws Exception
+     * @return - String - marshaled object
+     * @throws Exception - Serialisation exceptions
      */
     public static <T> String marshal(T object, String rootName) throws Exception{
         String result;
@@ -44,11 +44,11 @@ public class JsonSerializer {
 
     /**
      * Unmarshall an object without root element
-     * @param data - String - marshalled object to unmarshal
+     * @param data - String - marshaled object to unmarshal
      * @param objectClass - class of the object
      * @param <T> - class of the object
-     * @return <T> - unmarshalled object
-     * @throws Exception
+     * @return - unmarshaled object
+     * @throws Exception - Serialisation exceptions
      */
     public static <T>T unmarshal(String data, Class<T> objectClass) throws Exception{
         return unmarshal(data, "", objectClass);
@@ -56,12 +56,12 @@ public class JsonSerializer {
 
     /**
      * Unmarshall object with root element
-     * @param data - String - marshalled object to unmarshal
+     * @param data - String - marshaled object to unmarshal
      * @param rootName - String - additional root name to add
      * @param objectClass - class of the object
      * @param <T> - class of the object
-     * @return <T> - unmarshalled object
-     * @throws Exception
+     * @return - unmarshaled object
+     * @throws Exception - Serialisation exceptions
      */
     public static <T>T unmarshal(String data, String rootName, Class<T> objectClass) throws Exception{
         if (rootName != null && !"".equals(rootName)){

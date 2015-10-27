@@ -22,10 +22,10 @@ public class XmlSerializer {
 
     /**
      * Marhsal an object to string
-     * @param instance
-     * @return
-     * @throws IOException
-     * @throws JAXBException
+     * @param instance - An instance of an object
+     * @return - String - Marshaled objelct
+     * @throws IOException - IOException
+     * @throws JAXBException - JAXBException
      */
     public static String marshal(Object instance) throws IOException, JAXBException {
         JAXBContext contextA = JAXBContext.newInstance(instance.getClass());
@@ -41,10 +41,10 @@ public class XmlSerializer {
      * @param data - String - marshalled object to unmarshal
      * @param clazz - Class of the object
      * @param <T> - Class of the object
-     * @return <T> - Unmarshalled object
-     * @throws JAXBException
-     * @throws IOException
-     * @throws SAXException
+     * @return Unmarshaled object
+     * @throws JAXBException - JAXBException
+     * @throws IOException - IOException
+     * @throws SAXException - SAXException
      */
     public static <T>T unmarshal(String data, Class<T> clazz) throws JAXBException, IOException, SAXException {
         try {
@@ -61,10 +61,10 @@ public class XmlSerializer {
      * @param data - String - marshalled object to unmarshal
      * @param clazz - Class of the object
      * @param <T> - Class of the object
-     * @return <T> - Unmarshalled object
-     * @throws JAXBException
-     * @throws IOException
-     * @throws SAXException
+     * @return Unmarshaled object
+     * @throws JAXBException - JAXBException
+     * @throws IOException - IOException
+     * @throws SAXException - SAXException
      */
     public static <T>T unmarshal(InputStream data, Class<T> clazz) throws JAXBException, IOException, SAXException {
         JAXBContext contextObj = JAXBContext.newInstance(clazz);
@@ -79,10 +79,10 @@ public class XmlSerializer {
      * @param data - String - marshalled object to unmarshal
      * @param clazz - Class of the object
      * @param <T> - Class of the object
-     * @return <T> - Unmarshalled object
-     * @throws JAXBException
-     * @throws IOException
-     * @throws SAXException
+     * @return Unmarshaled object
+     * @throws JAXBException - JAXBException
+     * @throws IOException - IOException
+     * @throws SAXException - SAXException
      */
     public static <T>T unmarshalNamespaceAware(InputStream data, Class<T> clazz) throws JAXBException, IOException, SAXException {
         T result;

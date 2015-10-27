@@ -14,8 +14,10 @@ public class Traverse {
 
     /**
      * Collect nodes in order using Breadth-first traversal
-     * @param head
-     * @return
+     * @param head - A head node of a tree
+     * @return - returns a list of visited nodes
+     * @param <K> - Tree node key
+     * @param <V> - Tree node value
      */
     public static <K, V>List<Node<K, V>> bfsList(Node<K, V> head){
         final List<Node<K, V>> result = new LinkedList<Node<K, V>>();
@@ -30,8 +32,10 @@ public class Traverse {
 
     /**
      * Process node using visitors pattern
-     * @param head
-     * @return
+     * @param head - A head node of a tree
+     * @param visitor - Visitor object - a processor
+     * @param <K> - Tree node key
+     * @param <V> - Tree node value
      */
     public static <K, V> void bfsVisit(Node<K, V> head, Visitor visitor){
         if (head == null){
@@ -55,8 +59,10 @@ public class Traverse {
 
     /**
      * Collect nodes in order using Depth-first traversal
-     * @param head
-     * @return
+     * @param head - A head node of a tree
+     * @return - returns a list of visited nodes
+     * @param <K> - Tree node key
+     * @param <V> - Tree node value
      */
     public static <K, V>List<Node<K, V>> dfsList(Node<K, V> head){
         List<Node<K, V>> result = new LinkedList<Node<K, V>>();
@@ -66,8 +72,10 @@ public class Traverse {
 
     /**
      * Recursive method to collect objects in DFS traversal
-     * @param head
-     * @param result
+     * @param head - A head node of a tree
+     * @param result - returns a list of visited nodes
+     * @param <K> - Tree node key
+     * @param <V> - Tree node value
      */
     private static <K, V> void dfsList(Node<K, V> head, final List<Node<K, V>> result){
         dfsVisit(head, new Visitor() {
@@ -80,7 +88,10 @@ public class Traverse {
 
     /**
      * Recursive method to process objects in DFS traversal using visitors pattern
-     * @param head
+     * @param head - A head node of a tree
+     * @param visitor - Visitor object - a processor
+     * @param <K> - Tree node key
+     * @param <V> - Tree node value
      */
     public static <K, V> void dfsVisit(Node<K, V> head, Visitor visitor){
         if (head == null){
@@ -94,10 +105,10 @@ public class Traverse {
 
     /**
      * Find all leafs
-     * @param head
-     * @param <K>
-     * @param <V>
-     * @return
+     * @param head - A head node of a tree
+     * @param <K> - Tree node key
+     * @param <V> - Tree node value
+     * @return - List of Tree Nodes - all leafs
      */
     public static <K, V> List<Node<K, V>> getLeafs(Node<K, V> head){
         List<Node<K, V>> result = new LinkedList<Node<K, V>>();
@@ -108,10 +119,10 @@ public class Traverse {
 
     /**
      * Recursive method to collect all leafs in DFS traversal
-     * @param head
-     * @param result
-     * @param <K>
-     * @param <V>
+     * @param head - A head node of a tree
+     * @param result - List of Tree Nodes - all leafs
+     * @param <K> - Tree node key
+     * @param <V> - Tree node value
      */
     public static <K, V> void getLeafs(Node<K, V> head, List<Node<K, V>> result){
         if (head == null){
@@ -128,9 +139,10 @@ public class Traverse {
 
     /**
      * Recursive method to count all leafs in DFS traversal
-     * @param head
-     * @param <K>
-     * @param <V>
+     * @param head - A head node of a tree
+     * @param <K> - Tree node key
+     * @param <V> - Tree node value
+     * @return - ling value showing number of leafs
      */
     public static <K, V> long countLeafs(Node<K, V> head){
         long count = 0;
@@ -149,9 +161,10 @@ public class Traverse {
 
     /**
      * Recursive method to verify max height of the tree
-     * @param head
-     * @param <K>
-     * @param <V>
+     * @param head - A head node of a tree
+     * @param <K> - Tree node key
+     * @param <V> - Tree node value
+     * @return  int - max tree height
      */
     public static <K, V> int countMaxHeight(Node<K, V> head){
         if (head == null){

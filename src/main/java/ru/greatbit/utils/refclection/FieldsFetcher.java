@@ -18,10 +18,12 @@ public class FieldsFetcher {
 
     /**
      * Returns a value fetched from the provided object by point delimited path
-     * @param object
-     * @param path
-     * @return
-     * @throws NullObjectException
+     * @param object - An object to find value in
+     * @param path - A path to a field
+     * @return - Field value
+     * @throws NullObjectException - Reflection and Null exceptions
+     * @throws InstantiationException - InstantiationException exceptions
+     * @throws IllegalAccessException - IllegalAccessException exceptions
      */
     public static Object findValue(Object object, String path) throws NullObjectException, IllegalAccessException, InstantiationException {
         if (object == null){
@@ -32,10 +34,12 @@ public class FieldsFetcher {
 
     /**
      * Returns a value fetched from the provided object by path in a list
-     * @param object
-     * @param path
-     * @return
-     * @throws NullObjectException
+     * @param object - An object to find value in
+     * @param path - A path to a field as a string list
+     * @return - Field value
+     * @throws NullObjectException - Reflection and Null exceptions
+     * @throws InstantiationException - InstantiationException exceptions
+     * @throws IllegalAccessException - IllegalAccessException exceptions
      */
     public static Object findValue(Object object, List<String> path) throws NullObjectException, IllegalAccessException, InstantiationException {
         if (object == null){
@@ -46,11 +50,13 @@ public class FieldsFetcher {
 
     /**
      * Returns a value fetched from the provided object of provided class by point delimited path
-     * @param object
-     * @param clazz
-     * @param path
-     * @return
-     * @throws NullObjectException
+     * @param object - An object to find value in
+     * @param clazz - Object class
+     * @param path - A path to a field as a string list
+     * @return - Field value
+     * @throws NullObjectException - Reflection and Null exceptions
+     * @throws InstantiationException - InstantiationException exceptions
+     * @throws IllegalAccessException - IllegalAccessException exceptions
      */
     public static Object findValue(Object object, Class clazz, List<String> path) throws NullObjectException, InstantiationException, IllegalAccessException {
         if (object == null){
@@ -73,10 +79,10 @@ public class FieldsFetcher {
 
     /**
      * Fetch an object from the parent object by field name
-     * @param obj
-     * @param clazz
-     * @param fieldName
-     * @return
+     * @param obj - An object to find value in
+     * @param clazz - Object class
+     * @param fieldName - A field to look for
+     * @return - An object - field value
      */
     public static Object getObjectFromField(Object obj, Class clazz, String fieldName){
         Object result;
@@ -100,13 +106,13 @@ public class FieldsFetcher {
     }
 
     /**
-     * Combine lists with common interface into one
+     * Combine lists with common interface of an object into one
      * Useful if lists are generated from xsd
-     * @param obj
-     * @param commonInterface
-     * @param <T>
-     * @return
-     * @throws IllegalAccessException
+     * @param obj - Source object
+     * @param commonInterface - Interface to look for
+     * @param <T> - Class of interface
+     * @return - A list of merged values
+     * @throws IllegalAccessException -  Reflection exceptions
      */
     public static <T>List<T> mergeListsByInterface(Object obj, Class<T> commonInterface) throws IllegalAccessException {
 
@@ -145,11 +151,11 @@ public class FieldsFetcher {
     /**
      * Collect all fields of a certain interface into one list
      * Useful if fields are generated from xsd
-     * @param obj
-     * @param commonInterface
-     * @param <T>
-     * @return
-     * @throws IllegalAccessException
+     * @param obj - Source object
+     * @param commonInterface - Interface to look for
+     * @param <T> - Class of interface
+     * @return- A list of merged values
+     * @throws IllegalAccessException -  Reflection exceptions
      */
     public static <T>List<T> getValuesByInterface(Object obj, Class<T> commonInterface) throws IllegalAccessException {
 
