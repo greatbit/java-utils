@@ -1,9 +1,11 @@
 package ru.greatbit.utils.serialize;
 
-import org.codehaus.jackson.map.AnnotationIntrospector;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 
 /**
  * Created by azee on 4/11/14.
@@ -33,11 +35,7 @@ public class JsonSerializer {
      */
     public static <T> String marshal(T object, String rootName) throws Exception{
         String result;
-        ObjectMapper mapper = new ObjectMapper();
-        AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
-        mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
-        mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        result = mapper.writeValueAsString(object);
+        result = createObjectMapper().writeValueAsString(object);
         if (rootName != null && !"".equals(rootName)){
             result = "{\"" + rootName + "\": " + result + "}";
         }
@@ -69,10 +67,22 @@ public class JsonSerializer {
         if (rootName != null && !"".equals(rootName)){
             data = "{\"" + rootName + "\": " + data + "}";
         }
+        return (T)createObjectMapper().readValue(data, objectClass);
+    }
+
+    /**
+     * Create a default object mapper
+     */
+    private static ObjectMapper createObjectMapper(){
         ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
-        mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
-        return (T)mapper.readValue(data, objectClass);
+
+        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setAnnotationIntrospector(AnnotationIntrospector.pair(
+                new JaxbAnnotationIntrospector(TypeFactory.defaultInstance()),
+                new JacksonAnnotationIntrospector()
+        ));
+        return mapper;
     }
 }

@@ -12,8 +12,8 @@ public class AddressUtils {
     /**
      * Returns InetAddress most suitable for current sever
      * Iterates through interfaces to find most suitable one
-     * @return
-     * @throws UnknownHostException
+     * @return - InetAddress object
+     * @throws UnknownHostException - Unknown Host Exception
      */
     public static InetAddress getLocalHostLANAddress() throws UnknownHostException {
         try {
@@ -63,8 +63,8 @@ public class AddressUtils {
 
     /**
      * Returns localhost InetAddres
-     * @return
-     * @throws UnknownHostException
+     * @return - Inet Address object
+     * @throws UnknownHostException - Unknown Host Exception
      */
     public static InetAddress getLocalHost() throws UnknownHostException {
         try {

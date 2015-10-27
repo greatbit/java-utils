@@ -12,9 +12,10 @@ public class CollectionUtils {
 
     /**
      * Merge lists
-     * @param first - List<Object>
-     * @param second - List<Object>
-     * @return - List<Object>
+     * @param first - List
+     * @param second - List
+     * @param <T> - Object class
+     * @return - List
      */
     public static <T> List<T> mergeLists(List<T> first, List<T> second){
         Map<T, T> dataMap = listToMap(first);
@@ -33,11 +34,11 @@ public class CollectionUtils {
     /**
      * Merge lists of object
      * Objects are compared by serialisation value
-     * @param first
-     * @param second
-     * @param <T>
-     * @return
-     * @throws Exception
+     * @param first - The first list of objects
+     * @param second - The second list of objects
+     * @return - Merged list of objects
+     * @param <T> - Object class
+     * @throws Exception - Serialization exceptions
      */
     public static <T> List<T> mergeListsByValue(List<T> first, List<T> second) throws Exception {
         Map<String, T> dataMap = listToMD5Map(first);
@@ -59,8 +60,8 @@ public class CollectionUtils {
      * Get differences of lists
      * Objects should override hashCode and equals so they could be
      * compared in HashMap to find differences
-     * @param first - List<T>
-     * @param second - List<T>
+     * @param first - List
+     * @param second - List
      * @param <T> - Object class
      * @return Difference object
      */
@@ -72,11 +73,11 @@ public class CollectionUtils {
      * Get differences of lists
      * Uses serialised objects md5 - it will work slower
      * but can process objects if hashCode and equals can't be overridden
-     * @param first
-     * @param second
-     * @param <T>
-     * @return
-     * @throws Exception
+     * @param first - first list
+     * @param second - second list
+     * @return - Difference object
+     * @param <T> - Object class
+     * @throws Exception - Serialization exception
      */
     public static <T>Difference getDiffAnyObject(List<T> first, List<T> second) throws Exception {
         return getDiff(listToMD5Map(first), listToMD5Map(second));
@@ -84,10 +85,11 @@ public class CollectionUtils {
 
     /**
      * Return a difference from 2 maps
-     * @param firstMap
-     * @param secondMap
-     * @param <K, V>
-     * @return
+     * @param firstMap - First map do diff
+     * @param secondMap - Second map do diff
+     * @param <K> - Key class
+     * @param <V> - Value class
+     * @return - Difference object
      */
     private static <K, V>Difference getDiff(Map<K, V> firstMap, Map<K, V> secondMap){
         Difference difference = new Difference();
@@ -112,9 +114,9 @@ public class CollectionUtils {
 
     /**
      * Load a list to a map
-     * @param input - List<T>
-     * @param <V> - Class of objects
-     * @return - Map<V, V>
+     * @param input - List
+     * @param <V> - Object class
+     * @return - Map
      */
     public static <V> Map<V, V> listToMap(List<V> input){
         Map<V, V> dataMap = new HashMap<V, V>();
@@ -127,10 +129,10 @@ public class CollectionUtils {
     /**
      * Load a list to a map, use serialised objects md5 - it will work slower
      * but can process objects if hashCode and equals can't be overridden
-     * @param input
-     * @param <T>
-     * @return
-     * @throws Exception
+     * @param input - List of objects
+     * @return - Map of objects by md5 key
+     * @param <T> - Object class
+     * @throws Exception - Serialization exceptions
      */
     public static <T> Map<String, T> listToMD5Map(List<T> input) throws Exception {
         Map<String, T> dataMap = new HashMap<String, T>();
@@ -142,10 +144,10 @@ public class CollectionUtils {
 
     /**
      * Used to remove values from lists that don't support remove method
-     * @param input
-     * @param index
-     * @param <T>
-     * @return
+     * @param input - List
+     * @param index - Index to remove
+     * @param <T> - Object class
+     * @return - Result list with removed item
      */
     public static <T> List<T> removeByIndex(List<T> input, int index) {
         List<T> result = new LinkedList<T>(input);
@@ -163,10 +165,10 @@ public class CollectionUtils {
 
     /**
      * Remove duplicate values of list from map
-     * @param values
-     * @param <T>
-     * @param <K>
-     * @return
+     * @param values - Map of values
+     * @param <T> - Object class
+     * @param <K> - Key
+     * @return - Result Map without duplcates
      */
     public static <T, K> Map<K, List<T>> removeDuplicateValues(Map<K, List<T>> values) {
         if (values == null){
@@ -181,9 +183,9 @@ public class CollectionUtils {
 
     /**
      * Remove duplicate values of list from list
-     * @param values
-     * @param <T>
-     * @return
+     * @param values - List of values to filter
+     * @param <T> - Object class
+     * @return - Filtered list
      */
     public static <T> List<T> removeDuplicateValues(List<T> values) {
         if (values == null){

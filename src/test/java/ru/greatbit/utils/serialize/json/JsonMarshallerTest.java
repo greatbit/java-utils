@@ -13,8 +13,8 @@ import static org.hamcrest.core.Is.is;
 public class JsonMarshallerTest {
 
 
-    String beanWithRoot = "{\"beanExample\": {\"value\":1}}";
-    String beanWithoutRoot = "{\"value\":1}";
+    String beanWithRoot = "{\"beanExample\": {\n  \"value\" : 1\n}}";
+    String beanWithoutRoot = "{\n  \"value\" : 1\n}";
 
     @Test
     public void testMarshal() throws Exception {

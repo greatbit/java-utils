@@ -6,9 +6,9 @@ package ru.greatbit.utils.math;
 public class Random {
     /**
      * Returns random within a range (inclusive)
-     * @param min
-     * @param max
-     * @return
+     * @param min - Lower range valie (inclusive)
+     * @param max - Upper range valie (inclusive)
+     * @return - next random value
      */
     public static int next(int min, int max){
         return new java.util.Random().nextInt((max - min) + 1) + min;

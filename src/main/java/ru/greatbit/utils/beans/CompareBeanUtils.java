@@ -9,10 +9,10 @@ public class CompareBeanUtils {
 
     /**
      * Compare 2 beans by value using serialization to json
-     * @param bean1
-     * @param bean2
-     * @return
-     * @throws Exception
+     * @param bean1 - first bean to compare
+     * @param bean2 - second bean to compare
+     * @return - true (equal) or false (not equal)
+     * @throws Exception - Serialize exceptions
      */
     public static boolean equalByVal(Object bean1, Object bean2) throws Exception {
         //If both of them are null or the same object - no need to serialize

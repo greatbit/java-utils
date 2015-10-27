@@ -11,7 +11,7 @@ public class Prime {
 
     /**
      * Get list of simple primes
-     * @param depth
+     * @param depth - depth of primes starting from 2
      * @return
      */
     public static List<Long> getPrimes(int depth){
@@ -20,16 +20,16 @@ public class Prime {
 
     /**
      * Get list of simple primes in a range
-     * @param from
-     * @param to
-     * @return
+     * @param from - Lower value (inclusive)
+     * @param to - Upper value (inclusive)
+     * @return - list if Long values
      */
     public static List<Long> getPrimes(int from, int to){
         List<Long> result = new LinkedList<Long>();
         if (from < 2){
             from = 2;
         }
-        for (int i = from; i < to; i++){
+        for (int i = from; i <= to; i++){
             if (isPrime(i)){
                 result.add(new Long(i));
             }
@@ -40,8 +40,8 @@ public class Prime {
 
     /**
      * Find out if the number is prime
-     * @param value
-     * @return
+     * @param value - value to detect
+     * @return - true if prime, false - if not
      */
     public static boolean isPrime(long value){
         if (value < 2){

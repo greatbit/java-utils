@@ -16,8 +16,11 @@ public class TimeUtilsTest {
 
     @Test
     public void getStartOfTheDayTest(){
+        TimeZone.setDefault(TimeZone.getTimeZone("Etc/Greenwich"));
         TimeZone tz = TimeZone.getDefault();
+        System.out.println(tz.getRawOffset());
         assertEquals(1389312000000L - tz.getRawOffset(), TimeUtils.getStartOfTheDay(1389358493087L));
+        assertEquals(1389312000000L, TimeUtils.getStartOfTheDay(1389358493087L));
         assertEquals(10800000L, TimeUtils.getStartOfTheDay(0));
         assertEquals(10800000L, TimeUtils.getStartOfTheDay(10800000L));
     }

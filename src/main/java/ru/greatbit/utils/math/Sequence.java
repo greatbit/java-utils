@@ -12,7 +12,7 @@ public class Sequence {
 
     /**
      * Get factorial of defined depth
-     * @param depth
+     * @param depth - Depth for a factorial
      * @return
      */
     public static long factorial(int depth) throws MathException {
@@ -27,7 +27,7 @@ public class Sequence {
 
     /**
      * Get a sequence of factorial numbers of defined depth
-     * @param depth
+     * @param depth - Depth for a factorial
      * @return
      */
     public static List<Long> factorialSequence(int depth) throws MathException {
@@ -42,8 +42,8 @@ public class Sequence {
 
     /**
      * Fill factorial sequence recursively
-     * @param depth
-     * @param values
+     * @param depth  - Depth for a factorial
+     * @param values - Values to fill factorial
      */
     private static void factorialSequence(int depth, List<Long> values){
         if (depth == 1){
@@ -57,8 +57,8 @@ public class Sequence {
 
     /**
      * Get fibonacchi number of defined depth
-     * @param depth
-     * @return
+     * @param depth  - Depth for a fibonacci
+     * @return - Long result
      */
     public static long fibonacci(int depth) throws MathException {
         if (depth <= 0) {
@@ -73,8 +73,8 @@ public class Sequence {
 
     /**
      * Get a sequence of fibonacci numbers of defined depth
-     * @param depth
-     * @return
+     * @param depth  - Depth for a fibonacci sequence
+     * @return - List of fibonacci values
      * @throws MathException
      */
     public static List<Long> fibonacciSequence(int depth) throws MathException {
@@ -88,8 +88,8 @@ public class Sequence {
 
     /**
      * Fill fibonacci sequence recursively
-     * @param depth
-     * @param result
+     * @param depth -  - Depth for a fibonacci
+     * @param result - fill a fibonacci sequence recursively
      */
     private static void fibonacciSequence(int depth, List<Long> result) {
         if (depth == 1) {
