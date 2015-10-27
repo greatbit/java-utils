@@ -12,7 +12,7 @@ Maven
 <dependency>
     <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
-    <version>1.12</version>
+    <version>1.14</version>
 </dependency>
 ```
 
@@ -347,10 +347,6 @@ Find value of the field by point delimited path
 (String) FieldsFetcher.findValue(parent, "childPublic.childPrivate.str")
 ```
 
-
-New in 1.13-SNAPSHOT
-==========
-
 Random
 ==========
 
@@ -372,6 +368,11 @@ Returns localhost InetAddres
 ```
 InetAddress address = InetAddress getLocalHost()
 ```
+
+
+New in 1.15-SNAPSHOT
+==========
+
 
 Jenkins Build
 ==========
