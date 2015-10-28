@@ -1,9 +1,10 @@
 java-utils
 ==========
+[![Jenkins Build](http://azee.people.yandex.net/jenkins/buildStatus/icon?job=java-utils)](http://azee.people.yandex.net/jenkins/job/java-utils)
 
 Useful utils lib for java
 
-Project just started. Everyone is welcome to contribute
+Everyone is welcome to contribute
 
 Maven
 ==========
@@ -372,9 +373,4 @@ InetAddress address = InetAddress getLocalHost()
 
 New in 1.15-SNAPSHOT
 ==========
-
-
-Jenkins Build
-==========
-http://azee.people.yandex.net/jenkins/job/java-utils/
 
