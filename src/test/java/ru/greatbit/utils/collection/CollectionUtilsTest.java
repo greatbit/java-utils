@@ -7,6 +7,7 @@ import java.util.*;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+import static ru.greatbit.utils.string.StringUtils.listAsString;
 
 /**
  * Created by azee on 4/29/14.
@@ -293,5 +294,34 @@ public class CollectionUtilsTest {
         assertTrue(entry.contains("1"));
         assertTrue(entry.contains("2"));
     }
+
+    @Test
+    public void reorderTest(){
+        List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        List<Integer> reorder = Arrays.asList(5, 7, 4, 2, 9, 3);
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 5, 7, 4, 2, 9, 3, 6, 8, 10"));
+
+        reorder = Arrays.asList(10, 1, 6);
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("10, 1, 2, 3, 4, 5, 6, 7, 8, 9"));
+
+        reorder = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
+
+        reorder = new ArrayList<>();
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
+
+        reorder = Arrays.asList(89, 99, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 16);
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
+
+        assertThat(listAsString(CollectionUtils.reorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4))), is("1, 2, 3, 5, 4"));
+    }
+
+    @Test
+    public void swapTest(){
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+        CollectionUtils.swap(list, 2, 4);
+        assertThat(listAsString(list), is("1, 2, 5, 4, 3"));
+    }
+
 }
 

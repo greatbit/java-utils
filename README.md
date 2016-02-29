@@ -373,8 +373,27 @@ InetAddress address = InetAddress getLocalHost()
 
 New in 1.15-SNAPSHOT
 ==========
-
+String Utils
+==========
 Transliterate russian characters string to english
 ```
 String translited = StringUtils.translit(someTextWithRussianSymbols)
 ```
+
+List Utils
+==========
+Reorder a list of elements by another list. Trying to keep absolute order of initial list but reorder regarding to provided relative order list.
+E.g. initial was [1, 2, 3, 4, 5] - calling reorder with list [2, 5, 4] will generate list [1, 2, 3, 5, 4]
+```
+List<integer> newList = CollectionUtils.reorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4));
+```
+
+Swap elements in list by their indexes
+Will swap 3 and 5
+```
+List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+CollectionUtils.swap(list, 2, 4);
+```
+
+
+

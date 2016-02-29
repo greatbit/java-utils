@@ -193,4 +193,65 @@ public class CollectionUtils {
         }
         return new ArrayList(new HashSet<T>(values));
     }
+
+
+    /**
+     * Reorder a list of elements by another list. Trying to keep absolute order of initial list
+     * but reorder regarding to provided relative order list.
+     * E.g. initial was [1, 2, 3, 4, 5] - calling reorder with list [2, 5, 4] will generate list
+     * [1, 2, 3, 5, 4]
+     * @param elements - initial list
+     * @param order - list describing relative order
+     * @param <T> - Class of comparable object
+     * @return - new reordered list
+     */
+    public static <T extends Comparable> List<T> reorder(List<T> elements, List<T> order){
+        final Map<T, Long> orderMap = new LinkedHashMap<>();
+        for (int i = 0; i < order.size(); i++){
+            orderMap.put(order.get(i), new Long(i));
+        }
+
+        //Can't use 0(NLogN) sort (quick or merge) - need to compare each element with each
+        for (int i = 0; i < elements.size(); i++){
+            for (int j = i + 1; j < elements.size(); j++){
+                if (compare(elements.get(i), elements.get(j), orderMap) > 0){
+                    swap(elements, i, j);
+                }
+            }
+        }
+        return elements;
+    }
+
+    /**
+     * Compare objects values from map by provided keys
+     * @param o1
+     * @param o2
+     * @param orderMap
+     * @param <T>
+     * @return
+     */
+    private static <T extends Comparable>int compare(T o1, T o2, Map<T, Long> orderMap) {
+        Long order1 = orderMap.get(o1);
+        Long order2 = orderMap.get(o2);
+        if (order1 != null && order2 != null){
+            return order1.compareTo(order2);
+        }
+        return o1.compareTo(o2);
+    }
+
+    /**
+     * Swap two elements in list
+     * @param elements - list of elements
+     * @param i - index of first element
+     * @param j - index of second element
+     * @param <T> - elements class
+     */
+    public static <T extends Comparable> void swap(List<T> elements, int i, int j) {
+        T buff = elements.get(j);
+        elements.set(j, elements.get(i));
+        elements.set(i, buff);
+    }
+
+
+
 }
