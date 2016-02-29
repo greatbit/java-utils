@@ -205,21 +205,46 @@ public class CollectionUtils {
      * @param <T> - Class of comparable object
      * @return - new reordered list
      */
-    public static <T extends Comparable> List<T> reorder(List<T> elements, List<T> order){
-        final Map<T, Long> orderMap = new LinkedHashMap<>();
-        for (int i = 0; i < order.size(); i++){
-            orderMap.put(order.get(i), new Long(i));
+     public static <T extends Comparable> List<T> reorder(List<T> elements, List<T> order){
+        if (order.size() == 0){
+            return elements;
         }
-
-        //Can't use 0(NLogN) sort (quick or merge) - need to compare each element with each
-        for (int i = 0; i < elements.size(); i++){
-            for (int j = i + 1; j < elements.size(); j++){
-                if (compare(elements.get(i), elements.get(j), orderMap) > 0){
-                    swap(elements, i, j);
+        if (elements.size() == 0){
+            return order;
+        }
+        Set<T> merged = new LinkedHashSet<>();
+        Set<T> elementsSet = new HashSet<>(elements);
+        int i = 0;
+        int j = 0;
+        T currElement = elements.get(i);
+        T currOrder = order.get(j);
+        while(i < elements.size() || j < order.size()){
+            if (j >= order.size()){
+                merged.addAll(elements.subList(i, elements.size()));
+                break;
+            }
+            currElement = i < elements.size() ? elements.get(i) : currElement;
+            currOrder = j < order.size() ? order.get(j) : currOrder;
+            if (currElement.compareTo(currOrder) < 0){
+                merged.add(currElement);
+                i++;
+            }
+            if (currOrder.compareTo(currElement) < 0 || i >= elements.size()){
+                if (merged.contains(currOrder)){
+                    merged.remove(currOrder);
                 }
+                if (elementsSet.contains(currOrder)){
+                    merged.add(currOrder);
+                }
+                j++;
+            }
+            if (currElement.compareTo(currOrder) == 0){
+                merged.add(currElement);
+                i++;
+                j++;
             }
         }
-        return elements;
+        return new ArrayList<>(merged);
     }
 
     /**

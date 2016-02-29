@@ -299,10 +299,11 @@ public class CollectionUtilsTest {
     public void reorderTest(){
         List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         List<Integer> reorder = Arrays.asList(5, 7, 4, 2, 9, 3);
-        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 5, 7, 4, 2, 9, 3, 6, 8, 10"));
+
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 5, 6, 7, 4, 2, 8, 9, 3, 10"));
 
         reorder = Arrays.asList(10, 1, 6);
-        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("10, 1, 2, 3, 4, 5, 6, 7, 8, 9"));
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("2, 3, 4, 5, 7, 8, 9, 10, 1, 6"));
 
         reorder = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
@@ -312,6 +313,15 @@ public class CollectionUtilsTest {
 
         reorder = Arrays.asList(89, 99, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 16);
         assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
+
+        reorder = Arrays.asList(10, 9, 8, 7, 6, 5, 4, 3, 2, 1);
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("10, 9, 8, 7, 6, 5, 4, 3, 2, 1"));
+
+        reorder = Arrays.asList(10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 10);
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("9, 8, 7, 6, 5, 4, 3, 2, 1, 10"));
+
+        reorder = Arrays.asList(77, 10, 9, 8, 7, 88, 6, 5, 4, 3, 2, 1, 1, 1, 99, 10, 101);
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("9, 8, 7, 6, 5, 4, 3, 2, 1, 10"));
 
         assertThat(listAsString(CollectionUtils.reorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4))), is("1, 2, 3, 5, 4"));
     }
