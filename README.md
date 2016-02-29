@@ -374,3 +374,7 @@ InetAddress address = InetAddress getLocalHost()
 New in 1.15-SNAPSHOT
 ==========
 
+Transliterate russian characters string to english
+```
+String translited = StringUtils.translit(someTextWithRussianSymbols)
+```

@@ -155,4 +155,9 @@ public class StringUtilsTest {
                 is("My name i Aziz"));
         assertThat(StringUtils.lcs("My name is Aziz", "RockNRoll"), is(""));
     }
+
+    @Test
+    public void translitTest(){
+        assertThat(StringUtils.translit("Что-то там_такое по-русски. Написано?"), is("CHto-to tam_takoe po-russki. Napisano?"));
+    }
 }
