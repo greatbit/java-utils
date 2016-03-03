@@ -205,13 +205,14 @@ public class CollectionUtils {
      * @param <T> - Class of comparable object
      * @return - new reordered list
      */
-     public static <T extends Comparable> List<T> reorder(List<T> elements, List<T> order){
+    public static <T extends Comparable> List<T> reorder(List<T> elements, List<T> order){
         if (order.size() == 0){
             return elements;
         }
         if (elements.size() == 0){
             return order;
         }
+        Set<Set<T>> collisionsToReorder = new LinkedHashSet<>();
         Set<T> merged = new LinkedHashSet<>();
         Set<T> elementsSet = new HashSet<>(elements);
         int i = 0;
@@ -226,7 +227,13 @@ public class CollectionUtils {
             currElement = i < elements.size() ? elements.get(i) : currElement;
             currOrder = j < order.size() ? order.get(j) : currOrder;
             if (currElement.compareTo(currOrder) < 0){
-                merged.add(currElement);
+                if (!merged.add(currElement)){
+                    Set<T> collisionToReorder = getCollisionList(elements, order, currElement);
+                    if (collisionToReorder.size() > 1){
+                        collisionsToReorder.add(collisionToReorder);
+                    }
+
+                }
                 i++;
             }
             if (currOrder.compareTo(currElement) < 0 || i >= elements.size()){
@@ -244,7 +251,20 @@ public class CollectionUtils {
                 j++;
             }
         }
-        return new ArrayList<>(merged);
+
+        List<T> result = new ArrayList<>(merged);
+        for (Set<T> collisionToReorder : collisionsToReorder){
+            result = reorder(result, new ArrayList<T>(collisionToReorder));
+        }
+        return result;
+    }
+
+    private static <T extends Comparable> Set<T> getCollisionList(List<T> elements, List<T> order, T currElement) {
+        List<T> elementsCopy = new LinkedList<>(elements);
+        List<T> orderCopy = new LinkedList<>(order);
+        orderCopy.remove(currElement);
+        elementsCopy.removeAll(orderCopy);
+        return new LinkedHashSet<>(elementsCopy);
     }
 
     /**

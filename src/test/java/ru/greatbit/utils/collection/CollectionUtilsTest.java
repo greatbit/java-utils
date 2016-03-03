@@ -324,6 +324,22 @@ public class CollectionUtilsTest {
         assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("9, 8, 7, 6, 5, 4, 3, 2, 1, 10"));
 
         assertThat(listAsString(CollectionUtils.reorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4))), is("1, 2, 3, 5, 4"));
+
+        input = Arrays.asList(3, 4, 1, 2, 5, 8, 7, 6);
+        reorder = Arrays.asList(1, 4, 2, 5);
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("3, 1, 4, 2, 5, 8, 7, 6"));
+    }
+
+    @Test(timeout=1000)
+    public void reorderLargeSetTest(){
+        final int number = 100000;
+        List<Integer> input = new ArrayList<>(number);
+        List<Integer> order = new ArrayList<>(number);
+        for (int i = 0; i < number; i++){
+            input.add(i);
+            order.add(number - 1 - i);
+        }
+        assertThat(listAsString(CollectionUtils.reorder(input, order)), is(listAsString(order)));
     }
 
     @Test
