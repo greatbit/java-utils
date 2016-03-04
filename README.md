@@ -13,7 +13,7 @@ Maven
 <dependency>
     <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
-    <version>1.14</version>
+    <version>1.17</version>
 </dependency>
 ```
 
@@ -134,6 +134,11 @@ Determine the longest common subsequence between the two strings:
 StringUtils.lcs("Two beer or not two beer", "To bee or not to bee")
 ```
 
+Transliterate russian characters string to english
+```
+String translited = StringUtils.translit(someTextWithRussianSymbols)
+```
+
 Collections
 ==========
 Merge 2 lists, objects are compared by hashCode and equals:
@@ -207,6 +212,19 @@ Map<String, List<String>> values = new HashMap<String, List<String>>();
 values.put("one", Arrays.asList("0", "1", "2", "0", "3", "1"));
 values.put("two", Arrays.asList("0", "1", "2", "1", "2", "0"));
 values = CollectionUtils.removeDuplicateValues(values);
+```
+
+Reorder a list of elements by another list. Trying to keep absolute order of initial list but reorder regarding to provided relative order list.
+E.g. initial was [1, 2, 3, 4, 5] - calling reorder with list [2, 5, 4] will generate list [1, 2, 3, 5, 4]
+```
+List<integer> newList = CollectionUtils.reorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4));
+```
+
+Swap elements in list by their indexes
+Will swap 3 and 5
+```
+List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+CollectionUtils.swap(list, 2, 4);
 ```
 
 Time
@@ -371,29 +389,9 @@ InetAddress address = InetAddress getLocalHost()
 ```
 
 
-New in 1.15-SNAPSHOT
+New in 1.18-SNAPSHOT
 ==========
-String Utils
-==========
-Transliterate russian characters string to english
-```
-String translited = StringUtils.translit(someTextWithRussianSymbols)
-```
 
-List Utils
-==========
-Reorder a list of elements by another list. Trying to keep absolute order of initial list but reorder regarding to provided relative order list.
-E.g. initial was [1, 2, 3, 4, 5] - calling reorder with list [2, 5, 4] will generate list [1, 2, 3, 5, 4]
-```
-List<integer> newList = CollectionUtils.reorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4));
-```
-
-Swap elements in list by their indexes
-Will swap 3 and 5
-```
-List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
-CollectionUtils.swap(list, 2, 4);
-```
 
 
 
