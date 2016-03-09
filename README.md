@@ -216,8 +216,14 @@ values = CollectionUtils.removeDuplicateValues(values);
 
 Reorder a list of elements by another list. Trying to keep absolute order of initial list but reorder regarding to provided relative order list.
 E.g. initial was [1, 2, 3, 4, 5] - calling reorder with list [2, 5, 4] will generate list [1, 2, 3, 5, 4]
+Threshold can be used (default is 1000). Threshold defines when to use slow but accurate algorithm or fast one that could corrupt initial order if not all elements are present in new one.
+Default threshold is 1000 for new order length. If threshold > order size then O(nm) algorithm will be used. Otherwise O(n + m) will be used.
+Algorithms are available separately - O(n + m) mergeReorder method and O(nm) swapReorder. 
 ```
 List<integer> newList = CollectionUtils.reorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4));
+List<integer> newList = CollectionUtils.reorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4), 10000);
+List<integer> newList = CollectionUtils.swapReorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4));
+List<integer> newList = CollectionUtils.mergeReorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4));
 ```
 
 Swap elements in list by their indexes
