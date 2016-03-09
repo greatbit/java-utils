@@ -6,6 +6,7 @@ import ru.greatbit.utils.beans.BeanWithNamespaceExample;
 import java.util.*;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.*;
 import static ru.greatbit.utils.string.StringUtils.listAsString;
 
@@ -300,37 +301,87 @@ public class CollectionUtilsTest {
         List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         List<Integer> reorder = Arrays.asList(5, 7, 4, 2, 9, 3);
 
-        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 5, 6, 7, 4, 2, 8, 9, 3, 10"));
+        assertThat(listAsString(CollectionUtils.mergeReorder(input, reorder)), is("1, 5, 6, 7, 4, 2, 8, 9, 3, 10"));
 
         reorder = Arrays.asList(10, 1, 6);
-        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("2, 3, 4, 5, 7, 8, 9, 10, 1, 6"));
+        assertThat(listAsString(CollectionUtils.mergeReorder(input, reorder)), is("2, 3, 4, 5, 7, 8, 9, 10, 1, 6"));
 
         reorder = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        assertThat(listAsString(CollectionUtils.mergeReorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
+
+        reorder = new ArrayList<>();
+        assertThat(listAsString(CollectionUtils.mergeReorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
+
+        reorder = Arrays.asList(89, 99, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 16);
+        assertThat(listAsString(CollectionUtils.mergeReorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
+
+        reorder = Arrays.asList(10, 9, 8, 7, 6, 5, 4, 3, 2, 1);
+        assertThat(listAsString(CollectionUtils.mergeReorder(input, reorder)), is("10, 9, 8, 7, 6, 5, 4, 3, 2, 1"));
+
+        reorder = Arrays.asList(10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 10);
+        assertThat(listAsString(CollectionUtils.mergeReorder(input, reorder)), is("9, 8, 7, 6, 5, 4, 3, 2, 1, 10"));
+
+        reorder = Arrays.asList(77, 10, 9, 8, 7, 88, 6, 5, 4, 3, 2, 1, 1, 1, 99, 10, 101);
+        assertThat(listAsString(CollectionUtils.mergeReorder(input, reorder)), is("9, 8, 7, 6, 5, 4, 3, 2, 1, 10"));
+
+        assertThat(listAsString(CollectionUtils.mergeReorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4))), is("1, 2, 3, 5, 4"));
+
+        input = Arrays.asList(3, 4, 1, 2);
+        reorder = Arrays.asList(2, 1, 4);
+        assertThat(listAsString(CollectionUtils.mergeReorder(input, reorder)), is("2, 1, 3, 4"));
+    }
+
+    @Test
+    public void swapReorderTest(){
+        List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        List<Integer> reorder = Arrays.asList(5, 7, 4, 2, 9, 3);
+
+        assertThat(listAsString(CollectionUtils.swapReorder(input, reorder)), is("1, 5, 7, 4, 2, 6, 9, 8, 3, 10"));
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 5, 7, 4, 2, 6, 9, 8, 3, 10"));
+
+        reorder = Arrays.asList(10, 1, 6);
+        assertThat(listAsString(CollectionUtils.swapReorder(input, reorder)), is("10, 2, 3, 4, 5, 1, 7, 8, 9, 6"));
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("10, 2, 3, 4, 5, 1, 7, 8, 9, 6"));
+
+        reorder = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        assertThat(listAsString(CollectionUtils.swapReorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
         assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
 
         reorder = new ArrayList<>();
+        assertThat(listAsString(CollectionUtils.swapReorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
         assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
 
         reorder = Arrays.asList(89, 99, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 16);
+        assertThat(listAsString(CollectionUtils.swapReorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
         assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
 
         reorder = Arrays.asList(10, 9, 8, 7, 6, 5, 4, 3, 2, 1);
-        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("10, 9, 8, 7, 6, 5, 4, 3, 2, 1"));
+        assertThat(listAsString(CollectionUtils.swapReorder(input, reorder)), is("10, 9, 8, 7, 6, 5, 4, 3, 2, 1"));
+        assertThat(listAsString(CollectionUtils.swapReorder(input, reorder)), is("10, 9, 8, 7, 6, 5, 4, 3, 2, 1"));
 
         reorder = Arrays.asList(10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 10);
+        assertThat(listAsString(CollectionUtils.swapReorder(input, reorder)), is("9, 8, 7, 6, 5, 4, 3, 2, 1, 10"));
         assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("9, 8, 7, 6, 5, 4, 3, 2, 1, 10"));
 
         reorder = Arrays.asList(77, 10, 9, 8, 7, 88, 6, 5, 4, 3, 2, 1, 1, 1, 99, 10, 101);
+        assertThat(listAsString(CollectionUtils.swapReorder(input, reorder)), is("9, 8, 7, 6, 5, 4, 3, 2, 1, 10"));
         assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("9, 8, 7, 6, 5, 4, 3, 2, 1, 10"));
 
+        assertThat(listAsString(CollectionUtils.swapReorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4))), is("1, 2, 3, 5, 4"));
         assertThat(listAsString(CollectionUtils.reorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4))), is("1, 2, 3, 5, 4"));
 
         input = Arrays.asList(3, 4, 1, 2, 5, 8, 7, 6);
         reorder = Arrays.asList(1, 4, 2, 5);
+        assertThat(listAsString(CollectionUtils.swapReorder(input, reorder)), is("3, 1, 4, 2, 5, 8, 7, 6"));
         assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("3, 1, 4, 2, 5, 8, 7, 6"));
+
+        input = Arrays.asList(3, 4, 1, 2);
+        reorder = Arrays.asList(2, 1, 4);
+        assertThat(listAsString(CollectionUtils.swapReorder(input, reorder)), is("3, 2, 1, 4"));
+        assertThat(listAsString(CollectionUtils.reorder(input, reorder)), is("3, 2, 1, 4"));
     }
 
-    @Test(timeout=1000)
+    @Test(timeout=300)
     public void reorderLargeSetTest(){
         final int number = 100000;
         List<Integer> input = new ArrayList<>(number);
@@ -340,6 +391,18 @@ public class CollectionUtilsTest {
             order.add(number - 1 - i);
         }
         assertThat(listAsString(CollectionUtils.reorder(input, order)), is(listAsString(order)));
+    }
+
+    @Test(timeout=4000)
+    public void swapReorderLargeSetTest(){
+        final int number = 10000;
+        List<Integer> input = new ArrayList<>(number);
+        List<Integer> order = new ArrayList<>(number);
+        for (int i = 0; i < number; i++){
+            input.add(i);
+            order.add(number - 1 - i);
+        }
+        assertThat(listAsString(CollectionUtils.swapReorder(input, order)), is(listAsString(order)));
     }
 
     @Test
