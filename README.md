@@ -395,7 +395,7 @@ InetAddress address = InetAddress getLocalHost()
 ```
 
 
-New in 1.18-SNAPSHOT
+New in 1.19-SNAPSHOT
 ==========
 
 
