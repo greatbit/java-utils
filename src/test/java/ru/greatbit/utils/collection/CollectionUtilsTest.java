@@ -296,7 +296,7 @@ public class CollectionUtilsTest {
     }
 
     @Test
-    public void reorderTest(){
+    public void mergerReorderTest(){
         List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         List<Integer> reorder = Arrays.asList(5, 7, 4, 2, 9, 3);
 
@@ -325,9 +325,11 @@ public class CollectionUtilsTest {
 
         assertThat(listAsString(CollectionUtils.mergeReorder(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 5, 4))), is("1, 2, 3, 5, 4"));
 
+        assertThat(listAsString(CollectionUtils.mergeReorder(Arrays.asList(3, 5, 2), Arrays.asList(2, 5))), is("3, 2, 5"));
+
         input = Arrays.asList(3, 4, 1, 2);
         reorder = Arrays.asList(2, 1, 4);
-        assertThat(listAsString(CollectionUtils.mergeReorder(input, reorder)), is("2, 1, 3, 4"));
+        assertThat(listAsString(CollectionUtils.mergeReorder(input, reorder)), is("3, 2, 1, 4"));
     }
 
     @Test

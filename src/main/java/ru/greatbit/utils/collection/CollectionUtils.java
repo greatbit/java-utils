@@ -305,6 +305,12 @@ public class CollectionUtils {
         if (elements.size() == 0){
             return order;
         }
+
+        Map<T, Integer> elementsIndexMap = new HashMap<>();
+        for(int i = 0; i < elements.size(); i++){
+            elementsIndexMap.put(elements.get(i), i);
+        }
+
         Set<T> merged = new LinkedHashSet<>();
         Set<T> elementsSet = new HashSet<>(elements);
         int i = 0;
@@ -318,11 +324,16 @@ public class CollectionUtils {
             }
             currElement = i < elements.size() ? elements.get(i) : currElement;
             currOrder = j < order.size() ? order.get(j) : currOrder;
-            if (currElement.compareTo(currOrder) < 0){
+
+            Integer currElementIndex = elementsIndexMap.get(currElement);
+            Integer currOrderIndexInElements = elementsIndexMap.get(currOrder);
+            currOrderIndexInElements = currOrderIndexInElements == null ? elements.size() : currOrderIndexInElements;
+
+            if (currElementIndex.compareTo(currOrderIndexInElements) < 0){
                 merged.add(currElement);
                 i++;
             }
-            if (currOrder.compareTo(currElement) < 0 || i >= elements.size()){
+            if (currOrderIndexInElements.compareTo(currElementIndex) < 0 || i >= elements.size()){
                 if (merged.contains(currOrder)){
                     merged.remove(currOrder);
                 }
@@ -331,7 +342,7 @@ public class CollectionUtils {
                 }
                 j++;
             }
-            if (currElement.compareTo(currOrder) == 0){
+            if (currElementIndex.compareTo(currOrderIndexInElements) == 0){
                 merged.add(currElement);
                 i++;
                 j++;
@@ -339,7 +350,6 @@ public class CollectionUtils {
         }
         return new ArrayList<>(merged);
     }
-
 
     /**
      * Compare objects values from map by provided keys
