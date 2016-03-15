@@ -3,10 +3,9 @@ package ru.greatbit.utils.beans;
 import ru.greatbit.utils.serialize.JsonSerializer;
 
 /**
- * Created by azee on 5/5/14.
+ * Created by azee on 15.03.16.
  */
-public class CompareBeanUtils {
-
+public class BeanUtils {
     /**
      * Compare 2 beans by value using serialization to json
      * @param bean1 - first bean to compare
@@ -29,5 +28,18 @@ public class CompareBeanUtils {
         String bean1String = JsonSerializer.marshal(bean1);
         String bean2String = JsonSerializer.marshal(bean2);
         return bean1String.equals(bean2String);
+    }
+
+    /**
+     * Get a copy of an object
+     * @param source - a source object
+     * @param <T> - class of the object
+     * @return - a copy of the object
+     * @throws Exception - Serialization Exceptions
+     */
+    public static <T>T getCopy(Object source) throws Exception {
+        String sourceString = JsonSerializer.marshal(source);
+        Class clazz = source.getClass();
+        return (T) JsonSerializer.unmarshal(sourceString, clazz);
     }
 }
