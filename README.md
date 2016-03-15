@@ -397,7 +397,6 @@ InetAddress address = InetAddress getLocalHost()
 
 New in 1.19-SNAPSHOT
 ==========
-
-
+CopyBeanUtils and CompareBeanUtils are merged into a single BeanUtils class
 
 
