@@ -13,7 +13,7 @@ Maven
 <dependency>
     <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
-    <version>1.18</version>
+    <version>1.19</version>
 </dependency>
 ```
 
@@ -22,13 +22,13 @@ Beans
 Beans deep copy:
 
 ```
-SomeBean targetBean = CopyBeanUtils.getCopy(sourceBean);
+SomeBean targetBean = BeanUtils.getCopy(sourceBean);
 ```
 
 
 Compare beans by value:
 ```
-boolean areEqual = CompareBeanUtils.equalByVal(bean1, bean2)
+boolean areEqual = BeanUtils.equalByVal(bean1, bean2)
 ```
 
 
