@@ -10,8 +10,6 @@ import java.util.*;
  */
 public class CollectionUtils {
 
-    private static final int SWAP_SORT_THRESHOLD = 1000;
-
     /**
      * Merge lists
      * @param first - List
@@ -196,100 +194,8 @@ public class CollectionUtils {
         return new ArrayList(new HashSet<T>(values));
     }
 
-
     /**
-     * Reorder a list of elements by another list by swapping or merging elements. Default threshold is 1000;
-     * Reorder regarding to provided relative order list.
-     * E.g. initial was [1, 2, 3, 4, 5] - calling reorder with list [2, 5, 4] will generate list
-     * [1, 2, 3, 5, 4]
-     * @param elements - initial list
-     * @param order - list describing relative order
-     * @param <T> - Class of comparable object
-     * @return - new reordered list
-     */
-    public static <T extends Comparable> List<T> reorder(List<T> elements, List<T> order){
-        return reorder(elements, order, SWAP_SORT_THRESHOLD);
-    }
-
-    /**
-     * Reorder a list of elements by another list by swapping or merging elements.
-     * Reorder regarding to provided relative order list.
-     * Reorder method is selected using threshold.
-     * If order size is greater than threshold then O(n + m) algorithm will be used.
-     * It may corrupt initial order if not all of elements are persisted in new order.
-     * If order size is less than threshold then O(nm) - slower - algorithm will be used.
-     * It will corrupt initial order with less probability;
-     * E.g. initial was [1, 2, 3, 4, 5] - calling reorder with list [2, 5, 4] will generate list
-     * @param elements
-     * @param order
-     * @param threshold
-     * @param <T>
-     * @return
-     */
-    public static <T extends Comparable> List<T> reorder(List<T> elements, List<T> order, int threshold){
-        if (order.size() > threshold){
-            return mergeReorder(elements, order);
-        }
-        return swapReorder(elements, order);
-    }
-
-    /**
-     * Reorder a list of elements by another list by swapping elements. Alphabetical order may be corrupted.
-     * Reorder regarding to provided relative order list. May be slower than {@link #mergeReorder(List, List)})
-     * E.g. initial was [1, 2, 3, 4, 5] - calling reorder with list [2, 5, 4] will generate list
-     * [1, 2, 3, 5, 4]
-     * @param elements - initial list
-     * @param order - list describing relative order
-     * @param <T> - Class of comparable object
-     * @return - new reordered list
-     */
-    public static <T extends Comparable> List<T> swapReorder(List<T> elements, List<T> order){
-        Map<T, Long> elementsMap = new HashMap<>();
-        Map<T, Long> orderMap = new HashMap<>();
-
-        for (int i = 0; i < elements.size(); i++) {
-            elementsMap.put(elements.get(i), new Long(i));
-        }
-        for (int i = 0; i < order.size(); i++) {
-            orderMap.put(order.get(i), new Long(i));
-        }
-
-        for (int i = 0; i < order.size(); i++) {
-            T anchorOrder = order.get(i);
-            Long anchorOrderElementsIndex = elementsMap.get(anchorOrder);
-            if (anchorOrderElementsIndex == null){
-                continue;
-            }
-            for (int j = i + 1; j < order.size(); j++ ) {
-                T searchOrder = order.get(j);
-                Long searchOrderElementsIndex = elementsMap.get(searchOrder);
-                if (searchOrderElementsIndex == null){
-                    continue;
-                }
-                if (new Long(i).compareTo(new Long(j)) != anchorOrderElementsIndex.compareTo(searchOrderElementsIndex)) {
-                    //Swap orders in map
-                    elementsMap.put(anchorOrder, searchOrderElementsIndex);
-                    elementsMap.put(searchOrder, anchorOrderElementsIndex);
-                    anchorOrderElementsIndex = searchOrderElementsIndex;
-                }
-            }
-        }
-
-        List<WeightObject<T>> weightObjects = new ArrayList<>(elements.size());
-        for (T object : elementsMap.keySet()) {
-            weightObjects.add(new WeightObject<T>(object, elementsMap.get(object)));
-        }
-        Collections.sort(weightObjects);
-
-        List<T> result = new ArrayList<>(elements.size());
-        for (WeightObject<T> weightObject : weightObjects) {
-            result.add(weightObject.getObject());
-        }
-        return result;
-    }
-
-    /**
-     * Reorder a list of elements by another list. Trying to keep absolute order of initial list in alphabetical order
+     * Reorder a list of elements by another list. Trying to keep absolute order of initial list
      * but reorder regarding to provided relative order list.
      * E.g. initial was [1, 2, 3, 4, 5] - calling reorder with list [2, 5, 4] will generate list
      * [1, 2, 3, 5, 4]
@@ -298,7 +204,7 @@ public class CollectionUtils {
      * @param <T> - Class of comparable object
      * @return - new reordered list
      */
-    public static <T extends Comparable> List<T> mergeReorder(List<T> elements, List<T> order){
+    public static <T extends Comparable> List<T> reorder(List<T> elements, List<T> order){
         if (order.size() == 0){
             return elements;
         }
@@ -349,23 +255,6 @@ public class CollectionUtils {
             }
         }
         return new ArrayList<>(merged);
-    }
-
-    /**
-     * Compare objects values from map by provided keys
-     * @param o1
-     * @param o2
-     * @param orderMap
-     * @param <T>
-     * @return
-     */
-    private static <T extends Comparable>int compare(T o1, T o2, Map<T, Long> orderMap) {
-        Long order1 = orderMap.get(o1);
-        Long order2 = orderMap.get(o2);
-        if (order1 != null && order2 != null){
-            return order1.compareTo(order2);
-        }
-        return o1.compareTo(o2);
     }
 
     /**
