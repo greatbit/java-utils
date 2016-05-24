@@ -5,6 +5,9 @@ import ru.greatbit.utils.string.StringUtils;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
+
 /**
  * Created by azee on 4/29/14.
  */
@@ -19,16 +22,8 @@ public class CollectionUtils {
      */
     public static <T> List<T> mergeLists(List<T> first, List<T> second){
         Map<T, T> dataMap = listToMap(first);
-
-        for (T object : second){
-            dataMap.put(object, object);
-        }
-
-        List<T> resultObject = new LinkedList<T>();
-        for (T object : dataMap.keySet()){
-            resultObject.add(object);
-        }
-        return resultObject;
+        second.forEach(item -> dataMap.put(item, item));
+        return dataMap.values().stream().collect(toList());
     }
 
     /**
@@ -42,16 +37,10 @@ public class CollectionUtils {
      */
     public static <T> List<T> mergeListsByValue(List<T> first, List<T> second) throws Exception {
         Map<String, T> dataMap = listToMD5Map(first);
-
         for (T object : second){
             dataMap.put(StringUtils.getMd5String(JsonSerializer.marshal(object)), object);
         }
-
-        List<T> resultObject = new LinkedList<T>();
-        for (String key : dataMap.keySet()){
-            resultObject.add(dataMap.get(key));
-        }
-        return resultObject;
+        return dataMap.values().stream().collect(toList());
     }
 
 
@@ -94,21 +83,21 @@ public class CollectionUtils {
     private static <K, V>Difference getDiff(Map<K, V> firstMap, Map<K, V> secondMap){
         Difference difference = new Difference();
 
-        for (K object : secondMap.keySet()){
-            V value = firstMap.get(object);
+        secondMap.entrySet().forEach(entry ->{
+            V value = firstMap.get(entry.getKey());
             if (value == null){
-                difference.getAdded().add(secondMap.get(object));
+                difference.getAdded().add(entry.getValue());
             } else {
                 difference.getEqual().add(value);
             }
-        }
+        });
 
-        for (K object : firstMap.keySet()){
-            V value = secondMap.get(object);
+        firstMap.entrySet().forEach(entry -> {
+            V value = secondMap.get(entry.getKey());
             if (value == null){
-                difference.getRemoved().add(firstMap.get(object));
+                difference.getRemoved().add(entry.getValue());
             }
-        }
+        });
         return difference;
     }
 
@@ -120,9 +109,7 @@ public class CollectionUtils {
      */
     public static <V> Map<V, V> listToMap(List<V> input){
         Map<V, V> dataMap = new LinkedHashMap<V, V>();
-        for (V object : input){
-            dataMap.put(object, object);
-        }
+        input.forEach(value -> dataMap.put(value, value));
         return dataMap;
     }
 
