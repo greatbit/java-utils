@@ -119,7 +119,7 @@ public class CollectionUtils {
      * @return - Map
      */
     public static <V> Map<V, V> listToMap(List<V> input){
-        Map<V, V> dataMap = new HashMap<V, V>();
+        Map<V, V> dataMap = new LinkedHashMap<V, V>();
         for (V object : input){
             dataMap.put(object, object);
         }
@@ -135,7 +135,7 @@ public class CollectionUtils {
      * @throws Exception - Serialization exceptions
      */
     public static <T> Map<String, T> listToMD5Map(List<T> input) throws Exception {
-        Map<String, T> dataMap = new HashMap<String, T>();
+        Map<String, T> dataMap = new LinkedHashMap<String, T>();
         for (T object : input){
             dataMap.put(StringUtils.getMd5String(JsonSerializer.marshal(object)), object);
         }
@@ -191,7 +191,7 @@ public class CollectionUtils {
         if (values == null){
             return values;
         }
-        return new ArrayList(new HashSet<T>(values));
+        return new ArrayList(new LinkedHashSet<T>(values));
     }
 
     /**
