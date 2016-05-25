@@ -4,6 +4,8 @@ java-utils
 
 Useful utils lib for java
 
+Build for Java 8
+
 Everyone is welcome to contribute
 
 Maven
@@ -13,7 +15,7 @@ Maven
 <dependency>
     <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
-    <version>1.19</version>
+    <version>2.0</version>
 </dependency>
 ```
 
@@ -395,8 +397,8 @@ InetAddress address = InetAddress getLocalHost()
 ```
 
 
-New in 1.19-SNAPSHOT
+New in 2.1-SNAPSHOT
 ==========
-CopyBeanUtils and CompareBeanUtils are merged into a single BeanUtils class
+
 
 
