@@ -4,6 +4,8 @@ import ru.greatbit.utils.serialize.JsonSerializer;
 import ru.greatbit.utils.string.StringUtils;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
@@ -161,11 +163,10 @@ public class CollectionUtils {
         if (values == null){
             return values;
         }
-        Map<K, List<T>> newValues = new LinkedHashMap<K, List<T>>();
-        for (K key : values.keySet()) {
-            newValues.put(key, removeDuplicateValues(values.get(key)));
-        }
-        return newValues;
+        values.entrySet().forEach(entry ->{
+            entry.setValue(entry.getValue().stream().distinct().collect(toList()));
+        });
+        return values;
     }
 
     /**
@@ -178,7 +179,7 @@ public class CollectionUtils {
         if (values == null){
             return values;
         }
-        return new ArrayList(new LinkedHashSet<T>(values));
+        return values.stream().distinct().collect(toList());
     }
 
     /**
