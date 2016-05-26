@@ -4,11 +4,8 @@ import ru.greatbit.utils.serialize.JsonSerializer;
 import ru.greatbit.utils.string.StringUtils;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
 /**
  * Created by azee on 4/29/14.
@@ -23,9 +20,13 @@ public class CollectionUtils {
      * @return - List
      */
     public static <T> List<T> mergeLists(List<T> first, List<T> second){
-        Map<T, T> dataMap = listToMap(first);
-        second.forEach(item -> dataMap.put(item, item));
-        return dataMap.values().stream().collect(toList());
+        HashSet<T> set = new LinkedHashSet<>(first);
+        set.addAll(second);
+
+        //Keep initial list class
+        first.clear();
+        first.addAll(set);
+        return first;
     }
 
     /**
