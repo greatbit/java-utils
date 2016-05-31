@@ -4,6 +4,9 @@ import ru.greatbit.utils.serialize.JsonSerializer;
 import ru.greatbit.utils.string.StringUtils;
 
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.toList;
 
@@ -171,7 +174,7 @@ public class CollectionUtils {
     }
 
     /**
-     * Remove duplicate values of list from list
+     * Remove duplicate values from list, equals() will be used to compare objects
      * @param values - List of values to filter
      * @param <T> - Object class
      * @return - Filtered list
@@ -181,6 +184,22 @@ public class CollectionUtils {
             return values;
         }
         return values.stream().distinct().collect(toList());
+    }
+
+    /**
+     * Remove duplicate values from list by values fetched in meaningValue function
+     * @param values - List of values to filter
+     * @param <T> - Object class
+     * @return - Filtered list
+     */
+    public static <T> List<T> removeDuplicateValues(List<T> values, Function<T, Object> meaningValue) {
+        if (values == null){
+            return values;
+        }
+        return values.stream().map(value -> new Wrapper<T>(value, meaningValue))
+                .distinct()
+                .map(wrapper -> wrapper.getObject())
+                .collect(toList());
     }
 
     /**
