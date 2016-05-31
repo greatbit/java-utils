@@ -4,6 +4,11 @@ import ru.greatbit.utils.serialize.JsonSerializer;
 import ru.greatbit.utils.string.StringUtils;
 
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by azee on 4/29/14.
@@ -18,17 +23,13 @@ public class CollectionUtils {
      * @return - List
      */
     public static <T> List<T> mergeLists(List<T> first, List<T> second){
-        Map<T, T> dataMap = listToMap(first);
+        HashSet<T> set = new LinkedHashSet<>(first);
+        set.addAll(second);
 
-        for (T object : second){
-            dataMap.put(object, object);
-        }
-
-        List<T> resultObject = new LinkedList<T>();
-        for (T object : dataMap.keySet()){
-            resultObject.add(object);
-        }
-        return resultObject;
+        //Keep initial list class
+        first.clear();
+        first.addAll(set);
+        return first;
     }
 
     /**
@@ -42,16 +43,10 @@ public class CollectionUtils {
      */
     public static <T> List<T> mergeListsByValue(List<T> first, List<T> second) throws Exception {
         Map<String, T> dataMap = listToMD5Map(first);
-
         for (T object : second){
             dataMap.put(StringUtils.getMd5String(JsonSerializer.marshal(object)), object);
         }
-
-        List<T> resultObject = new LinkedList<T>();
-        for (String key : dataMap.keySet()){
-            resultObject.add(dataMap.get(key));
-        }
-        return resultObject;
+        return dataMap.values().stream().collect(toList());
     }
 
 
@@ -94,21 +89,21 @@ public class CollectionUtils {
     private static <K, V>Difference getDiff(Map<K, V> firstMap, Map<K, V> secondMap){
         Difference difference = new Difference();
 
-        for (K object : secondMap.keySet()){
-            V value = firstMap.get(object);
+        secondMap.entrySet().forEach(entry ->{
+            V value = firstMap.get(entry.getKey());
             if (value == null){
-                difference.getAdded().add(secondMap.get(object));
+                difference.getAdded().add(entry.getValue());
             } else {
                 difference.getEqual().add(value);
             }
-        }
+        });
 
-        for (K object : firstMap.keySet()){
-            V value = secondMap.get(object);
+        firstMap.entrySet().forEach(entry -> {
+            V value = secondMap.get(entry.getKey());
             if (value == null){
-                difference.getRemoved().add(firstMap.get(object));
+                difference.getRemoved().add(entry.getValue());
             }
-        }
+        });
         return difference;
     }
 
@@ -120,9 +115,7 @@ public class CollectionUtils {
      */
     public static <V> Map<V, V> listToMap(List<V> input){
         Map<V, V> dataMap = new LinkedHashMap<V, V>();
-        for (V object : input){
-            dataMap.put(object, object);
-        }
+        input.forEach(value -> dataMap.put(value, value));
         return dataMap;
     }
 
@@ -174,15 +167,14 @@ public class CollectionUtils {
         if (values == null){
             return values;
         }
-        Map<K, List<T>> newValues = new LinkedHashMap<K, List<T>>();
-        for (K key : values.keySet()) {
-            newValues.put(key, removeDuplicateValues(values.get(key)));
-        }
-        return newValues;
+        values.entrySet().forEach(entry ->{
+            entry.setValue(entry.getValue().stream().distinct().collect(toList()));
+        });
+        return values;
     }
 
     /**
-     * Remove duplicate values of list from list
+     * Remove duplicate values from list, equals() will be used to compare objects
      * @param values - List of values to filter
      * @param <T> - Object class
      * @return - Filtered list
@@ -191,7 +183,23 @@ public class CollectionUtils {
         if (values == null){
             return values;
         }
-        return new ArrayList(new LinkedHashSet<T>(values));
+        return values.stream().distinct().collect(toList());
+    }
+
+    /**
+     * Remove duplicate values from list by values fetched in meaningValue function
+     * @param values - List of values to filter
+     * @param <T> - Object class
+     * @return - Filtered list
+     */
+    public static <T> List<T> removeDuplicateValues(List<T> values, Function<T, Object> meaningValue) {
+        if (values == null){
+            return values;
+        }
+        return values.stream().map(value -> new Wrapper<T>(value, meaningValue))
+                .distinct()
+                .map(wrapper -> wrapper.getObject())
+                .collect(toList());
     }
 
     /**

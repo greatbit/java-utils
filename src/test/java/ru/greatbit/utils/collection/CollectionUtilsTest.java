@@ -1,12 +1,16 @@
 package ru.greatbit.utils.collection;
 
+import javafx.util.Pair;
 import org.junit.Test;
 import ru.greatbit.utils.beans.BeanWithNamespaceExample;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.*;
+import static ru.greatbit.utils.collection.CollectionUtils.removeDuplicateValues;
 import static ru.greatbit.utils.string.StringUtils.listAsString;
 
 /**
@@ -202,7 +206,7 @@ public class CollectionUtilsTest {
     }
 
     @Test
-    public void removeByIndexTest() {
+    public void removeByIndexTestTest() {
         //LinkedList
         List<String> input = new LinkedList<String>();
         input.add("0");
@@ -238,9 +242,9 @@ public class CollectionUtilsTest {
     }
 
     @Test
-    public void removeDuplicatesFromList() {
+    public void removeDuplicatesFromListTest() {
         List<String> values = Arrays.asList("0", "1", "2", "0", "3", "1");
-        values = CollectionUtils.removeDuplicateValues(values);
+        values = removeDuplicateValues(values);
         assertNotNull(values);
         assertThat(values.size(), is(4));
         assertTrue(values.contains("0"));
@@ -250,21 +254,41 @@ public class CollectionUtilsTest {
     }
 
     @Test
-    public void removeDuplicatesFromNullList() {
+    public void removeDuplicatesFromNullListTest() {
         List list = null;
-        assertNull(CollectionUtils.removeDuplicateValues(list));
+        assertNull(removeDuplicateValues(list));
 
-        List emptyList = CollectionUtils.removeDuplicateValues(new ArrayList());
+        List emptyList = removeDuplicateValues(new ArrayList());
         assertNotNull(emptyList);
         assertThat(emptyList.size(), is(0));
     }
 
     @Test
+    public void removeDuplicatesFromListWithEqualsFunctionTest() {
+        List<String> values = Arrays.asList("a", "aa", "b", "bb", "bbb", "cccc", "dddd");
+        values = removeDuplicateValues(values, (str -> str.length()));
+        assertNotNull(values);
+        assertThat(values.size(), is(4));
+        assertThat(values, containsInAnyOrder("a", "aa", "bbb", "cccc"));
+
+        List<Pair<String, Object>> pairs = new LinkedList<>();
+        pairs.add(new Pair<>("1", new Object()));
+        pairs.add(new Pair<>("2", new Object()));
+        pairs.add(new Pair<>("1", new Object()));
+        pairs.add(new Pair<>("3", new Object()));
+        pairs.add(new Pair<>("1", new Object()));
+        pairs.add(new Pair<>("4", new Object()));
+        pairs = removeDuplicateValues(pairs, Pair::getKey);
+        assertThat(pairs.size(), is(4));
+        assertThat(pairs.stream().map(Pair::getKey).collect(toList()), containsInAnyOrder("1", "2", "3", "4"));
+    }
+
+    @Test
     public void removeDuplicatesFromNullMap() {
         Map map = null;
-        assertNull(CollectionUtils.removeDuplicateValues(map));
+        assertNull(removeDuplicateValues(map));
 
-        Map emptyMap = CollectionUtils.removeDuplicateValues(new HashMap<String, List<String>>());
+        Map emptyMap = removeDuplicateValues(new HashMap<String, List<String>>());
         assertNotNull(emptyMap);
         assertThat(emptyMap.size(), is(0));
     }
@@ -275,7 +299,7 @@ public class CollectionUtilsTest {
         values.put("one", Arrays.asList("0", "1", "2", "0", "3", "1"));
         values.put("two", Arrays.asList("0", "1", "2", "1", "2", "0"));
 
-        values = CollectionUtils.removeDuplicateValues(values);
+        values = removeDuplicateValues(values);
         assertNotNull(values);
         assertThat(values.size(), is(2));
 
@@ -343,7 +367,7 @@ public class CollectionUtilsTest {
         }
         assertThat(listAsString(CollectionUtils.reorder(input, order)), is(listAsString(order)));
     }
-    
+
     @Test
     public void swapTest(){
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);

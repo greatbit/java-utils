@@ -4,6 +4,8 @@ java-utils
 
 Useful utils lib for java
 
+Build for Java 8
+
 Everyone is welcome to contribute
 
 Maven
@@ -13,7 +15,7 @@ Maven
 <dependency>
     <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
-    <version>1.19</version>
+    <version>2.0</version>
 </dependency>
 ```
 
@@ -206,6 +208,20 @@ List<String> values = Arrays.asList("0", "1", "2", "0", "3", "1");
 values = CollectionUtils.removeDuplicateValues(values);
 ```
 
+Remove duplicate values from list using provided function to fetch field (or values) used to compare objects
+```
+List<String> values = Arrays.asList("a", "aa", "b", "bb", "bbb", "cccc", "dddd");
+values = removeDuplicateValues(values, (str -> str.length()));
+```
+
+```
+List<Pair<String, Object>> pairs = new LinkedList<>();
+pairs.add(new Pair<>("1", new Object()));
+pairs.add(new Pair<>("2", new Object()));
+pairs.add(new Pair<>("1", new Object()));
+pairs = removeDuplicateValues(pairs, Pair::getKey);
+```
+
 Remove duplicate objects from Map
 ```
 Map<String, List<String>> values = new HashMap<String, List<String>>();
@@ -395,8 +411,8 @@ InetAddress address = InetAddress getLocalHost()
 ```
 
 
-New in 1.19-SNAPSHOT
+New in 2.1-SNAPSHOT
 ==========
-CopyBeanUtils and CompareBeanUtils are merged into a single BeanUtils class
+
 
 

@@ -114,10 +114,7 @@ public class StringUtils {
      * @return String - Empty string or string value if not null
      */
     public static String emptyIfNull(String input){
-        if (input == null) {
-            return "";
-        }
-        else return input;
+        return input == null ? "" : input;
     }
 
     /**
@@ -142,9 +139,7 @@ public class StringUtils {
      */
     public static <T>String listAsStringNoSpaces(List<T> stringList){
         StringBuffer sb = new StringBuffer();
-        for (T obj : stringList){
-            sb.append(obj).append(",");
-        }
+        stringList.forEach(string -> sb.append(string).append(","));
         return removeTailing(sb.toString(), ",").trim();
     }
 
