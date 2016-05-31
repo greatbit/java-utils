@@ -10,7 +10,7 @@
 
     <groupId>ru.greatbit</groupId>
     <artifactId>java-utils</artifactId>
-    <version>2.0</version>
+    <version>2.1-SNAPSHOT</version>
 
     <name>Java Utils</name>
     <packaging>jar</packaging>
