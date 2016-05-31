@@ -5,6 +5,7 @@ java-utils
 Useful utils lib for java
 
 Build for Java 8
+(For 1.7 use version 1.20)
 
 Everyone is welcome to contribute
 
