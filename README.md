@@ -230,8 +230,6 @@ values.put("two", Arrays.asList("0", "1", "2", "1", "2", "0"));
 values = CollectionUtils.removeDuplicateValues(values);
 ```
 
-
-
 Reorder a list of elements by another list. Trying to keep absolute order of initial list but reorder regarding to provided relative order list.
 E.g. initial was [1, 2, 3, 4, 5] - calling reorder with list [2, 5, 4] will generate list [1, 2, 3, 5, 4]
 Threshold can be used (default is 1000). Threshold defines when to use slow but accurate algorithm or fast one that could corrupt initial order if not all elements are present in new one.
