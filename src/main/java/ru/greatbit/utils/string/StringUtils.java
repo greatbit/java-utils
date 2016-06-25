@@ -5,6 +5,7 @@ import org.apache.commons.codec.binary.Hex;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,7 +124,7 @@ public class StringUtils {
      * @return result String - A list serialised in string
      * @param <T> - Objects class un list
      */
-    public static <T>String listAsString(List<T> stringList){
+    public static <T>String listAsString(Collection<T> stringList){
         String result = stringList.toString();
         result = removeHeading(result, "[");
         result = removeTailing(result, "]");
@@ -137,7 +138,7 @@ public class StringUtils {
      * @return result String -  A list serialised in string without spaces
      * @param <T> - Objects class un list
      */
-    public static <T>String listAsStringNoSpaces(List<T> stringList){
+    public static <T>String listAsStringNoSpaces(Collection<T> stringList){
         StringBuffer sb = new StringBuffer();
         stringList.forEach(string -> sb.append(string).append(","));
         return removeTailing(sb.toString(), ",").trim();

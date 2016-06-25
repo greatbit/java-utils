@@ -250,6 +250,14 @@ List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
 CollectionUtils.swap(list, 2, 4);
 ```
 
+Get a power set - all invariants of items in collections
+Will return: [], [a], [b], [c], [a, b], [a, c], [b, c], [a, b, c]
+```
+List<String> input = Arrays.asList("a", "b", "c")
+<T> Set<Set<T>> = CollectionUtils.powerSet(input);
+```
+
+
 Time
 ==========
 Get long - time of the beginning of the day for provided time

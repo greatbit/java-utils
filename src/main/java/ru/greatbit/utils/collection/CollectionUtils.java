@@ -279,5 +279,44 @@ public class CollectionUtils {
     }
 
 
+    /**
+     * Get a power set (all possible invariants of elements in list)
+     * @param input - A collection of elements
+     * @param <T> - Element type
+     * @return - Set of Sets - all possible invariants including an empty one
+     */
+    public static <T> Set<Set<T>> powerSet(Collection<T> input) {
+        //Using LinkedHashSet to ensure the iteration order
+        //Create an output container
+        Set<Set<T>> sets = new LinkedHashSet<Set<T>>();
+        if (input.isEmpty()) {
+            sets.add(new HashSet<T>());
+            return sets;
+        }
+
+        //Copy original set to a list to be able to manipulate with it as a temporary list
+        List<T> list = new ArrayList<T>(input);
+
+        //Getting the first element
+        T head = list.get(0);
+
+        //Getting the "tail"
+        Set<T> rest = new LinkedHashSet<T>(list.subList(1, list.size()));
+
+        //Get all possible states of the tail
+        for (Set<T> set : powerSet(rest)) {
+            Set<T> newSet = new LinkedHashSet<T>();
+
+            //Concatinate head with possible tail
+            newSet.add(head);
+            newSet.addAll(set);
+            sets.add(newSet);
+
+            //Add a possible tail to result
+            sets.add(set);
+        }
+        return sets;
+    }
+
 
 }
