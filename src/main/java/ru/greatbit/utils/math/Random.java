@@ -6,8 +6,8 @@ package ru.greatbit.utils.math;
 public class Random {
     /**
      * Returns random within a range (inclusive)
-     * @param min - Lower range valie (inclusive)
-     * @param max - Upper range valie (inclusive)
+     * @param min - Lower range value (inclusive)
+     * @param max - Upper range value (inclusive)
      * @return - next random value
      */
     public static int next(int min, int max){
