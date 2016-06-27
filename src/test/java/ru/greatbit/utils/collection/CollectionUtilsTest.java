@@ -3,6 +3,7 @@ package ru.greatbit.utils.collection;
 import javafx.util.Pair;
 import org.junit.Test;
 import ru.greatbit.utils.beans.BeanWithNamespaceExample;
+import ru.greatbit.utils.string.StringUtils;
 
 import java.util.*;
 
@@ -373,6 +374,24 @@ public class CollectionUtilsTest {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
         CollectionUtils.swap(list, 2, 4);
         assertThat(listAsString(list), is("1, 2, 5, 4, 3"));
+    }
+
+    @Test
+    public void powerSetTest(){
+        Set<Set<String>> sets = CollectionUtils.powerSet(Arrays.asList("a", "b", "c"));
+        assertNotNull(sets);
+        assertThat(sets.size(), is(8));
+        assertThat(sets.stream().map(set -> StringUtils.listAsString(set)).collect(toList()),
+                containsInAnyOrder("", "a", "b", "c", "a, b", "a, c", "b, c", "a, b, c"));
+    }
+
+    @Test
+    public void permutationsTest(){
+        List<Set<String>> result = CollectionUtils.permutations(Arrays.asList("1", "2", "3"));
+        assertNotNull(result);
+        assertThat(result.size(), is(6));
+        assertThat(result.stream().map(set -> StringUtils.listAsString(set)).collect(toList()),
+                containsInAnyOrder("1, 2, 3", "1, 3, 2", "2, 1, 3", "2, 3, 1", "3, 1, 2", "3, 2, 1"));
     }
 
 }

@@ -252,13 +252,6 @@ List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
 CollectionUtils.swap(list, 2, 4);
 ```
 
-Get a power set - all invariants of items in collections
-Will return: [], [a], [b], [c], [a, b], [a, c], [b, c], [a, b, c]
-```
-List<String> input = Arrays.asList("a", "b", "c")
-<T> Set<Set<T>> = CollectionUtils.powerSet(input);
-```
-
 
 Time
 ==========
@@ -424,6 +417,22 @@ InetAddress address = InetAddress getLocalHost()
 
 New in 2.1-SNAPSHOT
 ==========
+
+Collection utils
+==========
+
+Get a power set - all invariants of items in collections
+Will return: [], [a], [b], [c], [a, b], [a, c], [b, c], [a, b, c]
+```
+List<String> input = Arrays.asList("a", "b", "c")
+<T> Set<Set<T>> = CollectionUtils.powerSet(input);
+```
+
+Get all possible permutated invariants of list
+Will return: [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]
+```
+List<Set<String>> result = CollectionUtils.permutations(Arrays.asList("1", "2", "3"));
+```
 
 
 

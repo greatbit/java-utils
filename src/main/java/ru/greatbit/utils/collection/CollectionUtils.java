@@ -318,5 +318,31 @@ public class CollectionUtils {
         return sets;
     }
 
+    /**
+     * Get all possible permutated invariants of list
+     * @param items - list of items
+     * @param <T> - Item type
+     * @return - List of Sets of all invariants
+     */
+    public static <T>List<Set<T>> permutations(List<T> items){
+        List<Set<T>> result = new LinkedList<Set<T>>();
+
+        if (items.size() == 1){
+            result.add(new LinkedHashSet<T>(items));
+            return result;
+        }
+
+        for(int i = 0; i < items.size(); i++){
+            T currItem = items.get(i);
+            for(Set<T> gotItems : permutations(items.stream().filter(item -> item != currItem).collect(toList()))){
+                Set<T> gotItemsList = new LinkedHashSet<>();
+                gotItemsList.add(currItem);
+                gotItemsList.addAll(gotItems);
+                result.add(gotItemsList);
+            }
+        }
+        return result;
+    }
+
 
 }
