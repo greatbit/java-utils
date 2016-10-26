@@ -1,8 +1,8 @@
 java-utils
 ==========
 
-[![Join the chat at https://gitter.im/azee/java-utils](https://badges.gitter.im/azee/java-utils.svg)](https://gitter.im/azee/java-utils?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Jenkins Build](http://azee.people.yandex.net/jenkins/buildStatus/icon?job=java-utils)](http://azee.people.yandex.net/jenkins/job/java-utils)
+[![Join the chat at https://gitter.im/azee/honewords](https://badges.gitter.im/azee/honewords.svg)](https://gitter.im/azee/honewords?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Jenkins Build](http://azee.people.yandex.net/jenkins/buildStatus/icon?job=honewords)](http://azee.people.yandex.net/jenkins/job/honewords)
 
 Useful utils lib for java
 
