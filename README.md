@@ -445,4 +445,4 @@ Anyone can use library for free under Apache 2.0 licence except:
 **A**tlasian
 **G**oogle
 
-FAAGS should contact me before using the lib.
+**FAAGS** should contact me before using the lib.
