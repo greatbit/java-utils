@@ -434,5 +434,13 @@ Will return: [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]
 List<Set<String>> result = CollectionUtils.permutations(Arrays.asList("1", "2", "3"));
 ```
 
+License
+==========
 
-
+No **FAAGS** license
+==========
+Anyone can use librury for free except:
+**F**acebook
+**A**mazon
+**A**tlasian
+**G**oogle
