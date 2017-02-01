@@ -439,8 +439,10 @@ License
 
 No **FAAGS** license
 ==========
-Anyone can use librury for free except:
+Anyone can use library for free under Apache 2.0 licence except:
 **F**acebook
 **A**mazon
 **A**tlasian
 **G**oogle
+
+FAAGS should contact me before using the lib.
