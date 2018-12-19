@@ -437,12 +437,4 @@ List<Set<String>> result = CollectionUtils.permutations(Arrays.asList("1", "2", 
 License
 ==========
 
-No **FAAGS** license
-==========
-Anyone can use library for free under Apache 2.0 licence except:
-**F**acebook
-**A**mazon
-**A**tlasian
-**G**oogle
-
-**FAAGS** should contact me before using the lib.
+No limitations of usage
