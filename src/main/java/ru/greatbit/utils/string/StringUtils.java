@@ -128,8 +128,7 @@ public class StringUtils {
         String result = stringList.toString();
         result = removeHeading(result, "[");
         result = removeTailing(result, "]");
-        result.trim();
-        return result;
+        return result.trim();
     }
 
     /**
@@ -155,8 +154,7 @@ public class StringUtils {
         messageDigest.reset();
         messageDigest.update(input.getBytes(Charset.forName("UTF8")));
         final byte[] resultByte = messageDigest.digest();
-        final String result = Hex.encodeHexString(resultByte);
-        return result;
+        return Hex.encodeHexString(resultByte);
     }
 
     /**
