@@ -434,6 +434,15 @@ Will return: [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]
 List<Set<String>> result = CollectionUtils.permutations(Arrays.asList("1", "2", "3"));
 ```
 
+Time
+==========
+Get Date - the beginning of the day for provided time
+
+```
+TimeUtils.getStartOfTheDay(new Date());
+```
+
+
 License
 ==========
 
